@@ -1,0 +1,63 @@
+<div class="columns is-12 is-multiline">
+  <div class="column is-12 normal-margin-top">
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">
+              <% if @profile.name.present? %>
+                <%= @profile.name %>
+              <% else %>
+                John Smith
+              <% end %>
+            </p>
+            <p class="subtitle is-6"><%= @profile.user.email %></p>
+          </div>
+          <section id="all-links">
+            <% if current_user.profile == @profile %>
+              <%= link_to 'Edytuj profil', edit_profile_path, class: 'button' %>
+            <% elsif current_user.profile.followees.include?(@profile) %>
+              <h5><%= button_to "Unfollow", unfollow_user_path, method: "POST", class: 'button is-danger' %></h5>
+            <% else %>
+              <h5><%= button_to "Follow", follow_user_path, method: "POST",  class: 'button is-success' %></h5>
+            <% end%>
+          </section>
+        </div>
+        <div class="content">
+          <%= @profile&.description %>
+          <br>
+          <time><%= time_ago_in_words(@profile.created_at) %></time>
+        </div>
+        <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
+          <ul>
+            <li><a href="#">Posty</a></li>
+            <li><a href="#">Multimedia</a></li>
+            <li><a href="#">Components</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <% if @profile == current_user.profile %>
+    <div class="columns is-12 is-multiline" style="width: 100%; margin: 0px;">
+      <div class="column is-12 card" style="">
+        <%= simple_form_for @post, url: posts_path do |f| %>
+          <%= render partial: 'post_form', locals: { f: f }%>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="column is-12">
+    <div class="columns is-12 is-multiline">
+      <% @posts.each do |p| %>
+        <%= render 'shared/posts_partial', p: p %>
+      <% end %>
+    </div>
+  </div>
+</div>
