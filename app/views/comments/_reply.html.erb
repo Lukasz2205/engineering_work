@@ -1,0 +1,42 @@
+<div class="card" style="background-color: #E4E4E4; margin: 25px 25px 10px 25px;">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4"><%= comment.profile.name %></p>
+        <p class="subtitle is-6"><%= time_ago_in_words(comment.created_at) %></p>
+      </div>
+      <%# if current_user.profile == comment.profile %>
+        <%#= button_to 'delete', post_comment_path(comment.post, comment), method: :delete, class: "button is-danger" %>
+      <%# end %>
+    </div>
+    <div class="content">
+      <%= comment.message %>
+    </div>
+  </div>
+</div>
+<div class="columns is-12 is-multiline reply-options-section">
+  <div class="column is-12" style="display: flex; justify-content: space-around;">
+    <a href="">Like</a>
+    <a href="">Reply</a>
+    <a href="">Share</a>
+  </div>
+  <div class="column is-12">
+    <%# if comment.replies.any? %>
+      <%# comment.replies.each do |comm| %>
+        <%#= render partial: 'posts/reply', locals: { comment: comm} %>
+      <%# end %>
+    <%# end %>
+  </div>
+
+  <div class="column is-12" style="display: flex; justify-content: center">
+    <%#= form_with model: comment.replies.new, url: post_reply_path(comment.post, comment) do |f| %>
+    <%#= f.text_field :body, class: 'input', style: 'width: 100%' %>
+    <%#= f.submit 'Dodaj', class: 'button is-primary'  %>
+    <%# end %>
+  </div>
+</div>
