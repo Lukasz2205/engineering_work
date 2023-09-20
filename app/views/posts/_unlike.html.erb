@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'likeable_options' do %>
+<%= turbo_frame_tag "likeable_options_#{p.id}" do %>
   <%= link_to post_unlike_path(p), data: { turbo_method: :post }  do %>
     <i class="fa-solid fa-heart fa-lg"></i>
   <% end %>
