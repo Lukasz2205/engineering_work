@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
     return unless signed_in?
     Profile.find_or_create_by(user_id: current_user.id)
   end
+
+  def current_user_profile
+    current_user.profile
+  end
 end
