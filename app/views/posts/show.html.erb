@@ -1,0 +1,41 @@
+<div class="column is-12 card small-margin-top" style="width: 100%;">
+  <div class="post-text">
+    <div class="columns is-12 is-multiline">
+      <div class="column is-1">
+        <div class="columns is-12">
+          <div class="column is-2">
+            <%= link_to profile_path(@post.profile), class: 'is-rounded' do %>
+              <div class="first-email-letter">
+                <%= @post.profile.user.email.slice(0)  %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="column is-8">
+        <%= @post.description %><br/>
+        <% if @post.attachments.attached? %>
+          <% @post.attachments.each_with_index do |attachment, index| %>
+            <% if attachment.image? %>
+              <%= image_tag(@post.post_attachment(index)) %>
+            <% elsif attachment.video? %>
+              <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
+            <% elsif attachment.audio? %>
+              <%= audio_tag(url_for(attachment), controls: '') %>
+            <% else %>
+              <%= link_to attachment.filename, url_for(attachment), style: "text-decoration: none; color: #fff" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="column is-2">
+        <% if current_user.profile == @post.profile %>
+          <%= button_to 'delete', post_path(@post), method: :delete, class: "button is-danger" %>
+        <% end %>
+      </div>
+      <div class="column is-12">
+        <%= render partial: 'comments/post_comment', locals: { post: @post} %>
+      </div>
+    </div>
+  </div>
+</div>

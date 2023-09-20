@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "new_post" do %>
+  <%= render partial: 'posts/form', locals: { f: @post } %>
+<% end %>
