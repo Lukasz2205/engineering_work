@@ -11,8 +11,36 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+
+  <div class="columns is-12 full-page-height is-multiline">
+
+    <% if signed_in? %>
+      <div class="column is-12">
+        <%= render 'layouts/navigation' %>
+      </div>
+    <% end %>
+
+    <div class="column is-12">
+      <div class="columns is-12 is-multiline normal-margin-top">
+        <div class="column is-12">
+          <%= render 'layouts/messages' %>
+        </div>
+        <% if signed_in? %>
+          <div class="column is-3">
+            <%= render 'layouts/navigation_panel' %>
+          </div>
+        <% end %>
+
+        <div class="column is-6">
+          <%= yield %>
+        </div>
+
+        <% if signed_in? %>
+          <div class="column is-3">
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
   </body>
 </html>

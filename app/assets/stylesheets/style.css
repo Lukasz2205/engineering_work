@@ -1,0 +1,74 @@
+.is-rounded {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    border: 1px solid black;
+    border-radius: 100%;
+}
+
+.first-email-letter {
+    display: flex;
+    align-content: center;
+}
+
+.post-text {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.menu-label {
+    font-size: 20px;
+}
+
+.menu {
+    position: fixed;
+}
+
+.full-page-height {
+    height: 100vh;
+}
+
+.profile-icon {
+    margin: 1rem;
+}
+
+.normal-margin-top {
+    margin-top: 3rem;
+}
+
+.big-margin-top {
+    margin-top: 10vh;
+}
+
+.small-margin-top {
+    margin-top: 1rem;
+}
+
+.navbar {
+    border-bottom: 1px solid aqua;
+    width: 100%;
+    position: fixed;
+    /* background-color: rgba(255,255,255,0.5) !important; */
+}
+
+.navbar-end {
+    /* filter: blur(4px); */
+}
+
+.user-email {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 35rem;
+}
+
+.padding-less {
+    padding: 0 !important;
+}

@@ -1,0 +1,15 @@
+<% if notice && user_signed_in? %>
+  <div class="notification is-primary" style="top: 10%">
+    <button class="delete"></button>
+    <p class="notice">
+    <p class="notice"><%= notice %></p>
+  </div>
+<% end %>
+<% if alert && user_signed_in? %>
+  <div class="notification is-danger" style="top: 10%">
+    <button class="delete"></button>
+    <% alert.each_with_index do |k, v| %>
+      <p class="notice"><%= k[1][0] %></p>
+    <% end %>
+  </div>
+<% end %>

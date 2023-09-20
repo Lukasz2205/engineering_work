@@ -1,0 +1,26 @@
+<div class="column is-12">
+  <div class="columns is-12 is-multiline full-page-height big-margin-top container">
+    <div class="column is-3">
+      <div style="position: fixed; left: 5%">
+        <aside class="menu">
+          <p class="menu-label">
+            <%= link_to 'Strona główna', root_path %>
+          </p>
+          <p class="menu-label">
+            <% if signed_in? %>
+              <%= link_to 'Profil', profile_path(current_user.profile) %>
+            <% end %>
+          </p>
+          <p class="menu-label">
+            <% if signed_in? && current_user.role == 'admin' %>
+              <%#= link_to 'Panel administratorski', panel_index_path %>
+            <% end %>
+          </p>
+          <p class="menu-label">
+            Powiadomienia
+          </p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>

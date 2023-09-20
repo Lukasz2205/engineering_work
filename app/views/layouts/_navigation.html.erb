@@ -1,0 +1,30 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand profile-icon">
+    <h1 style="display: flex; align-items: center; font-size: 24px"><strong>Platforma komunikacyjna</strong></h1>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbarBasicExample" class="navbar-menu container">
+    <div class="navbar-start">
+
+    </div>
+
+    <div class="navbar-start">
+      <div class="search-bar">
+        <input type="text" class="input" placeholder="Wyszukaj">
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <%= link_to 'Log out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'button is-danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
