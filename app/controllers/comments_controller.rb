@@ -13,6 +13,18 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    respond_to do |format|
+      if @comment.destroy
+        format.turbo_stream
+        format.html { redirect_to root_path, notice: 'Pomyślnie usunięto posts' }
+      else
+        format.html { redirect_to root_path, notice: 'something went wrong' }
+      end
+    end
+  end
+
   private
 
   def set_comment
