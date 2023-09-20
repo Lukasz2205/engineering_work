@@ -2,11 +2,11 @@
   <div class="column is-12">
     <div class="columns is-12" style="flex-direction: column; height: 100vh;">
       <%= render partial: 'posts/form', locals: { post: @post } %>
-      <% @posts.each do |p| %>
-        <div id='posts-list'>
+      <div id='posts-list'>
+        <% @posts.each do |p| %>
           <%= render 'shared/post', p: p %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
