@@ -51,8 +51,14 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
-    redirect_to root_path, notice: 'Pomyślnie usunięto posts'
+    respond_to do |format|
+      if @post.destroy
+        format.turbo_stream
+        format.html { redirect_to root_path, alert: 'Pomyślnie usunięto post' }
+      else
+        format.html { redirect_to root_path, notice: 'something went wrong' }
+      end
+    end
   end
 
   private

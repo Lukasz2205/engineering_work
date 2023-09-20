@@ -1,4 +1,5 @@
-<div class="card" style="margin-top: 25px;">
+<%= turbo_frame_tag "post_#{p.id}" do %>
+  <div class="card" style="margin-top: 25px;">
   <div class="card-content">
     <div class="media">
       <div class="media-left">
@@ -68,3 +69,4 @@
   </div>
   <%= render partial: 'comments/form', locals: { p: p } %>
 </div>
+<% end %>
