@@ -1,6 +1,6 @@
 <div class="columns is-12 is-multiline">
   <div class="column is-12 normal-margin-top">
-    <%= simple_form_for @profile, url: profile_path do |f| %>
+    <%= form_with model: @post, url: posts_path do |f| %>
       <%= render partial: 'form', locals: { f: f } %>
     <% end %>
   </div>

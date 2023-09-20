@@ -1,2 +1,12 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="columns is-12 normal-margin-top">
+  <div class="column is-12">
+    <div class="columns is-12" style="flex-direction: column; height: 100vh;">
+      <%= render partial: 'posts/form', locals: { post: @post } %>
+      <% @posts.each do |p| %>
+        <div id='posts-list'>
+          <%= render 'shared/post', p: p %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

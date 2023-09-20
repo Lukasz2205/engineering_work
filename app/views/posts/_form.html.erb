@@ -1,0 +1,15 @@
+<%= turbo_frame_tag 'new_post' do %>
+  <%= form_with model: post, url: posts_path do |f| %>
+    <div class="columns is-12 is-multiline" style="margin-bottom: 2rem">
+      <div class="column is-12 card">
+        <%= f.text_field :description, label: 'Opis', placeholder: 'Dodaj posts', class: 'input' %>
+      </div>
+      <div class="column is-6 card" style="display: flex; justify-content: start; align-items: center">
+        <%= f.file_field :attachments, multiple: true %>
+      </div>
+      <div class="column is-6 card" style="display: flex; justify-content: end">
+        <%= f.submit class: 'button' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
