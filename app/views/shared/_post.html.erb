@@ -11,7 +11,9 @@
         <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) %></p>
       </div>
       <% if current_user.profile == p.profile %>
-        <%= button_to 'delete', post_path(p), method: :delete, class: "button is-danger" %>
+        <%= link_to post_path(p), method: :delete, data: { turbo_method: :delete } do %>
+          <i class="fa-solid fa-trash fa-lg"></i>
+        <% end %>
       <% end %>
     </div>
     <span class="card-footer" style="margin-bottom: 25px"></span>
@@ -41,10 +43,18 @@
     <%# end %>
   </div>
   <span class="card-footer" style="margin-bottom: 15px"></span>
-  <div class="action-buttons" style="display: flex; justify-content: space-evenly; margin-bottom: 15px">
-    <button class="button is-primary">Like</button>
-    <button class="button is-primary">Comment</button>
-    <button class="button is-primary">Share</button>
+  <div class="action-buttons" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
+    <% unless p.liked?(current_user.profile) %>
+      <%= render partial: 'posts/like', locals: { p: p } %>
+      <% else %>
+      <%= render partial: 'posts/unlike', locals: { p: p } %>
+    <% end %>
+    <a href="#">
+      <i class="fa-regular fa-comment fa-lg"></i>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-share fa-lg"></i>
+    </a>
   </div>
   <span class="card-footer" style="margin-bottom: 15px"></span>
   <div class="comments-section">

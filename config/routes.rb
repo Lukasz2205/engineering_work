@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
-  resources :posts
+  resources :posts do
+    post '/like', to: 'posts#like', as: 'like'
+    post '/unlike', to: 'posts#unlike', as: 'unlike'
+  end
+
   resources :profiles, only: %i[show edit update]
 end
