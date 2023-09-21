@@ -21,13 +21,21 @@
         <%= comment.message %>
       </div>
     </div>
+    <span class="card-footer" style="margin-bottom: 15px"></span>
+    <div class="action-buttons" style="display: flex; justify-content: space-evenly; padding: 10px; align-items: center">
+      <a href="#">
+        <i class="fa-regular fa-heart fa-lg"></i>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-comment fa-lg"></i>
+      </a>
+      <a href="#">
+        <i class="fa-solid fa-share fa-lg"></i>
+      </a>
+    </div>
   </div>
   <div class="columns is-12 is-multiline reply-options-section">
-    <div class="column is-12" style="display: flex; justify-content: space-around;">
-      <a href="">Like</a>
-      <a href="">Reply</a>
-      <a href="">Share</a>
-    </div>
+
     <div class="column is-12">
       <%# if comment.replies.any? %>
       <%# comment.replies.each do |comm| %>
