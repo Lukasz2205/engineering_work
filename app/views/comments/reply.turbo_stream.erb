@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend "comment_#{@comment.id}_replies" do %>
+  <%= render partial: 'comments/reply', locals: { comment: @reply } %>
+<% end %>
+
+<%= turbo_stream.replace "comment_#{@comment.id}_reply_form" do %>
+  <%= render partial: 'comments/form_reply', locals: { comment: @reply } %>
+<% end %>

@@ -10,6 +10,7 @@
         <div class="media-content">
           <p class="title is-4"><%= comment.profile.name %></p>
           <p class="subtitle is-6"><%= time_ago_in_words(comment.created_at) %></p>
+          <p class="subtitle is-2">W odpowiedzi do: <%= comment.parent_id %></p>
         </div>
         <% if current_user.profile == comment.profile %>
           <%= link_to post_comment_path(comment.post, comment), data: { turbo_method: :delete } do %>
@@ -36,19 +37,14 @@
   </div>
   <div class="columns is-12 is-multiline reply-options-section">
 
-    <div class="column is-12">
-      <%# if comment.replies.any? %>
-      <%# comment.replies.each do |comm| %>
-      <%#= render partial: 'posts/reply', locals: { comment: comm} %>
-      <%# end %>
-      <%# end %>
+    <div id="comment_<%= comment.id %>_replies" class="column is-12">
+      <% if comment.replies.any? %>
+        <% comment.replies.each do |reply| %>
+          <%= render partial: 'comments/reply', locals: { comment: reply } %>
+        <% end %>
+      <% end %>
     </div>
 
-    <div class="column is-12" style="display: flex; justify-content: center">
-      <%#= form_with model: comment.replies.new, url: post_reply_path(comment.post, comment) do |f| %>
-      <%#= f.text_field :body, class: 'input', style: 'width: 100%' %>
-      <%#= f.submit 'Dodaj', class: 'button is-primary'  %>
-      <%# end %>
-    </div>
+    <%= render partial: 'comments/form_reply', locals: { comment: comment } %>
   </div>
 <% end %>
