@@ -2,6 +2,8 @@
   <%= render partial: 'comments/reply', locals: { comment: @reply } %>
 <% end %>
 
-<%= turbo_stream.replace "comment_#{@comment.id}_reply_form" do %>
-  <%= render partial: 'comments/form_reply', locals: { comment: @reply } %>
+<%= turbo_stream.replace "show_hide_comment_#{@comment.id}" do %>
+  <%= render partial: 'comments/show', locals: { comment: @comment} %>
 <% end %>
+
+<%= turbo_stream.remove "new_comment_#{@comment.id}" %>

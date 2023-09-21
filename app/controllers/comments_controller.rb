@@ -39,7 +39,16 @@ class CommentsController < ApplicationController
 
   def show_comment
     @comment = Comment.find(params[:comment_id])
+    respond_to do |format|
+      format.turbo_stream { render :show_comment, locals: { comment: @comment } }
+    end
+  end
 
+  def hide_comment
+    @comment = Comment.find(params[:comment_id])
+    respond_to do |format|
+      format.turbo_stream { render :hide_comment, locals: { comment: @comment } }
+    end
   end
 
   private

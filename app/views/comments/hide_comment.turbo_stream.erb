@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "show_hide_comment_#{@comment.id}" do %>
+  <%= render partial: 'comments/show', locals: { comment: @comment} %>
+<% end %>
+
+<%= turbo_stream.remove "new_comment_#{@comment.id}" %>

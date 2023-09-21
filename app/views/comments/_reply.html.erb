@@ -27,24 +27,22 @@
       <a href="#">
         <i class="fa-regular fa-heart fa-lg"></i>
       </a>
-      <a href="#">
-        <i class="fa-regular fa-comment fa-lg"></i>
-      </a>
-      <a href="#">
-        <i class="fa-solid fa-share fa-lg"></i>
-      </a>
+      <%= render partial: 'comments/show', locals: { comment: comment} %>
+      <i class="fa-solid fa-share fa-lg"></i>
     </div>
-  </div>
-  <div class="columns is-12 is-multiline reply-options-section">
+    <div class="columns is-12 is-multiline reply-options-section">
 
-    <div id="comment_<%= comment.id %>_replies" class="column is-12">
-      <% if comment.replies.any? %>
-        <% comment.replies.each do |reply| %>
-          <%= render partial: 'comments/reply', locals: { comment: reply } %>
+      <div id="comment_<%= comment.id %>_replies" class="column is-12">
+        <% if comment.replies.any? %>
+          <% comment.replies.each do |reply| %>
+            <%= render partial: 'comments/reply', locals: { comment: reply } %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
 
-    <%= render partial: 'comments/form_reply', locals: { comment: comment } %>
+      <div class="column is-8">
+        <div id="comment_<%= comment.id %>_reply_form"></div>
+      </div>
+    </div>
   </div>
 <% end %>
