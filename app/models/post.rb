@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :profile
 
   has_many :comments, dependent: :destroy
-  has_many :likes, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
 
   def liked?(profile)
     self.likes.find { |like| like.profile_id == profile.id }

@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
   end
+
   def new
     @post = Post.new
   end
@@ -22,32 +23,6 @@ class PostsController < ApplicationController
       end
     end
   end
-
-  def like
-    @post = Post.find(params[:post_id])
-    @like = @post.likes.build(profile: current_user_profile, object_type: @post.class.to_s)
-    respond_to do |format|
-      if @like.save
-        format.turbo_stream { render :unlike, locals: { post: @post } }
-      else
-        redirect_to root_path, alert: 'something went wrong'
-      end
-    end
-
-  end
-
-  def unlike
-    @post = Post.find(params[:post_id])
-    @like = @post.likes.find_by(profile_id: current_user_profile.id)
-    respond_to do |format|
-      if @like.destroy
-        format.turbo_stream { render :like, locals: { post: @post } }
-      else
-        redirect_to root_path, alert: 'something went wrong'
-      end
-    end
-  end
-
 
   def destroy
     @post = Post.find(params[:id])

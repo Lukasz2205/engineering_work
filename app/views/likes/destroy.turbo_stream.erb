@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "likeable_options_#{@likeable.id}" do %>
+  <%= render partial: 'likes/unlike', locals: { p: @likeable } %>
+<% end %>
