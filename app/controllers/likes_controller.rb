@@ -12,7 +12,6 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.find(params[:id])
-
     respond_to do |format|
       if @like.destroy
         format.html { redirect_to root_path, notice: "Post was successfully created." }
