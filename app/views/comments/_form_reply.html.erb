@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "new_comment_#{comment.id}" do %>
+  <%= form_with model: comment.replies.new, url: reply_path(comment) do |f| %>
+    <%= f.text_field :message , class: 'input' %>
+    <%= f.submit 'Dodaj', class: 'button is-primary'  %>
+  <% end %>
+<% end %>

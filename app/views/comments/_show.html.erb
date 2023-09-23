@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "show_hide_comment_#{comment.id}" do %>
+  <%= link_to show_comment_path(comment.id), data: { turbo_method: :post } do %>
+    <i class="fa-regular fa-comment fa-lg"></i>
+  <% end %>
+<% end %>

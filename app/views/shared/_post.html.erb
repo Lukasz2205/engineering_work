@@ -1,4 +1,5 @@
-<div class="card" style="margin-top: 25px;">
+<%= turbo_frame_tag "post_#{p.id}" do %>
+  <div class="card" style="margin-top: 25px;">
   <div class="card-content">
     <div class="media">
       <div class="media-left">
@@ -11,7 +12,7 @@
         <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) %></p>
       </div>
       <% if current_user.profile == p.profile %>
-        <%= link_to post_path(p), method: :delete, data: { turbo_method: :delete } do %>
+        <%= link_to post_path(p), data: { turbo_method: :delete } do %>
           <i class="fa-solid fa-trash fa-lg"></i>
         <% end %>
       <% end %>
@@ -29,7 +30,7 @@
             <%#= image_tag(p.post_attachment(index)) %>
 <!--          </figure>-->
         <%# elsif attachment.video? %>
-<!--          <figure class="image is-4by3">-->
+  <!--          <figure class="image is-4by3">-->
             <%#= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
 <!--          </figure>-->
         <%# elsif attachment.audio? %>
@@ -58,17 +59,14 @@
   </div>
   <span class="card-footer" style="margin-bottom: 15px"></span>
   <div class="comments-section">
-    <%# if p.comments.any? %>
-      <%# p.comments.each do |comm| %>
-        <%#= render partial: 'posts/reply', locals: { comment: comm} %>
-      <%# end %>
-    <%# end %>
+    <div id="post_comments_<%= p.id %>">
+      <% if p.comments.any? %>
+        <% p.comments.take(1).each do |comm| %>
+          <%= render partial: 'comments/reply', locals: { comment: comm} %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-  <span class="card-footer" style="margin-bottom: 15px"></span>
-  <div class="comment-form" style="margin: 15px">
-    <%#= form_with model: p.comments.new, url: post_comments_path( p) do |f| %>
-      <%#= f.text_field :body, class: 'input', style: 'width: 90%'  %>
-      <%#= f.submit 'Dodaj', class: 'button is-primary'  %>
-    <%# end %>
-  </div>
+  <%= render partial: 'comments/form', locals: { p: p } %>
 </div>
+<% end %>
