@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :profile
-  belongs_to :post
+  belongs_to :post, optional: true
 
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :replies, class_name: 'Comment', foreign_key: :parent_id, dependent: :destroy

@@ -13,7 +13,7 @@
           <p class="subtitle is-2">W odpowiedzi do: <%= comment.parent_id %></p>
         </div>
         <% if current_user.profile == comment.profile %>
-          <%= link_to post_comment_path(comment.post, comment), data: { turbo_method: :delete } do %>
+          <%= link_to post_comment_path('123', comment), data: { turbo_method: :delete } do %>
             <i class="fa-solid fa-trash fa-lg"></i>
           <% end %>
         <% end %>

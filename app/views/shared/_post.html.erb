@@ -61,7 +61,7 @@
   <div class="comments-section">
     <div id="post_comments_<%= p.id %>">
       <% if p.comments.any? %>
-        <% p.comments.take(1).each do |comm| %>
+        <% p.comments.each do |comm| %>
           <%= render partial: 'comments/reply', locals: { comment: comm} %>
         <% end %>
       <% end %>
@@ -70,3 +70,5 @@
   <%= render partial: 'comments/form', locals: { p: p } %>
 </div>
 <% end %>
+
+Duplikuja sie komentarze i nie dziala lajkowanie

@@ -28,7 +28,6 @@ class CommentsController < ApplicationController
   def reply
     @comment       = Comment.find(params[:comment_id])
     @reply         = @comment.replies.new(set_comment)
-    @reply.post    = @comment.post
     @reply.profile = current_user_profile
     respond_to do |format|
       if @reply.save
