@@ -46,9 +46,9 @@
   <span class="card-footer" style="margin-bottom: 15px"></span>
   <div class="action-buttons" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
     <% unless p.liked?(current_user.profile) %>
-      <%= render partial: 'posts/like', locals: { p: p } %>
-      <% else %>
-      <%= render partial: 'posts/unlike', locals: { p: p } %>
+      <%= render partial: 'likes/like', locals: { obj: p, post: true } %>
+    <% else %>
+      <%= render partial: 'likes/unlike', locals: { obj: p, post: true } %>
     <% end %>
     <a href="#">
       <i class="fa-regular fa-comment fa-lg"></i>
@@ -61,7 +61,7 @@
   <div class="comments-section">
     <div id="post_comments_<%= p.id %>">
       <% if p.comments.any? %>
-        <% p.comments.take(1).each do |comm| %>
+        <% p.comments.each do |comm| %>
           <%= render partial: 'comments/reply', locals: { comment: comm} %>
         <% end %>
       <% end %>

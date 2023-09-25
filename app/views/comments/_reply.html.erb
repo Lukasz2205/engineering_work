@@ -13,7 +13,7 @@
           <p class="subtitle is-2">W odpowiedzi do: <%= comment.parent_id %></p>
         </div>
         <% if current_user.profile == comment.profile %>
-          <%= link_to post_comment_path(comment.post, comment), data: { turbo_method: :delete } do %>
+          <%= link_to post_comment_path('123', comment), data: { turbo_method: :delete } do %>
             <i class="fa-solid fa-trash fa-lg"></i>
           <% end %>
         <% end %>
@@ -24,9 +24,11 @@
     </div>
     <span class="card-footer"></span>
     <div class="action-buttons" style="display: flex; justify-content: space-evenly; padding: 10px; align-items: center">
-      <a href="#">
-        <i class="fa-regular fa-heart fa-lg"></i>
-      </a>
+      <% unless comment.liked?(current_user.profile) %>
+        <%= render partial: 'likes/like', locals: { obj: comment, post: false } %>
+      <% else %>
+        <%= render partial: 'likes/unlike', locals: { obj: comment, post: false } %>
+      <% end %>
       <%= render partial: 'comments/show', locals: { comment: comment} %>
       <i class="fa-solid fa-share fa-lg"></i>
     </div>
