@@ -1,72 +1,75 @@
 <%= turbo_frame_tag "post_#{p.id}" do %>
-  <div class="card" style="margin-top: 25px;">
-  <div class="card-content">
-    <div class="media">
-      <div class="media-left">
-        <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-        </figure>
-      </div>
-      <div class="media-content">
-        <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile) %></p>
-        <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) %></p>
-      </div>
-      <% if current_user.profile == p.profile %>
-        <%= link_to post_path(p), data: { turbo_method: :delete } do %>
-          <i class="fa-solid fa-trash fa-lg"></i>
+  <div class="card" data-controller="share" data-share-url-value="<%= post_url(p) %>" sstyle="margin-top: 25px;">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4" data-share-target="author" value="<%= p.profile.name %>"><%= link_to p.profile.name, profile_path(p.profile) %></p>
+          <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) %></p>
+        </div>
+        <% if current_user.profile == p.profile %>
+          <%= link_to post_path(p), data: { turbo_method: :delete } do %>
+            <i class="fa-solid fa-trash fa-lg"></i>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <span class="card-footer" style="margin-bottom: 25px"></span>
+      <div class="content" data-share-target="content" value="<%= p.description %>">
+        <%= p.description %><br/>
+      </div>
     </div>
-    <span class="card-footer" style="margin-bottom: 25px"></span>
-    <div class="content">
-      <%= p.description %><br/>
-    </div>
-  </div>
-  <div class="card-image">
-    <%# if p.attachments.attached? %>
+    <div class="card-image">
+      <%# if p.attachments.attached? %>
       <%# p.attachments.each_with_index do |attachment, index| %>
-        <%# if attachment.image? %>
-<!--          <figure class="image is-4by3">-->
-            <%#= image_tag(p.post_attachment(index)) %>
-<!--          </figure>-->
-        <%# elsif attachment.video? %>
-  <!--          <figure class="image is-4by3">-->
-            <%#= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
-<!--          </figure>-->
-        <%# elsif attachment.audio? %>
-<!--          <figure class="image is-4by3">-->
-            <%#= audio_tag(url_for(attachment), controls: '') %>
-<!--          </figure>-->
-        <%# else %>
-          <%#= link_to attachment.filename, url_for(attachment), style: "text-decoration: none; color: #fff" %>
-        <%# end %>
+      <%# if attachment.image? %>
+      <!--          <figure class="image is-4by3">-->
+      <%#= image_tag(p.post_attachment(index)) %>
+      <!--          </figure>-->
+      <%# elsif attachment.video? %>
+      <!--          <figure class="image is-4by3">-->
+      <%#= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
+      <!--          </figure>-->
+      <%# elsif attachment.audio? %>
+      <!--          <figure class="image is-4by3">-->
+      <%#= audio_tag(url_for(attachment), controls: '') %>
+      <!--          </figure>-->
+      <%# else %>
+      <%#= link_to attachment.filename, url_for(attachment), style: "text-decoration: none; color: #fff" %>
       <%# end %>
-    <%# end %>
-  </div>
-  <span class="card-footer" style="margin-bottom: 15px"></span>
-  <div class="action-buttons" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
-    <% unless p.liked?(current_user.profile) %>
-      <%= render partial: 'likes/like', locals: { obj: p, post: true } %>
-    <% else %>
-      <%= render partial: 'likes/unlike', locals: { obj: p, post: true } %>
-    <% end %>
-    <a href="#">
-      <i class="fa-regular fa-comment fa-lg"></i>
-    </a>
-    <a href="#">
-      <i class="fa-solid fa-share fa-lg"></i>
-    </a>
-  </div>
-  <span class="card-footer" style="margin-bottom: 15px"></span>
-  <div class="comments-section">
-    <div id="post_comments_<%= p.id %>">
-      <% if p.comments.any? %>
-        <% p.comments.each do |comm| %>
-          <%= render partial: 'comments/reply', locals: { comment: comm} %>
-        <% end %>
-      <% end %>
+      <%# end %>
+      <%# end %>
     </div>
+    <span class="card-footer" style="margin-bottom: 15px"></span>
+    <div class="action-buttons" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
+      <% unless p.liked?(current_user.profile) %>
+        <%= render partial: 'likes/like', locals: { obj: p, post: true } %>
+      <% else %>
+        <%= render partial: 'likes/unlike', locals: { obj: p, post: true } %>
+      <% end %>
+      <a href="#">
+        <i class="fa-regular fa-comment fa-lg"></i>
+      </a>
+      <a href="#" data-action="click->share#share">
+        <i class="fa-solid fa-share fa-lg"></i>
+      </a>
+    </div>
+    <%= content_tag(:p, "", class: 'result', data: {
+      share_target: 'result'
+    }) %>
+    <span class="card-footer" style="margin-bottom: 15px"></span>
+    <div class="comments-section">
+      <div id="post_comments_<%= p.id %>">
+        <% if p.comments.any? %>
+          <% p.comments.each do |comm| %>
+            <%= render partial: 'comments/reply', locals: { comment: comm } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <%= render partial: 'comments/form', locals: { p: p } %>
   </div>
-  <%= render partial: 'comments/form', locals: { p: p } %>
-</div>
 <% end %>
