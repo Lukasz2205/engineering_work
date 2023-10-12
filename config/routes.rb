@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[create destroy]
 
+  post 'follow', to: 'profiles#follow'
+  delete 'unfollow', to: 'profiles#unfollow'
+
   post '/comments/:comment_id/reply', to: 'comments#reply', as: 'reply'
   post '/comments/:comment_id/show_comment', to: 'comments#show_comment', as: 'show_comment'
   post '/comments/:comment_id/hide_comment', to: 'comments#hide_comment', as: 'hide_comment'

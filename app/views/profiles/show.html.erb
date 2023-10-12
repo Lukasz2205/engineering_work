@@ -18,15 +18,15 @@
             </p>
             <p class="subtitle is-6"><%= @profile.user.email %></p>
           </div>
-          <section id="all-links">
+          <%= turbo_frame_tag 'followable_options' do %>
             <% if current_user.profile == @profile %>
               <%= link_to 'Edytuj profil', edit_profile_path, class: 'button' %>
-            <% elsif current_user.profile.followees.include?(@profile) %>
-              <h5><%= button_to "Unfollow", unfollow_user_path, method: "POST", class: 'button is-danger' %></h5>
+            <% elsif current_user.profile.followed_profiles.include?(@profile) %>
+              <%= render partial: 'profiles/unfollow', locals: { profile: @profile } %>
             <% else %>
-              <h5><%= button_to "Follow", follow_user_path, method: "POST",  class: 'button is-success' %></h5>
+              <%= render partial: 'profiles/follow', locals: { profile: @profile } %>
             <% end%>
-          </section>
+          <% end%>
         </div>
         <div class="content">
           <%= @profile&.description %>
