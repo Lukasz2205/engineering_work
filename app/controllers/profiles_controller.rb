@@ -1,14 +1,16 @@
 class ProfilesController < ApplicationController
-  before_action :fetch_profile, only: %i[show update]
-
   def show
+    fetch_profile
     @post = @profile&.posts.new
     @posts = @profile&.posts.order(' created_at DESC')
   end
 
-  def edit;end
+  def edit
+    fetch_profile
+  end
 
   def update
+    fetch_profile
     if @profile.update(set_profile)
       redirect_to @profile, notice: 'Successfully updated'
     else

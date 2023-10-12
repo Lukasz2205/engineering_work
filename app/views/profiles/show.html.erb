@@ -10,17 +10,13 @@
           </div>
           <div class="media-content">
             <p class="title is-4">
-              <% if @profile.name.present? %>
-                <%= @profile.name %>
-              <% else %>
-                John Smith
-              <% end %>
+              <%= @profile.name %>
             </p>
             <p class="subtitle is-6"><%= @profile.user.email %></p>
           </div>
           <%= turbo_frame_tag 'followable_options' do %>
             <% if current_user.profile == @profile %>
-              <%= link_to 'Edytuj profil', edit_profile_path, class: 'button' %>
+              <%= link_to 'Edytuj profil', edit_profile_path, data: { turbo: 'false' }, class: 'button' %>
             <% elsif current_user.profile.followed_profiles.include?(@profile) %>
               <%= render partial: 'profiles/unfollow', locals: { profile: @profile } %>
             <% else %>
@@ -56,7 +52,7 @@
   <div class="column is-12">
     <div class="columns is-12 is-multiline">
       <% @posts.each do |p| %>
-        <%= render 'shared/post', p: p %>
+        <%= render 'shared/profile_post', p: p %>
       <% end %>
     </div>
   </div>
