@@ -24,23 +24,23 @@
     </div>
     <div class="card-image">
       <%# if p.attachments.attached? %>
-        <%# p.attachments.each_with_index do |attachment, index| %>
-          <%# if attachment.image? %>
-          <!--          <figure class="image is-4by3">-->
-          <%#= image_tag(p.post_attachment(index)) %>
-          <!--          </figure>-->
-          <%# elsif attachment.video? %>
-          <!--          <figure class="image is-4by3">-->
-          <%#= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
-          <!--          </figure>-->
-          <%# elsif attachment.audio? %>
-          <!--          <figure class="image is-4by3">-->
-          <%#= audio_tag(url_for(attachment), controls: '') %>
-          <!--          </figure>-->
-          <%# else %>
-            <%#= link_to attachment.filename, url_for(attachment), style: "text-decoration: none; color: #fff" %>
-          <%# end %>
-        <%# end %>
+      <%# p.attachments.each_with_index do |attachment, index| %>
+      <%# if attachment.image? %>
+      <!--          <figure class="image is-4by3">-->
+      <%#= image_tag(p.post_attachment(index)) %>
+      <!--          </figure>-->
+      <%# elsif attachment.video? %>
+      <!--          <figure class="image is-4by3">-->
+      <%#= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
+      <!--          </figure>-->
+      <%# elsif attachment.audio? %>
+      <!--          <figure class="image is-4by3">-->
+      <%#= audio_tag(url_for(attachment), controls: '') %>
+      <!--          </figure>-->
+      <%# else %>
+      <%#= link_to attachment.filename, url_for(attachment), style: "text-decoration: none; color: #fff" %>
+      <%# end %>
+      <%# end %>
       <%# end %>
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
@@ -56,18 +56,6 @@
       <a href="#">
         <i class="fa-solid fa-share fa-lg"></i>
       </a>
-    </div>
-    <span class="card-footer" style="margin-bottom: 15px"></span>
-    <%= render partial: 'comments/form', locals: { p: p } %>
-    <span class="card-footer" style="margin-bottom: 15px"></span>
-    <div class="comments-section">
-      <div id="post_comments_<%= p.id %>">
-        <% if p.comments.any? %>
-          <% p.comments.each do |comm| %>
-            <%= render partial: 'comments/reply', locals: { comment: comm } %>
-          <% end %>
-        <% end %>
-      </div>
     </div>
   </div>
 <% end %>
