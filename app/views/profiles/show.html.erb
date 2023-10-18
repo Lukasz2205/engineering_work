@@ -10,23 +10,19 @@
           </div>
           <div class="media-content">
             <p class="title is-4">
-              <% if @profile.name.present? %>
-                <%= @profile.name %>
-              <% else %>
-                John Smith
-              <% end %>
+              <%= @profile.name %>
             </p>
             <p class="subtitle is-6"><%= @profile.user.email %></p>
           </div>
-          <section id="all-links">
+          <%= turbo_frame_tag 'followable_options' do %>
             <% if current_user.profile == @profile %>
-              <%= link_to 'Edytuj profil', edit_profile_path, class: 'button' %>
-            <% elsif current_user.profile.followees.include?(@profile) %>
-              <h5><%= button_to "Unfollow", unfollow_user_path, method: "POST", class: 'button is-danger' %></h5>
+              <%= link_to 'Edytuj profil', edit_profile_path, data: { turbo: 'false' }, class: 'button' %>
+            <% elsif current_user.profile.followed_profiles.include?(@profile) %>
+              <%= render partial: 'profiles/unfollow', locals: { profile: @profile } %>
             <% else %>
-              <h5><%= button_to "Follow", follow_user_path, method: "POST",  class: 'button is-success' %></h5>
+              <%= render partial: 'profiles/follow', locals: { profile: @profile } %>
             <% end%>
-          </section>
+          <% end%>
         </div>
         <div class="content">
           <%= @profile&.description %>
@@ -47,16 +43,14 @@
   <% if @profile == current_user.profile %>
     <div class="columns is-12 is-multiline" style="width: 100%; margin: 0px;">
       <div class="column is-12 card" style="">
-        <%= form_with model: @post, url: posts_path do |f| %>
-          <%= render partial: 'post_form', locals: { f: f }%>
-        <% end %>
+        <%= render partial: 'posts/form', locals: { post: Post.new } %>
       </div>
     </div>
   <% end %>
   <div class="column is-12">
-    <div class="columns is-12 is-multiline">
+    <div id='posts-list' class="columns is-12 is-multiline">
       <% @posts.each do |p| %>
-        <%= render 'shared/post', p: p %>
+        <%= render 'shared/profile_post', p: p %>
       <% end %>
     </div>
   </div>

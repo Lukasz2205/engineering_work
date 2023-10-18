@@ -1,14 +1,16 @@
 class ProfilesController < ApplicationController
-  before_action :fetch_profile
-
   def show
+    fetch_profile
     @post = @profile&.posts.new
     @posts = @profile&.posts.order(' created_at DESC')
   end
 
-  def edit;end
+  def edit
+    fetch_profile
+  end
 
   def update
+    fetch_profile
     if @profile.update(set_profile)
       redirect_to @profile, notice: 'Successfully updated'
     else
@@ -16,17 +18,23 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # def follow
-  #   @profile = Profile.find(params[:id])
-  #   current_user.profile.followees << @profile
-  #   redirect_back(fallback_location: root_path)
-  # end
-  #
-  # def unfollow
-  #   @profile = Profile.find(params[:id])
-  #   current_user.profile.followed_profiles.find_by(followee_id: @profile.id).destroy
-  #   redirect_back(fallback_location: root_path)
-  # end
+  def follow
+    @profile = Profile.find(params[:profile_id])
+    respond_to do |format|
+      if current_user_profile.followed_profiles << @profile
+        format.html { redirect_to @profile, notice: "Post was successfully created." }
+      end
+    end
+  end
+
+  def unfollow
+    @profile = Profile.find(params[:profile_id])
+    respond_to do |format|
+      if current_user_profile.followed_profiles.destroy(@profile)
+        format.html { redirect_to @profile, notice: "Post was successfully created." }
+      end
+    end
+  end
 
   private
 
