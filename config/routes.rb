@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :messages
   end
 
+  get 'private_chat/:profile_id', to: 'rooms#private_chat', as: 'private_chat'
+
   post 'follow', to: 'profiles#follow'
   delete 'unfollow', to: 'profiles#unfollow'
 
