@@ -1,0 +1,8 @@
+<div class="cont-<%= message.profile.id %>">
+  <div class="message-box msg-<%= message.profile.id %> " >
+    <% unless message.room.is_private %>
+      <h6 class="name"> <%= message.profile.name %> </h6>
+    <% end %>
+    <%= message.content %>
+  </div>
+</div>

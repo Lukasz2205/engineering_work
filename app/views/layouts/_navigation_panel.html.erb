@@ -12,6 +12,11 @@
             <% end %>
           </p>
           <p class="menu-label">
+            <% if signed_in? %>
+              <%= link_to 'Wiadomości', rooms_path %>
+            <% end %>
+          </p>
+          <p class="menu-label">
             <% if signed_in? && current_user.role == 'admin' %>
               <%#= link_to 'Panel administratorski', panel_index_path %>
             <% end %>
