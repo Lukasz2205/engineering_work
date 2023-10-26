@@ -6,10 +6,8 @@ export default class extends Controller {
     connect() {
         this.scrollToBottom()
         const observer = new MutationObserver(function (mutationsList, observer) {
-            console.log('xxxx')
             for (let mutation of mutationsList) {
                 if (mutation.target.parentElement) {
-                    console.log('Zmiana wykryta!');
                     this.scrollToBottom()
                 }
             }
