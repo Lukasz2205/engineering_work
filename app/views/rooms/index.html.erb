@@ -1,12 +1,13 @@
 <div class="columns is-12 is-multiline">
   <div class="column is-11 box" style="background-color: gray; height: 100vh;">
     <% if @single_room %>
-      <h4 class="text-center"> <%= current_user.profile.name || @single_room.name %> </h4>
+      <h4 class="text-center" style="color: white"> <%= @single_room.name %> </h4>
       <%= turbo_stream_from @single_room %>
       <div class="chat" data-controller="autoscroll">
         <div id="messages" data-autoscroll-target="chat" style="overflow: auto;height: 75vh;">
           <%= render @messages %>
         </div>
+        <div class=""></div>
         <div class="msg-form" style="margin-top: 15px; width: 100%">
           <%= render partial: 'shared/new_message_form' %>
         </div>
@@ -19,7 +20,7 @@
     <h4> Users </h4>
     <div>
       <%= turbo_stream_from "users" %>
-      <div id="users">
+      <div id="profiles">
         <%= render @profiles %>
       </div>
     </div>
