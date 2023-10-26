@@ -16,7 +16,7 @@ class RoomsController < ApplicationController
     @profiles = Profile.all_except(current_user_profile)
     @room = Room.new
     @message = Message.new
-    @messages = @single_room.messages.order('created_at DESC')
+    @messages = @single_room.messages.order('created_at ASC')
 
     render "index"
   end

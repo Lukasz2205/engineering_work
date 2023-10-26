@@ -1,17 +1,17 @@
 <div class="columns is-12 is-multiline">
-  <div class="column is-11 box" style="background-color: gray;height: 100vh;">
+  <div class="column is-11 box" style="background-color: gray; height: 100vh;">
     <% if @single_room %>
       <h4 class="text-center"> <%= current_user.profile.name || @single_room.name %> </h4>
       <%= turbo_stream_from @single_room %>
-      <div class="chat">
-        <div id="messages" style="overflow: auto;height: 75vh; display: flex;flex-direction: column-reverse;">
+      <div class="chat" data-controller="autoscroll">
+        <div id="messages" data-autoscroll-target="chat" style="overflow: auto;height: 75vh;">
           <%= render @messages %>
         </div>
         <div class="msg-form" style="margin-top: 15px; width: 100%">
           <%= render partial: 'shared/new_message_form' %>
         </div>
       </div>
-  <% end %>
+    <% end %>
   </div>
 
   <div class="column is-1">
