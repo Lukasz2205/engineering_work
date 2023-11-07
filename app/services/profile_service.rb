@@ -4,8 +4,10 @@ class ProfileService
   end
 
   def get_likes
-    likeables = @profile.likes.where(likeable_type: 'Post').pluck(:likeable_id)
-    Post.where(id: likeables)
+    liked_posts = @profile.likes.where(likeable_type: 'Post').pluck(:likeable_id)
+    liked_comments = @profile.likes.where(likeable_type: 'Comment').pluck(:likeable_id)
+    posts = Post.where(id: liked_posts)
+    posts += Comment.where(id: liked_comments)
   end
 
   def get_comments
