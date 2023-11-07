@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   }
 
   root 'home#index'
+  get 'index_lazy', to: 'home#index_lazy', as: 'index_lazy'
 
   resources :profiles, only: %i[show edit update] do
     get 'posts', to: 'profiles#posts', as: 'posts'
