@@ -45,7 +45,14 @@ class ProfilesController < ApplicationController
 
   def liked_posts
     @profile = Profile.find(params[:profile_id])
-    @posts   = ProfileLikedPostsService.new(@profile).get_likes
+    @posts   = ProfileService.new(@profile).get_likes
+
+    render 'show'
+  end
+
+  def comments
+    @profile = Profile.find(params[:profile_id])
+    @posts   = ProfileService.new(@profile).get_comments
 
     render 'show'
   end

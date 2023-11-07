@@ -33,7 +33,7 @@
       <footer class="card-footer">
         <%= link_to 'Posty', profile_posts_path(@profile.id), class: 'card-footer-item' %>
         <%= link_to 'Polubienia', profile_liked_posts_path(@profile.id), class: 'card-footer-item' %>
-        <a href="#" class="card-footer-item">Komenatarze</a>
+        <%= link_to 'Komentarze', profile_comments_path(@profile.id), class: 'card-footer-item' %>
       </footer>
     </div>
   </div>

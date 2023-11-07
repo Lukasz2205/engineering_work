@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :profiles, only: %i[show edit update] do
     get 'posts', to: 'profiles#posts', as: 'posts'
     get 'liked_posts', to: 'profiles#liked_posts', as: 'liked_posts'
+    get 'comments', to: 'profiles#comments', as: 'comments'
   end
 
   resources :posts do
