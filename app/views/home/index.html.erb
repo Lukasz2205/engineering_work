@@ -3,10 +3,8 @@
     <div class="columns is-12" style="flex-direction: column; height: 100vh;">
       <%= render partial: 'posts/form', locals: { post: @post } %>
       <%= turbo_frame_tag "posts-list", src: index_lazy_path, loading: :lazy do %>
-        <% 10.times do |p| %>
-          <%= turbo_frame_tag "post_#{p}" do %>
-            <%= render 'shared/empty_post', p: p %>
-          <% end %>
+        <% 3.times do %>
+          <%= render 'shared/empty_post', p: p %>
         <% end %>
       <% end %>
     </div>
