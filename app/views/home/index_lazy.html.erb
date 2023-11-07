@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "posts-list" do %>
+  <% @posts.each do |p| %>
+      <%= render 'shared/post', p: p %>
+    <% end %>
+<% end %>
