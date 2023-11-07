@@ -19,7 +19,7 @@
       </div>
       <span class="card-footer" style="margin-bottom: 25px"></span>
       <div class="content">
-        <%= p.description %><br/>
+        <%= p.class == Post ? p&.description : p&.message %><br/>
       </div>
     </div>
     <div class="card-image">
