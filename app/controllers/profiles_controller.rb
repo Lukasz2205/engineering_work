@@ -36,9 +36,16 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def posts
+    @profile = Profile.find(params[:profile_id])
+    @posts   = @profile&.posts.order(' created_at DESC')
+
+    render 'show'
+  end
+
   def liked_posts
     @profile = Profile.find(params[:profile_id])
-    @posts = current_user_profile.posts
+    @posts   = ProfileLikedPostsService.new(@profile).get_likes
 
     render 'show'
   end
