@@ -36,6 +36,13 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def liked_posts
+    @profile = Profile.find(params[:profile_id])
+    @posts = current_user_profile.posts
+
+    render 'show'
+  end
+
   private
 
   def fetch_profile

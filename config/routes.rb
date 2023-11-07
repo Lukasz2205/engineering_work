@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :profiles, only: %i[show edit update]
+  resources :profiles, only: %i[show edit update] do
+    get 'liked_posts', to: 'profiles#liked_posts', as: 'liked_posts'
+  end
+
   resources :posts do
     resources :comments, only: %i[create destroy]
   end

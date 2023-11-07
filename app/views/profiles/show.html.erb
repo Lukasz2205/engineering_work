@@ -14,43 +14,40 @@
             </p>
             <p class="subtitle is-6"><%= @profile.user.email %></p>
           </div>
-          <%= turbo_frame_tag 'followable_options' do %>
-            <% if current_user.profile == @profile %>
-              <%= link_to 'Edytuj profil', edit_profile_path, data: { turbo: 'false' }, class: 'button' %>
-            <% elsif current_user.profile.followed_profiles.include?(@profile) %>
-              <%= render partial: 'profiles/unfollow', locals: { profile: @profile } %>
-            <% else %>
-              <%= render partial: 'profiles/follow', locals: { profile: @profile } %>
-            <% end%>
-          <% end%>
+          <%#= turbo_frame_tag 'followable_options' do %>
+            <%# if current_user.profile == @profile %>
+              <%#= link_to 'Edytuj profil', edit_profile_path, data: { turbo: 'false' }, class: 'button' %>
+            <%# elsif current_user.profile.followed_profiles.include?(@profile) %>
+              <%#= render partial: 'profiles/unfollow', locals: { profile: @profile } %>
+            <%# else %>
+              <%#= render partial: 'profiles/follow', locals: { profile: @profile } %>
+            <%# end %>
+          <%# end %>
         </div>
         <div class="content">
           <%= @profile&.description %>
           <br>
           <time><%= time_ago_in_words(@profile.created_at) %></time>
         </div>
-        <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
-          <ul>
-            <li><a href="#">Posty</a></li>
-            <li><a href="#">Multimedia</a></li>
-            <li><a href="#">Components</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
-          </ul>
-        </nav>
       </div>
+      <footer class="card-footer">
+        <a href="#" class="card-footer-item">Posty</a>
+        <%= link_to 'Polubienia', profile_liked_posts_path(@profile.id), class: 'card-footer-item' %>
+        <a href="#" class="card-footer-item">Komenatarze</a>
+      </footer>
     </div>
   </div>
   <% if @profile == current_user.profile %>
-    <div class="columns is-12 is-multiline" style="width: 100%; margin: 0px;">
-      <div class="column is-12 card" style="">
-        <%= render partial: 'posts/form', locals: { post: Post.new } %>
-      </div>
+    <div class="column is-12">
+      <%= render partial: 'posts/form', locals: { post: Post.new } %>
     </div>
   <% end %>
   <div class="column is-12">
     <div id='posts-list' class="columns is-12 is-multiline">
       <% @posts.each do |p| %>
-        <%= render 'shared/profile_post', p: p %>
+        <div class="column is-12">
+          <%= render 'shared/profile_post', p: p %>
+        </div>
       <% end %>
     </div>
   </div>
