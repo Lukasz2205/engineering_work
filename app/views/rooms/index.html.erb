@@ -1,0 +1,38 @@
+<div class="columns is-12 is-multiline">
+  <div class="column is-11 box" style="background-color: gray; height: 100vh;">
+    <% if @single_room %>
+      <h4 class="text-center" style="color: white"> <%= @user&.username || @single_room.name %> </h4>
+      <%= turbo_stream_from @single_room %>
+      <div class="chat" data-controller="autoscroll">
+        <div id="messages" data-autoscroll-target="chat" style="overflow: auto;height: 75vh;">
+          <%= render @messages %>
+        </div>
+        <div class=""></div>
+        <div class="msg-form" style="margin-top: 15px; width: 100%">
+          <%= render partial: 'shared/new_message_form' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="column is-1">
+    <div>
+      <%= turbo_stream_from "profiles" %>
+      <div id="profiles">
+        <% @profiles&.each do |profile| %>
+          <%= link_to profile.name, private_chat_path(profile.id)  %>
+        <% end %>
+        <%#= render @profiles %>
+      </div>
+    </div>
+    ----------------------------------------
+    <h4> Rooms </h4>
+    <%= render partial: "shared/new_room_form" %>
+    <div>
+      <%= turbo_stream_from "rooms" %>
+      <div id="rooms">
+        <%= render @rooms %>
+      </div>
+    </div>
+  </div>
+</div>
