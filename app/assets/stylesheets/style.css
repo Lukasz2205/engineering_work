@@ -39,6 +39,10 @@
     margin-top: 3rem;
 }
 
+.normal-margin-bottom {
+    margin-bottom: 1rem;
+}
+
 .big-margin-top {
     margin-top: 10vh;
 }
