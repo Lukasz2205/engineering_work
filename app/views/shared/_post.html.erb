@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "post_#{p}" do %>
+<%= turbo_frame_tag "post_#{p.id}" do %>
   <div class="card" style="margin-top: 25px;">
     <div class="card-content">
       <div class="media">
@@ -12,7 +12,7 @@
           <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) %></p>
         </div>
         <% if current_user.profile == p.profile %>
-          <%= link_to post_path(p), data: { turbo_method: :delete } do %>
+          <%= link_to post_path(p.id), data: { turbo_method: :delete } do %>
             <i class="fa-solid fa-trash fa-lg"></i>
           <% end %>
         <% end %>
