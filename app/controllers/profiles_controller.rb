@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   def show
     @post = @profile&.posts.new
-    @posts = @profile&.posts.order(' created_at DESC')
+    @posts = @profile&.posts.order('created_at DESC')
   end
 
   def edit;end
