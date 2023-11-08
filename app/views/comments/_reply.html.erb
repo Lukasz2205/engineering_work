@@ -23,10 +23,12 @@
     </div>
     <span class="card-footer"></span>
     <div class="action-buttons" style="display: flex; justify-content: space-evenly; padding: 10px; align-items: center">
-      <% unless comment.liked?(current_user.profile) %>
-        <%= render partial: 'likes/like', locals: { obj: comment, post: false } %>
-      <% else %>
-        <%= render partial: 'likes/unlike', locals: { obj: comment, post: false } %>
+      <%= turbo_frame_tag "likeable_options_#{comment.id}" do %>
+        <% unless comment.liked?(current_user.profile) %>
+          <%= render partial: 'shared/like', locals: { obj: comment, post: false } %>
+        <% else %>
+          <%= render partial: 'shared/unlike', locals: { obj: comment, post: false } %>
+        <% end %>
       <% end %>
       <%= render partial: 'comments/show', locals: { comment: comment} %>
       <i class="fa-solid fa-share fa-lg"></i>

@@ -5,16 +5,20 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like.save
-        format.html { redirect_to root_path, notice: "Post was successfully created." }
+        format.turbo_stream { render :create, locals: { p: @likeable } }
+      else
+        format.html { redirect_to root_path, alert: 'Something went wrong' }
       end
     end
   end
 
   def destroy
+    @likeable = find_likeable
     @like = Like.find(params[:id])
-    respond_to do |format|
-      if @like.destroy
-        format.html { redirect_to root_path, notice: "Post was successfully created." }
+
+    if @like.destroy
+      respond_to do |format|
+        format.turbo_stream { render :destroy, locals: { p: @likeable } }
       end
     end
   end

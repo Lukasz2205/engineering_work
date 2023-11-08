@@ -1,0 +1,11 @@
+<% if post %>
+  <%= link_to likes_path(post_id: obj), data: { turbo_method: :post }  do %>
+    <i class="fa-regular fa-heart fa-lg"></i>
+  <% end %>
+  <%= obj.likes.count %>
+<% else %>
+  <%= link_to likes_path(comment_id: obj), data: { turbo_method: :post }  do %>
+    <i class="fa-regular fa-heart fa-lg"></i>
+  <% end %>
+  <%= obj.likes.count %>
+<% end %>

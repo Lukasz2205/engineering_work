@@ -1,5 +1,5 @@
-<%= turbo_frame_tag "post_#{p}" do %>
-  <div class="card" style="margin-top: 25px;">
+<%= turbo_frame_tag "post_#{p.id if p.present?}" do %>
+  <div class="card" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>">
     <div class="card-content">
       <div class="media">
         <div class="media-left">
@@ -8,18 +8,20 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile), data: { turbo: "false" } %></p>
-          <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) %></p>
+          <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile), data: { turbo: "false" } if p.present? %></p>
+          <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) if p.present? %></p>
         </div>
-        <% if current_user.profile == p.profile %>
-          <%= link_to post_path(p), data: { turbo_method: :delete } do %>
-            <i class="fa-solid fa-trash fa-lg"></i>
+        <% if p.present? %>
+          <% if current_user.profile == p.profile %>
+            <%= link_to post_path(p.id), data: { turbo_method: :delete } do %>
+              <i class="fa-solid fa-trash fa-lg"></i>
+            <% end %>
           <% end %>
         <% end %>
       </div>
       <span class="card-footer" style="margin-bottom: 25px"></span>
       <div class="content">
-        <%= p.description %><br/>
+        <%= p.description if p.present? %><br/>
       </div>
     </div>
     <div class="card-image">
@@ -44,11 +46,19 @@
       <%# end %>
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
-    <div class="action-buttons" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
-      <% unless p.liked?(current_user.profile) %>
-        <%= render partial: 'likes/like', locals: { obj: p, post: true } %>
+    <div class="action-buttons" data-controller="likes" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
+      <% if p.present? %>
+        <%= turbo_frame_tag "likeable_options_#{p.id}" do %>
+          <% unless p.liked?(current_user.profile) %>
+            <%= render partial: 'shared/like', locals: { obj: p, post: true } %>
+          <% else %>
+            <%= render partial: 'shared/unlike', locals: { obj: p, post: true } %>
+          <% end %>
+        <% end %>
       <% else %>
-        <%= render partial: 'likes/unlike', locals: { obj: p, post: true } %>
+        <a href="#">
+          <i class="fa-regular fa-heart fa-lg"></i>
+        </a>
       <% end %>
       <a href="#">
         <i class="fa-regular fa-comment fa-lg"></i>
@@ -59,15 +69,17 @@
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
     <div class="comments-section">
-      <div id="post_comments_<%= p.id %>">
-        <% if p.comments.any? %>
-          <% p.comments.each do |comm| %>
-            <%= render partial: 'comments/reply', locals: { comment: comm } %>
+      <% if p.present? %>
+        <div id="post_comments_<%= p.id %>">
+          <% if p.comments.any? %>
+            <% p.comments.each do |comm| %>
+              <%= render partial: 'comments/reply', locals: { comment: comm } %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
-    <%= render partial: 'comments/form', locals: { p: p } %>
+    <%= render partial: 'comments/form', locals: { p: p } if p.present? %>
   </div>
 <% end %>
 
