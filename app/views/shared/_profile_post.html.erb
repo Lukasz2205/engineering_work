@@ -45,10 +45,12 @@
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
     <div class="action-buttons" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
-      <% unless p.liked?(current_user.profile) %>
-        <%= render partial: 'likes/like', locals: { obj: p, post: true } %>
-      <% else %>
-        <%= render partial: 'likes/unlike', locals: { obj: p, post: true } %>
+      <%= turbo_frame_tag "likeable_options_#{p.id}" do %>
+        <% unless p.liked?(current_user.profile) %>
+          <%= render partial: 'likes/like', locals: { obj: p, post: true } %>
+        <% else %>
+          <%= render partial: 'likes/unlike', locals: { obj: p, post: true } %>
+        <% end %>
       <% end %>
       <a href="#">
         <i class="fa-regular fa-comment fa-lg"></i>
