@@ -1,3 +1,8 @@
-<%#= turbo_stream.replace "likeable_options_#{@likeable.id}" do %>
-  <%#= render partial: 'likes/unlike', locals: { p: @likeable } %>
-<%# end %>
+<%= turbo_stream.replace "likeable_options_#{p.id}" do %>
+  <%= turbo_frame_tag "likeable_options_#{p.id}" do %>
+    <%= link_to likes_path(post_id: p), data: { turbo_method: :post }  do %>
+      <i class="fa-regular fa-heart fa-lg"></i>
+    <% end %>
+    <%= p.likes.count %>
+  <% end %>
+<% end %>

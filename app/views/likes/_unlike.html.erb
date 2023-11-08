@@ -1,14 +1,12 @@
-<%= turbo_frame_tag "likeable_options_#{obj.id}" do %>
-  <% like = current_user.profile.likes.find_by(likeable: obj) %>
-  <% if like %>
-    <%= link_to like_path(like), data: { turbo_method: :delete } do %>
-      <i class="fa-solid fa-heart fa-lg"></i>
-    <% end %>
-    <%= obj.likes.count %>
-  <% else %>
-    <%= link_to like_path(like), data: { turbo_method: :delete } do %>
-      <i class="fa-solid fa-heart fa-lg"></i>
-    <% end %>
-    <%= obj.likes.count %>
+<% like = current_user.profile.likes.find_by(likeable: obj.id) %>
+<% if post %>
+  <%= link_to like_path(like, post_id: obj), data: { turbo_method: :delete } do %>
+    <i class="fa-solid fa-heart fa-lg"></i>
   <% end %>
+  <%= obj.likes.count %>
+<% else %>
+  <%= link_to like_path(like, post_id: obj), data: { turbo_method: :delete } do %>
+    <i class="fa-solid fa-heart fa-lg"></i>
+  <% end %>
+  <%= obj.likes.count %>
 <% end %>
