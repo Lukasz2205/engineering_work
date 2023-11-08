@@ -50,9 +50,9 @@
       <% if p.present? %>
         <%= turbo_frame_tag "likeable_options_#{p.id}" do %>
           <% unless p.liked?(current_user.profile) %>
-            <%= render partial: 'likes/like', locals: { obj: p, post: true } %>
+            <%= render partial: 'shared/like', locals: { obj: p, post: true } %>
           <% else %>
-            <%= render partial: 'likes/unlike', locals: { obj: p, post: true } %>
+            <%= render partial: 'shared/unlike', locals: { obj: p, post: true } %>
           <% end %>
         <% end %>
       <% else %>

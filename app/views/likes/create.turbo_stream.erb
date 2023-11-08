@@ -1,8 +1,14 @@
 <% like = current_user.profile.likes.find_by(likeable: p.id) %>
 <%= turbo_stream.replace "likeable_options_#{p.id}" do %>
   <%= turbo_frame_tag "likeable_options_#{p.id}" do %>
-    <%= link_to like_path(like, post_id: p), data: { turbo_method: :delete } do %>
-      <i class="fa-solid fa-heart fa-lg"></i>
+    <% if p.class == Post %>
+      <%= link_to like_path(like, post_id: p), data: { turbo_method: :delete } do %>
+        <i class="fa-solid fa-heart fa-lg"></i>
+      <% end %>
+    <% else %>
+      <%= link_to like_path(like, comment_id: p), data: { turbo_method: :delete } do %>
+        <i class="fa-solid fa-heart fa-lg"></i>
+      <% end %>
     <% end %>
     <%= p.likes.count %>
   <% end %>
