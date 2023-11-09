@@ -8,6 +8,10 @@
     border-radius: 100%;
 }
 
+.hidden {
+    display: none;
+}
+
 .first-email-letter {
     display: flex;
     align-content: center;
@@ -81,6 +85,17 @@
     position: -webkit-sticky;
     bottom: 0;
     width: 90%
+}
+
+.post-limit {
+    text-wrap: inherit;
+    min-height: 125px;
+    height: 125px;
+    overflow: hidden;
+}
+
+.post-content {
+    overflow-wrap: break-word;
 }
 
 .message-box {
