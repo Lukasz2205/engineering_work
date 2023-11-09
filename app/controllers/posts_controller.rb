@@ -38,6 +38,6 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    params.require(:post).permit(:description, pictures: [])
+    params.require(:post).permit(:description, attachments: [])
   end
 end

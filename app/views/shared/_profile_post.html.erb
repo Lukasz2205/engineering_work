@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "post_#{p.id if p.present?}" do %>
+<div id="<%= "post_#{p.id if p.present?}" %>" class="column is-12">
   <div class="card" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>">
     <div class="card-content">
       <div class="media">
@@ -13,8 +13,14 @@
         </div>
         <% if p.present? %>
           <% if current_user.profile == p.profile %>
-            <%= link_to post_path(p.id), data: { turbo_method: :delete } do %>
-              <i class="fa-solid fa-trash fa-lg"></i>
+            <% if p.class == Post %>
+              <%= link_to profile_path(current_user.profile, post_id: p.id), data: { turbo_method: :delete } do %>
+                <i class="fa-solid fa-trash fa-lg"></i>
+              <% end %>
+            <% else %>
+              <%= link_to profile_path(current_user.profile, comment_id: p.id), data: { turbo_method: :delete } do %>
+                <i class="fa-solid fa-trash fa-lg"></i>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
@@ -71,4 +77,4 @@
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
   </div>
-<% end %>
+</div>

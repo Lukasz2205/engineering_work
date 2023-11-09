@@ -39,15 +39,13 @@
   </div>
   <% if @profile == current_user.profile %>
     <div class="column is-12">
-      <%= render partial: 'posts/form', locals: { post: Post.new } %>
+      <%= render partial: 'posts/form' %>
     </div>
   <% end %>
   <div class="column is-12">
     <div id='posts-list' class="columns is-12 is-multiline">
       <% @posts.each do |p| %>
-        <div class="column is-12">
-          <%= render 'shared/profile_post', p: p %>
-        </div>
+        <%= render 'shared/profile_post', p: p %>
       <% end %>
     </div>
   </div>
