@@ -1,11 +1,11 @@
 <%= turbo_frame_tag 'new_post' do %>
-  <%= form_with model: post, url: posts_path do |f| %>
+  <%= form_with model: @post, url: posts_path do |f| %>
     <div class="columns is-12 is-multiline" style="margin-bottom: 2rem">
       <div class="column is-12 card">
-        <%= f.text_field :description, label: 'Opis', placeholder: 'Dodaj posts', class: 'input' %>
+        <%= f.text_field :description, label: 'opis', placeholder: 'dodaj posts', class: 'input' %>
       </div>
       <div class="column is-6 card" style="display: flex; justify-content: start; align-items: center">
-        <%= f.file_field :attachments, multiple: true %>
+        <%= f.file_field :attachments, multiple: true, accept: ".jpg, .jpeg, .png, .webp, .mp4" %>
       </div>
       <div class="column is-6 card" style="display: flex; justify-content: end">
         <%= f.submit class: 'button' %>

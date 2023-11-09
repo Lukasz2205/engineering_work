@@ -16,6 +16,18 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def destroy
+    fetch_object
+    respond_to do |format|
+      if @object.destroy
+        format.turbo_stream { render :destroy, locals: { obj: @object} }
+        format.html { redirect_to root_path, alert: 'Pomyślnie usunięto post' }
+      else
+        format.html { redirect_to root_path, notice: 'something went wrong' }
+      end
+    end
+  end
+
   def follow
     respond_to do |format|
       if current_user_profile.followed_profiles << @profile
@@ -51,6 +63,14 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def fetch_object
+    @object = if params[:post_id]
+                Post.find(params[:post_id])
+              elsif params[:comment_id]
+                Comment.find(params[:comment_id])
+              end
+  end
 
   def fetch_profile
     @profile = Profile.find(params[:id].present? ? params[:id] : params[:profile_id])
