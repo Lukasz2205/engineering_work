@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "post_#{p.id if p.present?}" do %>
   <div class="card" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>">
-    <div class="card-content">
+    <div class="card-content" data-controller="post">
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
@@ -20,9 +20,10 @@
         <% end %>
       </div>
       <span class="card-footer" style="margin-bottom: 25px"></span>
-      <div class="content">
+      <div class="post-content post-limit " data-post-target="content">
         <%= p.description if p.present? %>
       </div>
+      <div class="show-more" data-post-target="button"></div>
     </div>
     <div class="card-image">
       <% if p.present? && p.attachments.attached? %>

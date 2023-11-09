@@ -1,5 +1,5 @@
 <%= turbo_stream.prepend 'posts-list' do %>
-  <%= render partial: 'shared/profile_post', locals: { p: @post } %>
+  <%= render partial: 'shared/post', locals: { p: @post } %>
 <% end %>
 
 <%= turbo_stream.replace "new_post",
