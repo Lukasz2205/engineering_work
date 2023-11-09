@@ -46,13 +46,15 @@ class ProfilesController < ApplicationController
 
   def comments
     @posts = ProfileService.new(@profile).get_comments
-
+    puts 'hehehesd'
+    puts @posts
     render 'show'
   end
 
   private
 
   def fetch_profile
+
     @profile = Profile.find(params[:id].present? ? params[:id] : params[:profile_id])
   end
 

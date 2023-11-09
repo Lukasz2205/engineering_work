@@ -21,12 +21,12 @@
       </div>
       <span class="card-footer" style="margin-bottom: 25px"></span>
       <div class="content">
-        <%= p.description if p.present? %><br/>
+        <%= p.description if p.present? %>
       </div>
     </div>
     <div class="card-image">
       <% if p.present? && p.attachments.attached? %>
-        <div class="columns is-12" style="display: flex; justify-content: center;">
+        <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
           <% p.attachments.each_with_index do |attachment| %>
             <% if attachment.image? %>
               <div class="column is-3 normal-margin-bottom">

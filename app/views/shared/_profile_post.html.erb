@@ -1,5 +1,5 @@
-<%= turbo_frame_tag "post_#{p.id}" do %>
-  <div class="card" style="margin-top: 25px; padding-bottom: 25px">
+<%= turbo_frame_tag "post_#{p.id if p.present?}" do %>
+  <div class="card" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>">
     <div class="card-content">
       <div class="media">
         <div class="media-left">
@@ -8,49 +8,59 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile), data: { turbo: "false" } %></p>
-          <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) %></p>
+          <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile), data: { turbo: "false" } if p.present? %></p>
+          <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) if p.present? %></p>
         </div>
-        <% if current_user.profile == p.profile %>
-          <%= link_to post_path(p), data: { turbo_method: :delete } do %>
-            <i class="fa-solid fa-trash fa-lg"></i>
+        <% if p.present? %>
+          <% if current_user.profile == p.profile %>
+            <%= link_to post_path(p.id), data: { turbo_method: :delete } do %>
+              <i class="fa-solid fa-trash fa-lg"></i>
+            <% end %>
           <% end %>
         <% end %>
       </div>
       <span class="card-footer" style="margin-bottom: 25px"></span>
       <div class="content">
-        <%= p.class == Post ? p&.description : p&.message %><br/>
+        <% if p.class == Post %>
+          <%= p.description if p.present? %><br/>
+        <% else %>
+          <%= p.message if p.present? %><br/>
+        <% end %>
       </div>
     </div>
-    <div class="card-image">
-      <%# if p.attachments.attached? %>
-      <%# p.attachments.each_with_index do |attachment, index| %>
-      <%# if attachment.image? %>
-      <!--          <figure class="image is-4by3">-->
-      <%#= image_tag(p.post_attachment(index)) %>
-      <!--          </figure>-->
-      <%# elsif attachment.video? %>
-      <!--          <figure class="image is-4by3">-->
-      <%#= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
-      <!--          </figure>-->
-      <%# elsif attachment.audio? %>
-      <!--          <figure class="image is-4by3">-->
-      <%#= audio_tag(url_for(attachment), controls: '') %>
-      <!--          </figure>-->
-      <%# else %>
-      <%#= link_to attachment.filename, url_for(attachment), style: "text-decoration: none; color: #fff" %>
-      <%# end %>
-      <%# end %>
-      <%# end %>
+    <div class="card-attachments">
+      <% if p.class == Post && p.present? && p.attachments.attached? %>
+        <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
+          <% p.attachments.each_with_index do |attachment| %>
+            <% if attachment.image? %>
+              <div class="column is-3 normal-margin-bottom">
+                <figure class="image is-4by3">
+                  <%= image_tag(attachment) %>
+                </figure>
+              </div>
+            <% elsif attachment.video? %>
+              <div class="column is-6">
+                <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
-    <div class="action-buttons" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
-      <%= turbo_frame_tag "likeable_options_#{p.id}" do %>
-        <% unless p.liked?(current_user.profile) %>
-          <%= render partial: 'shared/like', locals: { obj: p, post: true } %>
-        <% else %>
-          <%= render partial: 'shared/unlike', locals: { obj: p, post: true } %>
+    <div class="action-buttons" data-controller="likes" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
+      <% if p.present? %>
+        <%= turbo_frame_tag "likeable_options_#{p.id}" do %>
+          <% unless p.liked?(current_user.profile) %>
+            <%= render partial: 'shared/like', locals: { obj: p, post: p.class == Post } %>
+          <% else %>
+            <%= render partial: 'shared/unlike', locals: { obj: p, post: p.class == Post } %>
+          <% end %>
         <% end %>
+      <% else %>
+        <a href="#">
+          <i class="fa-regular fa-heart fa-lg"></i>
+        </a>
       <% end %>
       <a href="#">
         <i class="fa-regular fa-comment fa-lg"></i>
@@ -59,5 +69,6 @@
         <i class="fa-solid fa-share fa-lg"></i>
       </a>
     </div>
+    <span class="card-footer" style="margin-bottom: 15px"></span>
   </div>
 <% end %>
