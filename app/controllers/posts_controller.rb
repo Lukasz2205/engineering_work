@@ -9,8 +9,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.profile.posts.build(
-      description: params[:post][:description])
+    @post = current_user.profile.posts.build(description: params[:post][:description], attachments: params[:post][:attachments])
     respond_to do |format|
       if @post.save
         format.html { redirect_to root_path, notice: "Post was successfully created." }
@@ -39,6 +38,6 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    params.require(:post).permit(:description, attachments: [])
+    params.require(:post).permit(:description, pictures: [])
   end
 end

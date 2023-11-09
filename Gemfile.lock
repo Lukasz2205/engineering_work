@@ -211,6 +211,7 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  activestorage
   bootsnap
   bulma-rails (~> 0.9.4)
   debug

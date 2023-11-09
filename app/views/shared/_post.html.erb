@@ -25,25 +25,23 @@
       </div>
     </div>
     <div class="card-image">
-      <%# if p.attachments.attached? %>
-      <%# p.attachments.each_with_index do |attachment, index| %>
-      <%# if attachment.image? %>
-      <!--          <figure class="image is-4by3">-->
-      <%#= image_tag(p.post_attachment(index)) %>
-      <!--          </figure>-->
-      <%# elsif attachment.video? %>
-      <!--          <figure class="image is-4by3">-->
-      <%#= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
-      <!--          </figure>-->
-      <%# elsif attachment.audio? %>
-      <!--          <figure class="image is-4by3">-->
-      <%#= audio_tag(url_for(attachment), controls: '') %>
-      <!--          </figure>-->
-      <%# else %>
-      <%#= link_to attachment.filename, url_for(attachment), style: "text-decoration: none; color: #fff" %>
-      <%# end %>
-      <%# end %>
-      <%# end %>
+      <% if p.present? && p.attachments.attached? %>
+        <div class="columns is-12" style="display: flex; justify-content: center;">
+          <% p.attachments.each_with_index do |attachment| %>
+            <% if attachment.image? %>
+              <div class="column is-3 normal-margin-bottom">
+                <figure class="image is-4by3">
+                  <%= image_tag(attachment) %>
+                </figure>
+              </div>
+            <% elsif attachment.video? %>
+              <div class="column is-6">
+                <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+    <% end %>
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
     <div class="action-buttons" data-controller="likes" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">

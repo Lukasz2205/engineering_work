@@ -1,7 +1,7 @@
 <div class="columns is-12 normal-margin-top">
   <div class="column is-12">
     <div class="columns is-12" style="flex-direction: column; height: 100vh;">
-      <%= render partial: 'posts/form', locals: { post: @post } %>
+      <%= render partial: 'posts/form' %>
       <%= turbo_frame_tag "posts-list", src: index_lazy_path do %>
         <% 3.times do %>
           <%= render partial: 'shared/post' %>
