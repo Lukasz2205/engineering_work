@@ -11,5 +11,5 @@ class Message < ApplicationRecord
     end
   end
 
-  after_create_commit { broadcast_append_to self.room }
+  after_create_commit { broadcast_prepend_to self.room }
 end
