@@ -1,5 +1,11 @@
 <%= turbo_frame_tag "posts-list" do %>
   <% @posts.each do |p| %>
       <%= render 'shared/post', p: p %>
-    <% end %>
+  <% end %>
+
+  <div id="next_link" class="normal-margin-top" style="display:flex;justify-content: center;">
+    <%== pagy_nav(@pagy) %><br/>
+  </div>
+  <%== pagy_info @pagy %><br/>
 <% end %>
+
