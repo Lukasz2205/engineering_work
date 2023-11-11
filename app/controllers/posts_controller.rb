@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     respond_to do |format|
       if @post.destroy
-        format.turbo_stream
+        format.turbo_stream { render :destroy, locals: { p: @post }}
         format.html { redirect_to root_path, alert: 'Pomyślnie usunięto post' }
       else
         format.html { redirect_to root_path, notice: 'something went wrong' }

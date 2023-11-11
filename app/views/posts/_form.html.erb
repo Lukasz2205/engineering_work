@@ -1,5 +1,5 @@
 <%= turbo_frame_tag 'new_post' do %>
-  <%= form_with model: @post, url: posts_path do |f| %>
+  <%= form_with model: Post.new, url: posts_path do |f| %>
     <div class="columns is-12 is-multiline" style="margin-bottom: 2rem">
       <div class="column is-12 card">
         <%= f.text_field :description, placeholder: 'dodaj posts', class: 'input' %>

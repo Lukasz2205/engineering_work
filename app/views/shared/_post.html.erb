@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "post_#{p.id if p.present?}" do %>
+<%= turbo_frame_tag "post_#{p.id if p.present?}", class: 'column is-12' do %>
   <div class="card" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>">
     <div class="card-content" data-controller="post">
       <div class="media">
@@ -42,7 +42,7 @@
             <% end %>
           <% end %>
         </div>
-    <% end %>
+      <% end %>
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
     <div class="action-buttons" data-controller="likes" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">

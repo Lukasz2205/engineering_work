@@ -7,7 +7,6 @@ export default class extends Controller {
         const content = this.contentTarget
 
         if (content.textContent.length >= 500) {
-            console.log(content.textContent)
             const showMoreLink = document.createElement('a')
             const showMoreText = document.getElementById('show-more')
             showMoreLink.setAttribute('href', '#');
