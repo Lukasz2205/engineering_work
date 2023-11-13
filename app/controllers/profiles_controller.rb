@@ -45,21 +45,20 @@ class ProfilesController < ApplicationController
   end
 
   def posts
-    @posts = @profile&.posts.order(' created_at DESC')
+    @pagy, @posts = pagy(@profile&.posts.order(created_at: :desc), items: 5)
 
-    render 'show'
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def liked_posts
     @posts = ProfileService.new(@profile).get_likes
-
-    render 'show'
   end
 
   def comments
     @posts = ProfileService.new(@profile).get_comments
-
-    render 'show'
   end
 
   private

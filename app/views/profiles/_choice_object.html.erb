@@ -43,12 +43,10 @@
     </div>
   <% end %>
   <div class="column is-12">
-    <%= turbo_frame_tag 'choice_objects', src: profile_posts_path(@profile.id), class: "columns is-12 is-multiline" do %>
-      <% 5.times do %>
-        <%= render partial: 'shared/post' %>
+    <%= turbo_frame_tag 'choice_objects', class: "columns is-12 is-multiline" do %>
+      <% @posts.each do |p| %>
+        <%= render partial: 'shared/profile_post', locals: { p: p } %>
       <% end %>
     <% end %>
-
-    <%= turbo_frame_tag "choice_objects_pagination" %>
   </div>
 </div>

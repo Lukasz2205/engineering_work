@@ -21,7 +21,7 @@
       </div>
       <span class="card-footer" style="margin-bottom: 25px"></span>
       <div class="post-content post-limit " data-post-target="content">
-        <%= p.description if p.present? %>
+        <%= p&.description if p.present? %>
       </div>
       <div class="show-more" data-post-target="button"></div>
     </div>

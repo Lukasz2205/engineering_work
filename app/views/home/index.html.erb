@@ -2,7 +2,7 @@
   <div class="column is-12">
     <div class="columns is-12" style="flex-direction: column; height: 100vh;">
       <%= render partial: 'posts/form' %>
-      <%= turbo_frame_tag "posts-list", src: index_lazy_path  do %>
+      <%= turbo_frame_tag "posts-list", src: index_lazy_path do %>
         <% 5.times do %>
           <%= render partial: 'shared/post' %>
         <% end %>
