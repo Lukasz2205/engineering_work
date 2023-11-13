@@ -1,1 +1,16 @@
-<%= render 'profiles/choice_object' %>
+<%= turbo_frame_tag "choice_objects" do %>
+  <% @posts.each do |p| %>
+    <%= render 'shared/profile_post', p: p %>
+  <% end %>
+
+  <% if @pagy.next.present? %>
+    <%= turbo_stream.replace "choice_objects_pagination" do %>
+      <%= turbo_frame_tag "choice_objects_pagination", src: profile_posts_path(@profile.id, page: @pagy.next, format: "turbo_stream"), loading: "lazy" do %>
+        <% 5.times do %>
+          <%= render partial: 'shared/post' %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+

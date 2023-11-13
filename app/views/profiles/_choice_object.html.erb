@@ -31,7 +31,7 @@
         </div>
       </div>
       <footer class="card-footer">
-        <%= link_to 'Posty', profile_posts_path(@profile.id), data: { turbo_target: 'choice_objects' }, class: 'card-footer-item' %>
+        <%= link_to 'Posty', profile_path(@profile.id), data: { turbo_target: 'choice_objects' }, class: 'card-footer-item' %>
         <%= link_to 'Polubienia', profile_liked_posts_path(@profile.id), data: { turbo_target: 'choice_objects' }, class: 'card-footer-item' %>
         <%= link_to 'Komentarze', profile_comments_path(@profile.id), data: { turbo_target: 'choice_objects' }, class: 'card-footer-item' %>
       </footer>

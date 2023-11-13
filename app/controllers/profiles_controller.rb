@@ -45,8 +45,12 @@ class ProfilesController < ApplicationController
   end
 
   def posts
-    @posts = @profile&.posts.order(created_at: :desc)
+    @pagy, @posts = pagy(@profile&.posts.order(created_at: :desc), items: 5)
 
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def liked_posts
