@@ -1,3 +1,7 @@
+body {
+    background-color: #F8F9FA;
+}
+
 .is-rounded {
     width: 48px;
     height: 48px;
@@ -56,7 +60,7 @@
 }
 
 .navbar {
-    border-bottom: 1px solid aqua;
+    border-bottom: 1px solid #E9ECEF;
     width: 100%;
     position: fixed;
     /* background-color: rgba(255,255,255,0.5) !important; */
