@@ -1,4 +1,7 @@
+include Pagy::Backend
+
 class ApplicationController < ActionController::Base
+
   before_action :authenticate_user!
   before_action :create_user_profile
 

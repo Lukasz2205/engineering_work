@@ -1,5 +1,16 @@
 <%= turbo_frame_tag "posts-list" do %>
   <% @posts.each do |p| %>
-      <%= render 'shared/post', p: p %>
+    <%= render 'shared/post', p: p %>
+  <% end %>
+
+  <% if @pagy.next.present? %>
+    <%= turbo_stream.replace "posts-pagination" do %>
+      <%= turbo_frame_tag "posts-pagination", src: index_lazy_path(page: @pagy.next, format: "turbo_stream"), loading: "lazy" do %>
+        <% 5.times do %>
+          <%= render partial: 'shared/post' %>
+        <% end %>
+      <% end %>
     <% end %>
+  <% end %>
 <% end %>
+

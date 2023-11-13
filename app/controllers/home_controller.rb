@@ -1,9 +1,12 @@
 class HomeController < ApplicationController
-  def index
-    @post = Post.new
-  end
+  def index; end
 
   def index_lazy
-    @posts = Post.all.order('created_at DESC')
+    @pagy, @posts = pagy(Post.all.order('created_at DESC'), items: 5)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 end

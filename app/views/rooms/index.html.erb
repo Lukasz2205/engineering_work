@@ -4,7 +4,7 @@
       <h4 class="text-center" style="color: white"> <%= @user&.username || @single_room.name %> </h4>
       <%= turbo_stream_from @single_room %>
       <div class="chat" data-controller="autoscroll">
-        <div id="messages" data-autoscroll-target="chat" style="overflow: auto;height: 75vh;">
+        <div id="messages" data-autoscroll-target="chat" style="overflow: auto; height: 75vh; display: flex;flex-direction: column-reverse">
           <%= render @messages %>
         </div>
         <div class=""></div>
