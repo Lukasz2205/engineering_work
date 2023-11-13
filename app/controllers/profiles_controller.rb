@@ -45,21 +45,16 @@ class ProfilesController < ApplicationController
   end
 
   def posts
-    @posts = @profile&.posts.order(' created_at DESC')
+    @posts = @profile&.posts.order(created_at: :desc)
 
-    render 'show'
   end
 
   def liked_posts
     @posts = ProfileService.new(@profile).get_likes
-
-    render 'show'
   end
 
   def comments
     @posts = ProfileService.new(@profile).get_comments
-
-    render 'show'
   end
 
   private
