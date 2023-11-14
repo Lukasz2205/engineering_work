@@ -1,47 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>EngineeringWork</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>EngineeringWork</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <%= javascript_importmap_tags %>
+</head>
 
-  <body>
-
-  <%= render 'layouts/navigation' %>
-  <div class="columns is-12 full-page-height is-multiline">
-
-    <% if signed_in? %>
-      <div class="column is-12">
-
-      </div>
-    <% end %>
-
-    <div class="column is-12">
-      <div class="columns is-12 is-multiline normal-margin-top">
-        <div class="column is-12">
-          <%= render 'layouts/messages' %>
-        </div>
-        <% if signed_in? %>
-          <div class="column is-3">
-            <%= render 'layouts/navigation_panel' %>
-          </div>
-        <% end %>
-
-        <div class="column is-6">
-          <%= yield %>
-        </div>
-
-        <% if signed_in? %>
-          <div class="column is-3">
-          </div>
-        <% end %>
-      </div>
-    </div>
+<body>
+<%= render 'layouts/navigation_panel' %>
+<div class="main-content">
+  <div class="container">
+    <%= yield %>
   </div>
-  </body>
+</div>
+</body>
 </html>

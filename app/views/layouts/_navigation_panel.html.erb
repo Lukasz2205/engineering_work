@@ -1,31 +1,54 @@
-<div class="column is-12">
-  <div class="columns is-12 is-multiline full-page-height big-margin-top container">
-    <div class="column is-3">
-      <div style="position: fixed; left: 5%">
-        <aside class="menu">
-          <p class="menu-label">
-            <%= link_to 'Strona główna', root_path %>
-          </p>
-          <p class="menu-label">
-            <% if signed_in? %>
-              <%= link_to 'Profil', profile_path(current_user.profile) %>
-            <% end %>
-          </p>
-          <p class="menu-label">
-            <% if signed_in? %>
-              <%= link_to 'Wiadomości', rooms_path %>
-            <% end %>
-          </p>
-          <p class="menu-label">
-            <% if signed_in? && current_user.role == 'admin' %>
-              <%#= link_to 'Panel administratorski', panel_index_path %>
-            <% end %>
-          </p>
-          <p class="menu-label">
-            Powiadomienia
-          </p>
-        </aside>
-      </div>
+<div class="sidebar" data-controller="toggle" data-toggle-target="sidebar">
+  <div class="top">
+    <div class="logo">
+      <i class='bx bxs-message-square-dots'></i>
+      <span>System</span>
+    </div>
+    <i class='bx bxs-right-arrow' id="btn" data-toggle-target="button" data-action="click->toggle#toggle"></i>
+  </div>
+  <div class="user">
+    <img src="https://bochenskiedzieje.pl/images/thumbnails/images/postacie/pisarze/matejko_autoportret-fill-480x480.jpg" alt="picture" class="user-img">
+    <div>
+      <p class="bold"><%= current_user.profile.name %></p>
+      <p><%= current_user.role %></p>
     </div>
   </div>
+  <ul>
+    <li>
+      <%= link_to root_path do %>
+        <i class="bx bxs-grid-alt"></i>
+        <span class="nav-item">Strona</span>
+      <% end %>
+      <span class="tooltip">Strona</span>
+    </li>
+    <li>
+      <%= link_to profile_path(current_user.profile) do %>
+        <i class="bx bxs-user"></i>
+        <span class="nav-item">Profil</span>
+      <% end %>
+      <span class="tooltip">Profil</span>
+    </li>
+    <li>
+      <%= link_to rooms_path do %>
+        <i class='bx bx-message-rounded-dots'></i>
+        <span class="nav-item">Wiadomości</span>
+      <% end %>
+      <span class="tooltip">Wiadomości</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class='bx bx-bell'></i>
+        <span class="nav-item">Powiadomienia</span>
+      </a>
+      <span class="tooltip">Powiadomienia</span>
+    </li>
+    <li>
+      <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+        <i class="bx bxs-log-out"></i>
+        <span class="nav-item">Logout</span>
+      <% end %>
+      <span class="tooltip">Logout</span>
+    </li>
+  </ul>
+</div>
 </div>
