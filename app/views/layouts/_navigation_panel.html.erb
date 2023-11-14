@@ -1,10 +1,10 @@
-<div class="sidebar" data-controller="toggle" data-toggle-target="sidebar">
+<div class="sidebar <%= 'active' if cookies[:sidebar_active] == 'true' %>" data-controller="toggle" data-toggle-target="sidebar">
   <div class="top">
     <div class="logo">
       <i class='bx bxs-message-square-dots'></i>
       <span>System</span>
     </div>
-    <i class='bx bxs-right-arrow' id="btn" data-toggle-target="button" data-action="click->toggle#toggle"></i>
+    <i class='bx bxs-<%= cookies[:sidebar_active] == 'true' ? 'left' : 'right' %>-arrow' id="btn" data-toggle-target="button" data-action="click->toggle#toggle"></i>
   </div>
   <div class="user">
     <img src="https://bochenskiedzieje.pl/images/thumbnails/images/postacie/pisarze/matejko_autoportret-fill-480x480.jpg" alt="picture" class="user-img">
