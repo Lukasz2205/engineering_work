@@ -11,23 +11,33 @@
   <%= javascript_importmap_tags %>
 </head>
 <body>
-  <div class="columns is-12 is-multiline is-centered" style="padding: 0 13rem 0 13rem; margin-top: 0rem">
-    <div class="column is-12 is-fixed box-column"  style="width: 82% ;z-index: 9999">
-      <%= render 'layouts/navigation' %>
-    </div>
-    <div class="column is-3 is-fixed box-column is-full-height" style="left: 9%; top: 8rem; width: 17rem;">
-      <%= render 'layouts/navigation_panel' %>
-    </div>
-    <div class="column is-7" style="position: relative; top: 8rem">
-      <%= yield %>
-    </div>
-    <div class="column is-2 is-fixed box-column is-full-height" style="right: 9%; top: 8rem; width: 17rem;">
-      Użytkownicy
-      <% @profiles.each do |profile| %>
-        <br/>
-        <%= profile.name %>
-      <% end %>
-    </div>
+<div class="columns is-12 is-multiline is-centered" style="padding: 0 13rem 0 13rem; margin-top: 0rem">
+  <div class="column is-10 is-fixed box-column" style="left:10.5%; width: 65%; z-index: 9999">
+    <%= render 'layouts/navigation' %>
   </div>
+  <div class="column is-2 is-fixed box-column min-max-height" style="right: 9%; width: 15%; z-index: 9999">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48" >
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" style="border-radius: 100%">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">
+            <%= current_user.profile.name %>
+          </p>
+          </div>
+      </div>
+  </div>
+  <div class="column is-3 is-fixed is-full-height" style="left: 9%; top: 8rem; width: 17rem;">
+    <%= render 'layouts/navigation_panel' %>
+  </div>
+  <div class="column is-7" style="position: relative; top: 8rem">
+    <%= yield %>
+  </div>
+  <div class="column is-2 is-fixed  is-full-height" style="right: 9%; top: 8rem; width: 17rem;">
+
+  </div>
+</div>
 </body>
 </html>

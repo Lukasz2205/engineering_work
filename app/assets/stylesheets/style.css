@@ -3,6 +3,18 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html {
+    background-color: #1C2541;
+}
+
+.navbar-brand a i  {
+    font-size: 2rem;
+}
+
+.navbar-brand a .title  {
+    font-size: 1rem;
+}
+
 .first-email-letter {
     display: flex;
     align-content: center;
