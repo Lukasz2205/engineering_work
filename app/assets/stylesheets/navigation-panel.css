@@ -6,7 +6,7 @@
 }
 
 .menu ul li:hover {
-    background-color: #3A506B;
+    background: rgba(58, 80, 107, 0.68);
     border-radius: 15px;
 }
 
@@ -22,6 +22,6 @@
 }
 
 .menu ul li.is-active {
-    background-color: #3A506B;
+    background: rgba(58, 80, 107, 0.68);
     border-radius: 15px;
 }

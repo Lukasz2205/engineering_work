@@ -1,8 +1,10 @@
 .box-column {
-    background-color: #FFFFFF;
-    border-radius: 1rem;
-    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
-    color: #4a4a4a;
+    background: rgba(58, 80, 107, 0.68);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .is-fixed {
@@ -16,4 +18,38 @@
 .min-max-height {
     min-height: 76px;
     max-height-: 76px;
+}
+
+.navbar-item.brand {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navbar-item.brand h1 {
+    color: #FFFFFF;
+}
+
+.navbar-item.brand:hover {
+    color: red;
+}
+
+.menu ul li:hover {
+    background: rgba(58, 80, 107, 0.68);
+    border-radius: 15px;
+}
+
+.menu ul li {
+    margin: 1rem;
+    width: 100%;
+    padding: 2.5%;
+}
+
+.menu ul a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.menu ul li.is-active {
+    background: rgba(58, 80, 107, 0.68);
+    border-radius: 15px;
 }

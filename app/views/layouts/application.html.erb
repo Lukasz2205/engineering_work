@@ -16,18 +16,7 @@
     <%= render 'layouts/navigation' %>
   </div>
   <div class="column is-2 is-fixed box-column min-max-height" style="right: 9%; width: 15%; z-index: 9999">
-      <div class="media">
-        <div class="media-left">
-          <figure class="image is-48x48" >
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" style="border-radius: 100%">
-          </figure>
-        </div>
-        <div class="media-content">
-          <p class="title is-4">
-            <%= current_user.profile.name %>
-          </p>
-          </div>
-      </div>
+    <%= render 'layouts/user_card' %>
   </div>
   <div class="column is-3 is-fixed is-full-height" style="left: 9%; top: 8rem; width: 17rem;">
     <%= render 'layouts/navigation_panel' %>
@@ -35,7 +24,7 @@
   <div class="column is-7" style="position: relative; top: 8rem">
     <%= yield %>
   </div>
-  <div class="column is-2 is-fixed  is-full-height" style="right: 9%; top: 8rem; width: 17rem;">
+  <div class="column is-2 is-fixed is-full-height" style="right: 9%; top: 8rem; width: 17rem;">
 
   </div>
 </div>
