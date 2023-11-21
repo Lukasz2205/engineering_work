@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @profiles = Profile.all
+  end
 
   def index_lazy
     @pagy, @posts = pagy(Post.all.order('created_at DESC'), items: 5)

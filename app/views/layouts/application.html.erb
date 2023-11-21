@@ -10,13 +10,24 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <%= javascript_importmap_tags %>
 </head>
-
 <body>
-<%= render 'layouts/navigation_panel' %>
-<div class="main-content">
-  <div class="container">
-    <%= yield %>
+  <div class="columns is-12 is-multiline is-centered" style="padding: 0 13rem 0 13rem; margin-top: 0rem">
+    <div class="column is-12 is-fixed box-column"  style="width: 82% ;z-index: 9999">
+      <%= render 'layouts/navigation' %>
+    </div>
+    <div class="column is-3 is-fixed box-column is-full-height" style="left: 9%; top: 8rem; width: 17rem;">
+      <%= render 'layouts/navigation_panel' %>
+    </div>
+    <div class="column is-7" style="position: relative; top: 8rem">
+      <%= yield %>
+    </div>
+    <div class="column is-2 is-fixed box-column is-full-height" style="right: 9%; top: 8rem; width: 17rem;">
+      Użytkownicy
+      <% @profiles.each do |profile| %>
+        <br/>
+        <%= profile.name %>
+      <% end %>
+    </div>
   </div>
-</div>
 </body>
 </html>

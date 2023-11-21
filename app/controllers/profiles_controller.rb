@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   before_action :fetch_profile
 
   def show
+    @profiles = Profile.all
     @post = @profile&.posts.new
     @posts = @profile&.posts.order('created_at DESC')
   end
