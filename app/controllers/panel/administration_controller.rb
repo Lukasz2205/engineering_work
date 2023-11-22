@@ -8,7 +8,12 @@ module Panel
     end
 
     def posts
-      @posts = Post.all.order(created_at: :desc).take(5)
+      @pagy, @posts = pagy(Post.all.order('created_at DESC'), items: 5)
+
+      respond_to do |format|
+        format.html
+        format.turbo_stream
+      end
     end
   end
 end
