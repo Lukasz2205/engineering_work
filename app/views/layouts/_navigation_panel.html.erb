@@ -1,19 +1,19 @@
 <aside class="menu">
   <ul>
     <%= link_to root_path do %>
-      <li class="is-active">
+      <li class="<%= 'is-active' if current_page?(controller: 'home', action: 'index') %>">
         <i class="bx bxs-grid-alt"></i>
-        <span class="nav-item">Strona</span>
+        <span class="nav-item">Strona główna</span>
       </li>
     <% end %>
     <%= link_to profile_path(current_user.profile) do %>
-      <li>
+      <li class="<%= 'is-active' if controller.controller_name == 'profiles' %>">
         <i class="bx bxs-user"></i>
         <span class="nav-item">Profil</span>
       </li>
     <% end %>
     <%= link_to rooms_path do %>
-      <li>
+      <li class="<%= 'is-active' if current_page?(controller: 'rooms', action: 'index') %>">
         <i class='bx bx-message-rounded-dots'></i>
         <span class="nav-item">Wiadomości</span>
       </li>
