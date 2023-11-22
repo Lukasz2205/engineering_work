@@ -37,7 +37,7 @@
       </footer>
     </div>
   </div>
-  <div class="column is-12" style="margin-top: 15rem; overflow-y: scroll;overflow-x: scroll">
+  <div class="column is-12" style="margin-top: 15rem;">
     <%= turbo_frame_tag 'choice_objects', src: profile_posts_path(@profile.id), class: "columns is-12 is-multiline" do %>
       <% 5.times do %>
         <%= render partial: 'shared/post' %>
