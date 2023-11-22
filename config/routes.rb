@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   get 'index_lazy', to: 'home#index_lazy', as: 'index_lazy'
 
   namespace :panel do
-    resources :administration
+    resources :administration, only: %i[index] do
+      collection do
+        get 'users'
+        get 'posts'
+      end
+    end
   end
 
   resources :profiles, only: %i[show edit update destroy] do

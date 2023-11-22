@@ -1,6 +1,8 @@
 <%= turbo_frame_tag 'choice_objects' %>
-
 <%= link_to 'Użytkownicy', users_panel_administration_index_path, data: { turbo_target: 'choice_objects' }, class: 'button is-primary' %>
 <%= link_to 'Najnowsze posty', posts_panel_administration_index_path, data: { turbo_target: 'choice_objects' }, class: 'button is-primary' %>
 
-
+<h2 style="color: #FFFFFF; font-size: 24px; margin-bottom: 1rem">Najnowsze Posty</h2>
+<% @posts.each do |p| %>
+<%= render partial: 'shared/profile_post', locals: { p: p } %>
+<% end %>
