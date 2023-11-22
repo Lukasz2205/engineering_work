@@ -16,3 +16,24 @@
     color: #FFFFFF;
     border-radius: 15px;
 }
+
+table {
+    color: #FFFFFF;
+    border-collapse: unset;
+}
+
+.table tr th {
+    color: #FFFFFF;
+}
+
+tbody tr th {
+    color: #FFFFFF !important;
+}
+
+tbody tr td {
+    color: #FFFFFF !important;
+}
+
+strong {
+    color: #FFFFFF;
+}
