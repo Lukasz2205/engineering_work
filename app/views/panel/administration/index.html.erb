@@ -1,6 +1,4 @@
 <%= turbo_frame_tag 'choice_objects' %>
 
-<%= link_to 'Użytkownicy', users_panel_administration_index_path, data: { turbo_target: 'choice_objects' }, class: 'button is-primary' %>
-<%= link_to 'Najnowsze posty', posts_panel_administration_index_path, data: { turbo_target: 'choice_objects' }, class: 'button is-primary' %>
-
+<%= render 'options' %>
 
