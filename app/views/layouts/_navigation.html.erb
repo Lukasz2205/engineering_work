@@ -1,28 +1,29 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand profile-icon">
-    <h1 style="display: flex; align-items: center; font-size: 24px"><strong>Platforma komunikacyjna</strong></h1>
+<nav class="custom-navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <%= link_to root_path, class: 'navbar-item brand' do  %>
+      <i class='bx bx-laptop'></i>
+      <h1 class="title">System komunikacyjny dla lubuskiego klastra metalowego</h1>
+    <% end %>
+
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
-  </div>
-  <div id="navbarBasicExample" class="navbar-menu container">
-    <div class="navbar-start">
 
-    </div>
-
-    <div class="navbar-start">
-      <div class="search-bar">
-        <input type="text" class="input" placeholder="Wyszukaj">
-      </div>
-    </div>
 
     <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <%= link_to 'Log out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'button is-danger' %>
+      <div class="media" style="display: flex; justify-content: center; align-items: center">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="https://fabricshop.pl/userdata/public/gfx/3706/Panel-welurowy---poduszka-48x48---Biszkoptowy-labrador-w-trzcinach---podglad.jpg" alt="Placeholder image" style="border-radius: 100%; border: 1px solid #FFFFFF">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-5" style="color: #FFFFFF;">
+            <%= current_user.profile.name %>
+          </p>
         </div>
       </div>
     </div>

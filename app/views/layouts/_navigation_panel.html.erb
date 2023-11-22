@@ -1,31 +1,36 @@
-<div class="column is-12">
-  <div class="columns is-12 is-multiline full-page-height big-margin-top container">
-    <div class="column is-3">
-      <div style="position: fixed; left: 5%">
-        <aside class="menu">
-          <p class="menu-label">
-            <%= link_to 'Strona główna', root_path %>
-          </p>
-          <p class="menu-label">
-            <% if signed_in? %>
-              <%= link_to 'Profil', profile_path(current_user.profile) %>
-            <% end %>
-          </p>
-          <p class="menu-label">
-            <% if signed_in? %>
-              <%= link_to 'Wiadomości', rooms_path %>
-            <% end %>
-          </p>
-          <p class="menu-label">
-            <% if signed_in? && current_user.role == 'admin' %>
-              <%#= link_to 'Panel administratorski', panel_index_path %>
-            <% end %>
-          </p>
-          <p class="menu-label">
-            Powiadomienia
-          </p>
-        </aside>
-      </div>
-    </div>
-  </div>
-</div>
+<aside class="menu">
+  <ul>
+    <%= link_to root_path do %>
+      <li class="is-active">
+        <i class="bx bxs-grid-alt"></i>
+        <span class="nav-item">Strona</span>
+      </li>
+    <% end %>
+    <%= link_to profile_path(current_user.profile) do %>
+      <li>
+        <i class="bx bxs-user"></i>
+        <span class="nav-item">Profil</span>
+      </li>
+    <% end %>
+    <%= link_to rooms_path do %>
+      <li>
+        <i class='bx bx-message-rounded-dots'></i>
+        <span class="nav-item">Wiadomości</span>
+      </li>
+    <% end %>
+    <li>
+      <a href="#">
+        <i class='bx bx-bell'></i>
+        <span class="nav-item">Powiadomienia</span>
+      </a>
+    </li>
+    <li>
+      <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+        <i class="bx bxs-log-out"></i>
+        <span class="nav-item">Logout</span>
+      <% end %>
+    </li>
+  </ul>
+
+
+</aside>

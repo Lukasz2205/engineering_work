@@ -7,6 +7,7 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <%= javascript_importmap_tags %>
   <style>
     <%= ".msg-#{current_user.profile&.id}" %> {
@@ -23,13 +24,6 @@
 <body style="overflow: hidden">
 
 <div class="columns is-12 full-page-height is-multiline">
-
-  <% if signed_in? %>
-    <div class="column is-12">
-      <%= render 'layouts/navigation' %>
-    </div>
-  <% end %>
-
   <div class="column is-12">
     <div class="columns is-12 is-multiline normal-margin-top">
       <div class="column is-12">

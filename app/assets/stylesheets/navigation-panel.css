@@ -1,0 +1,27 @@
+.menu {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10rem;
+    font-size: 1.5rem;
+}
+
+.menu ul li:hover {
+    background: rgba(58, 80, 107, 0.68);
+    border-radius: 15px;
+}
+
+.menu ul li {
+    margin: 1rem;
+    width: 100%;
+    padding: 2.5%;
+}
+
+.menu ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.menu ul li.is-active {
+    background: rgba(58, 80, 107, 0.68);
+    border-radius: 15px;
+}
