@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html style="overflow-y: hidden">
+<head>
+  <title>EngineeringWork</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+<div class="columns is-12 is-multiline is-centered" style="padding: 0 13rem 0 13rem; margin-top: 0rem">
+  <div class="column is-2 is-fixed box-column min-max-height" style="right: 9%; top: 2%; width: 15%; z-index: 9999">
+    <%= render 'layouts/user_card' %>
+  </div>
+  <div class="column is-7" style="overflow-y: auto">
+    <%= yield %>
+  </div>
+  <div class="column is-3 is-fixed is-full-height" style="left: 9%; width: 17rem;">
+    <%= render 'layouts/navigation_panel' %>
+  </div>
+</div>
+</body>
+</html>

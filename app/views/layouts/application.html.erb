@@ -11,21 +11,17 @@
   <%= javascript_importmap_tags %>
 </head>
 <body>
-<div class="columns is-12 is-multiline is-centered" style="padding: 0 13rem 0 13rem; margin-top: 0rem">
-  <div class="column is-10 is-fixed box-column" style="left:10.5%; width: 65%; z-index: 9999">
+<div class="columns is-12 is-multiline is-centered" style="padding: 0 13rem 0 13rem; margin-top: 1%">
+  <div class="column is-12 is-fixed box-column" style="left:10.5%; width: 80%; z-index: 9999">
     <%= render 'layouts/navigation' %>
   </div>
-  <div class="column is-2 is-fixed box-column min-max-height" style="right: 9%; width: 15%; z-index: 9999">
-    <%= render 'layouts/user_card' %>
-  </div>
-  <div class="column is-3 is-fixed is-full-height" style="left: 9%; top: 8rem; width: 17rem;">
+  <div class="column is-3 is-fixed is-full-height" style="left: 9%; width: 17rem;">
     <%= render 'layouts/navigation_panel' %>
   </div>
-  <div class="column is-7" style="position: relative; top: 5rem">
+  <div class="column is-7" style="position: relative; top: 7rem">
     <%= yield %>
   </div>
   <div class="column is-2 is-fixed is-full-height" style="right: 9%; top: 8rem; width: 17rem;">
-
   </div>
 </div>
 </body>

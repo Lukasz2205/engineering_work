@@ -1,0 +1,43 @@
+.title {
+    color: #FFFFFF;
+}
+
+.media-content .title a {
+      color: #FFFFFF;
+}
+
+.media-content .title a:hover {
+    color: #1C2541;
+}
+
+.subtitle {
+    color: #FFFFFF;
+}
+
+.post-content {
+    color: #FFFFFF;
+}
+
+.content {
+    color: #FFFFFF;
+}
+
+.card-footer a {
+    color: #FFFFFF;
+}
+
+.card-footer a:hover {
+    color: #1C2541;
+}
+
+.box-column i {
+    color: #FFFFFF;
+}
+
+.box-column i:hover {
+    color: #1C2541;
+}
+
+.likes-count {
+    color: #FFFFFF;
+}

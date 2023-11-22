@@ -1,6 +1,6 @@
 <div class="columns is-12 is-multiline">
-  <div class="column is-12 normal-margin-top">
-    <div class="card">
+  <div class="column is-12" style="position: fixed; width: 45%; z-index: 9999;">
+    <div class="card box-column">
       <div class="card-content">
         <div class="media">
           <div class="media-left">
@@ -37,12 +37,7 @@
       </footer>
     </div>
   </div>
-  <% if @profile == current_user.profile %>
-    <div class="column is-12">
-      <%= render partial: 'posts/form' %>
-    </div>
-  <% end %>
-  <div class="column is-12">
+  <div class="column is-12" style="margin-top: 15rem">
     <%= turbo_frame_tag 'choice_objects', class: "columns is-12 is-multiline" do %>
       <% @posts.each do |p| %>
         <%= render partial: 'shared/profile_post', locals: { p: p } %>

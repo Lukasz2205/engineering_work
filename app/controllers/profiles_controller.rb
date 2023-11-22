@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :fetch_profile
+  layout 'layouts/profile'
 
   def show
     @profiles = Profile.all

@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'new_post', class: 'box-column', style: 'position: fixed; z-index: 9999; width: 44.5%'  do %>
+<%= turbo_frame_tag 'new_post', class: 'box-column', style: ''  do %>
   <%= form_with model: Post.new, url: posts_path do |f| %>
     <div class="column is-12">
       <%= f.text_area :description, placeholder: 'dodaj posts', class: 'input post-input' %>
