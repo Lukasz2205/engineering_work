@@ -1,0 +1,18 @@
+.notification.box-column {
+    color: #FFFFFF;
+    margin: 1rem;
+}
+
+.notification.box-column.notice {
+    background-color: rgba(90, 227, 113, 0.68);
+
+}
+
+.notification.box-column.alert {
+    background-color: rgba(232, 54, 54, 0.68);
+}
+
+.notification.hiding {
+    transition: opacity 3s ease-out;
+    opacity: 0;
+}
