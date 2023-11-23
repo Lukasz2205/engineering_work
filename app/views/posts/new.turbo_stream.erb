@@ -2,7 +2,9 @@
   <%= render partial: 'posts/form', locals: { f: Post.new } %>
 <% end %>
 
-<%= turbo_stream.remove "post_#{post_id}" if post_id.present? %>
+<% unless post_id.nil?  %>
+  <%= turbo_stream.remove "post_#{post_id}" %>
+<% end %>
 
 <%= turbo_stream.append "messages_container",
                         partial: "layouts/messages",

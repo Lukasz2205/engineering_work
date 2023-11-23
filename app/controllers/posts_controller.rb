@@ -17,7 +17,7 @@ class PostsController < ApplicationController
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render root_path, status: :unprocessable_entity }
-        format.turbo_stream { render :new, status: :unprocessable_entity, locals: { alert: @post.errors.messages } }
+        format.turbo_stream { render :new, status: :unprocessable_entity, locals: { post_id: nil, alert: @post.errors.messages } }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -28,14 +28,14 @@ class PostsController < ApplicationController
   rescue StandardError
     respond_to do |format|
       format.turbo_stream do
-        render :new, status: :unprocessable_entity, locals: { post_id: params[:id], alert: 'Nie odnaleziono wybranego wpisu!' }
+        render :new, status: :unprocessable_entity, locals: { object_id: params[:id], alert: 'Nie odnaleziono wybranego obiektu!' }
       end
     end
   else
     respond_to do |format|
       if @post.destroy
         format.turbo_stream do
-          render :destroy, locals: { post: @post, notice: 'Pomyślnie usunięto wpis!' }
+          render :destroy, locals: { post: @post, notice: 'Pomyślnie usunięto obiekt!' }
         end
       end
     end

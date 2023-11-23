@@ -1,1 +1,9 @@
 <%= turbo_stream.remove "post_#{obj.id}" %>
+
+<% unless object_id.nil?  %>
+  <%= turbo_stream.remove "post_#{object_id}" %>
+<% end %>
+
+<%= turbo_stream.append "messages_container",
+                        partial: "layouts/messages",
+                        locals: { notice: notice } %>

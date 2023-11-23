@@ -21,12 +21,18 @@ class ProfilesController < ApplicationController
 
   def destroy
     fetch_object
+  rescue StandardError => e
+    respond_to do |format|
+      format.turbo_stream do
+        render :clear, status: :unprocessable_entity, locals: { object_id: e.id, alert: 'Nie odnaleziono wybranego obiektu!' }
+      end
+    end
+  else
     respond_to do |format|
       if @object.destroy
-        format.turbo_stream { render :destroy, locals: { obj: @object} }
-        format.html { redirect_to root_path, alert: 'Pomyślnie usunięto post' }
-      else
-        format.html { redirect_to root_path, notice: 'something went wrong' }
+        format.turbo_stream do
+          render :destroy, locals: { obj: @object, notice: 'Pomyślnie usunięto obiekt!' }
+        end
       end
     end
   end

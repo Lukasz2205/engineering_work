@@ -21,6 +21,10 @@
   <div class="column is-3 is-fixed is-full-height" style="left: 9%; width: 17rem;">
     <%= render 'layouts/navigation_panel' %>
   </div>
+  <div class="column is-2 is-fixed is-full-height" style="right: 9%; top: 7rem; width: 17rem;">
+    <%= render 'layouts/messages' %>
+    <%= turbo_frame_tag 'messages_container' %>
+  </div>
 </div>
 </body>
 </html>
