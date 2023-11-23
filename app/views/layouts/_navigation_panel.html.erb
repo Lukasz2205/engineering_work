@@ -1,7 +1,7 @@
 <aside class="menu">
   <ul>
     <%= link_to root_path do %>
-      <li class="<%= 'is-active' if current_page?(controller: 'home', action: 'index') %>">
+      <li class="<%= 'is-active' if controller.controller_name == 'home' %>">
         <i class="bx bxs-grid-alt"></i>
         <span class="nav-item">Strona główna</span>
       </li>
@@ -13,7 +13,7 @@
       </li>
     <% end %>
     <%= link_to rooms_path do %>
-      <li class="<%= 'is-active' if current_page?(controller: 'rooms', action: 'index') %>">
+      <li class="<%= 'is-active' if controller.controller_name == 'rooms' %>">
         <i class='bx bx-message-rounded-dots'></i>
         <span class="nav-item">Wiadomości</span>
       </li>
@@ -24,6 +24,14 @@
         <span class="nav-item">Powiadomienia</span>
       </a>
     </li>
+    <% if current_user.role == 'admin' %>
+      <%= link_to panel_administration_index_path do %>
+        <li class="<%= 'is-active' if controller.controller_name == 'administration' %>">
+          <i class='bx bx-laptop'></i>
+          <span class="nav-item">Panel</span>
+        </li>
+      <% end %>
+    <% end %>
     <li>
       <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
         <i class="bx bxs-log-out"></i>

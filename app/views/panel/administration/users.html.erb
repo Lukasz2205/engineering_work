@@ -1,0 +1,38 @@
+<%= turbo_frame_tag 'choice_objects' %>
+<div class="columns is-12 is-multiline">
+  <%= render 'options' %>
+  <div class="column is-12">
+    <h1 style="color: #FFFFFF; font-size: 24px; margin-bottom: 1rem" >Lista użytkowników</h1>
+    <table class="table box-column">
+      <thead>
+      <tr>
+        <th><abbr title="Position">Numer</abbr></th>
+        <th>Nazwa</th>
+        <th><abbr title="Adres email">Adres email</abbr></th>
+        <th><abbr title="Liczba postów">Liczba postów</abbr></th>
+        <th><abbr title="Liczba komentarzy">Liczba komentarzy</abbr></th>
+      </tr>
+      </thead>
+      <tfoot>
+      <tr>
+        <th><abbr title="Position">Numer</abbr></th>
+        <th>Nazwa</th>
+        <th><abbr title="Adres email">Adres email</abbr></th>
+        <th><abbr title="Liczba postów">Liczba postów</abbr></th>
+        <th><abbr title="Liczba komentarzy">Liczba komentarzy</abbr></th>
+      </tr>
+      </tfoot>
+      <tbody>
+      <% @profiles.each_with_index do |prof, index| %>
+        <tr>
+          <th><%= index %></th>
+          <td><strong><%= prof.name %></strong></td>
+          <td><%= prof.user.email %></td>
+          <td><%= prof.posts.count %></td>
+          <td><%= prof.comments.count %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

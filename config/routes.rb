@@ -6,6 +6,15 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'index_lazy', to: 'home#index_lazy', as: 'index_lazy'
 
+  namespace :panel do
+    resources :administration, only: %i[index] do
+      collection do
+        get 'users'
+        get 'posts'
+      end
+    end
+  end
+
   resources :profiles, only: %i[show edit update destroy] do
     get 'posts', to: 'profiles#posts', as: 'posts'
     get 'liked_posts', to: 'profiles#liked_posts', as: 'liked_posts'

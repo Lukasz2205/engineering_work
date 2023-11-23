@@ -1,0 +1,16 @@
+<%= turbo_frame_tag 'choice_objects' %>
+
+<div class="columns is-12 is-multiline">
+  <%= render 'options' %>
+  <div class="column is-12">
+
+    <h1 style="color: #FFFFFF; font-size: 24px; margin-bottom: 1rem">Najnowsze Posty</h1>
+    <% @posts.each do |p| %>
+      <%= render partial: 'shared/profile_post', locals: { p: p } %>
+    <% end %>
+    <div class="flex mt-12 items-center justify-center space-x-4 w-full">
+      <%== pagy_nav(@pagy) %>
+    </div>
+    <p class="text-center mt-8 text-gray-500"><%== pagy_info @pagy %></p>
+  </div>
+</div>

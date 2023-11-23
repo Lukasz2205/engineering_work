@@ -1,0 +1,8 @@
+<%= link_to users_panel_administration_index_path, data: { turbo_target: 'choice_objects' }, class: "column is-5 option-link #{'is-active' if current_page?(controller: 'administration', action: 'users')}" do %>
+  <i class='bx bx-table'></i>
+  <span class="nav-item">Użytkownicy</span>
+<% end %>
+<%= link_to posts_panel_administration_index_path, data: { turbo_target: 'choice_objects' }, class: "column is-5 option-link #{'is-active' if current_page?(controller: 'administration', action: 'posts')}" do %>
+  <i class='bx bx-book-open' ></i>
+  <span class="nav-item">Najnowsze wpisy</span>
+<% end %>
