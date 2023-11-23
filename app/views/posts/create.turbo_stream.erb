@@ -5,3 +5,7 @@
 <%= turbo_stream.replace "new_post",
                          partial: "posts/form",
                          locals: { post: Post.new } %>
+
+<%= turbo_stream.append "messages_container",
+                        partial: "layouts/messages",
+                        locals: { notice: notice } %>

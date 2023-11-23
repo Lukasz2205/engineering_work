@@ -13,11 +13,11 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to root_path, notice: "Post was successfully created." }
-        format.turbo_stream { render :create, locals: { post: @post } }
+        format.turbo_stream { render :create, locals: { post: @post, notice: "Pomyślnie utworzono nowy wpis!"  } }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render root_path, status: :unprocessable_entity }
-        format.turbo_stream { render :new, status: :unprocessable_entity, locals: { post: @post } }
+        format.turbo_stream { render :new, status: :unprocessable_entity, locals: { alert: @post.errors.messages } }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -25,12 +25,18 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+  rescue StandardError
+    respond_to do |format|
+      format.turbo_stream do
+        render :new, status: :unprocessable_entity, locals: { post_id: params[:id], alert: 'Nie odnaleziono wybranego wpisu!' }
+      end
+    end
+  else
     respond_to do |format|
       if @post.destroy
-        format.turbo_stream { render :destroy, locals: { p: @post }}
-        format.html { redirect_to root_path, alert: 'Pomyślnie usunięto post' }
-      else
-        format.html { redirect_to root_path, notice: 'something went wrong' }
+        format.turbo_stream do
+          render :destroy, locals: { post: @post, notice: 'Pomyślnie usunięto wpis!' }
+        end
       end
     end
   end
