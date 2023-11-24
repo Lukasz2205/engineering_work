@@ -28,7 +28,7 @@ class PostsController < ApplicationController
   rescue StandardError
     respond_to do |format|
       format.turbo_stream do
-        render :new, status: :unprocessable_entity, locals: { object_id: params[:id], alert: 'Nie odnaleziono wybranego obiektu!' }
+        render :clear, status: :unprocessable_entity, locals: { object_id: params[:id], alert: 'Nie odnaleziono wybranego obiektu!' }
       end
     end
   else

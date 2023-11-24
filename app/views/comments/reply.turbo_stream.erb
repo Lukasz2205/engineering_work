@@ -1,9 +1,9 @@
-<%= turbo_stream.prepend "comment_#{@comment.id}_replies" do %>
-  <%= render partial: 'comments/reply', locals: { comment: @reply } %>
+<%= turbo_stream.append "comment_#{comment.id}_replies" do %>
+  <%= render partial: 'comments/reply', locals: { comment: reply } %>
 <% end %>
 
-<%= turbo_stream.replace "show_hide_comment_#{@comment.id}" do %>
-  <%= render partial: 'comments/show', locals: { comment: @comment} %>
+<%= turbo_stream.replace "show_hide_comment_#{comment.id}" do %>
+  <%= render partial: 'comments/show', locals: { comment: comment} %>
 <% end %>
 
-<%= turbo_stream.remove "new_comment_#{@comment.id}" %>
+<%= turbo_stream.remove "new_comment_#{comment.id}" %>

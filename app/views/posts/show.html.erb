@@ -1,41 +1,87 @@
-<div class="column is-12 card small-margin-top" style="width: 100%;">
-  <div class="post-text">
-    <div class="columns is-12 is-multiline">
-      <div class="column is-1">
-        <div class="columns is-12">
-          <div class="column is-2">
-            <%= link_to profile_path(@post.profile), class: 'is-rounded' do %>
-              <div class="first-email-letter">
-                <%= @post.profile.user.email.slice(0)  %>
-              </div>
-            <% end %>
-          </div>
+<%= turbo_frame_tag "post_#{@post.id if @post.present?}", class: 'column is-12 ' do %>
+  <div class="card post-card box-column" style="margin-top: 25px; <%= 'filter: blur(4px);' unless @post.present? %>">
+    <div class="card-content" data-controller="post">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" style="border-radius: 100%; box-shadow: 0px 0px 0px 1px rgba(66, 68, 90, 1);">
+          </figure>
         </div>
-      </div>
-      <div class="column is-8">
-        <%= @post.description %><br/>
-        <% if @post.attachments.attached? %>
-          <% @post.attachments.each_with_index do |attachment, index| %>
-            <% if attachment.image? %>
-              <%= image_tag(@post.post_attachment(index)) %>
-            <% elsif attachment.video? %>
-              <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
-            <% elsif attachment.audio? %>
-              <%= audio_tag(url_for(attachment), controls: '') %>
-            <% else %>
-              <%= link_to attachment.filename, url_for(attachment), style: "text-decoration: none; color: #fff" %>
+        <div class="media-content">
+          <p class="title is-4"><%= link_to @post.profile.name, profile_path(@post.profile), data: { turbo: "false" } if @post.present? %></p>
+          <p class="subtitle is-6"><%= time_ago_in_words(@post.created_at) if @post.present? %></p>
+        </div>
+        <% if @post.present? %>
+          <% if current_user.profile == @post.profile %>
+            <%= link_to post_path(@post.id), data: { turbo_method: :delete } do %>
+              <i class="fa-solid fa-trash fa-lg"></i>
             <% end %>
           <% end %>
         <% end %>
       </div>
-      <div class="column is-2">
-        <% if current_user.profile == @post.profile %>
-          <%= button_to 'delete', post_path(@post), method: :delete, class: "button is-danger" %>
+      <span class="card-footer" style="margin-bottom: 25px"></span>
+      <div class="post-content post-limit " data-post-target="content">
+        <%= @post&.description if @post.present? %>
+      </div>
+      <div class="show-more" data-post-target="button"></div>
+    </div>
+    <div class="card-image">
+      <% if @post.present? && @post.attachments.attached? %>
+        <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
+          <% @post.attachments.each_with_index do |attachment| %>
+            <% if attachment.image? %>
+              <div class="column is-3 normal-margin-bottom">
+                <figure class="image is-4by3">
+                  <%= image_tag(attachment) %>
+                </figure>
+              </div>
+            <% elsif attachment.video? %>
+              <div class="column is-6">
+                <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <span class="card-footer" style="margin-bottom: 15px"></span>
+    <div class="action-buttons" data-controller="likes" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
+      <% if @post.present? %>
+        <%= turbo_frame_tag "likeable_options_#{@post.id}" do %>
+          <% unless @post.liked?(current_user.profile) %>
+            <%= render partial: 'shared/like', locals: { obj: @post, post: true } %>
+          <% else %>
+            <%= render partial: 'shared/unlike', locals: { obj: @post, post: true } %>
+          <% end %>
         <% end %>
-      </div>
-      <div class="column is-12">
-        <%= render partial: 'comments/post_comment', locals: { post: @post} %>
-      </div>
+      <% else %>
+        <a href="#">
+          <i class="fa-regular fa-heart fa-lg"></i>
+        </a>
+      <% end %>
+      <% if @post.present? %>
+        <%= link_to post_path(@post.id), data: { turbo: false } do %>
+          <i class="fa-regular fa-comment fa-lg"></i>
+        <% end %>
+      <% end %>
+      <a href="#">
+        <i class="fa-solid fa-share fa-lg"></i>
+      </a>
+    </div>
+    <span class="card-footer" style="margin-bottom: 15px"></span>
+    <%= render partial: 'comments/form', locals: { p: @post } if @post.present? %>
+
+    <div class="comments-section">
+      <% if @post.present? %>
+        <div id="post_comments_<%= @post.id %>" class="columns is-12 is-multiline" style="padding: 1rem">
+          <% if @post.comments.any? %>
+            <% @post.comments.each do |com| %>
+              <%= render partial: 'comments/reply', locals: { post: @post, comment: com } %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
-</div>
+<% end %>
+

@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "post_#{p.id if p.present?}", class: 'column is-12 ' do %>
-  <div class="card post-card box-column" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>">
+  <div class="card post-card box-column" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>; padding-bottom: 0.24rem">
     <div class="card-content" data-controller="post">
       <div class="media">
         <div class="media-left">
@@ -59,26 +59,15 @@
           <i class="fa-regular fa-heart fa-lg"></i>
         </a>
       <% end %>
-      <a href="#">
-        <i class="fa-regular fa-comment fa-lg"></i>
-      </a>
+      <% if p.present? %>
+        <%= link_to post_path(p.id), data: { turbo: "false" } do %>
+          <i class="fa-regular fa-comment fa-lg"></i>
+        <% end %>
+      <% end %>
       <a href="#">
         <i class="fa-solid fa-share fa-lg"></i>
       </a>
     </div>
-    <span class="card-footer" style="margin-bottom: 15px"></span>
-    <div class="comments-section">
-      <% if p.present? %>
-        <div id="post_comments_<%= p.id %>">
-          <% if p.comments.any? %>
-            <% p.comments.each do |comm| %>
-              <%= render partial: 'comments/reply', locals: { comment: comm } %>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <%= render partial: 'comments/form', locals: { p: p } if p.present? %>
   </div>
 <% end %>
 

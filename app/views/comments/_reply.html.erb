@@ -1,50 +1,49 @@
-<%= turbo_frame_tag "comment_#{comment.id}" do %>
-  <div class="card" style="background-color: #E4E4E4; margin: 25px 25px 10px 25px;">
-    <div class="card-content">
+<%= turbo_frame_tag "comment_#{comment.id}", class: "column is-12 comment-reply-box" do %>
+  <div class="columns is-12 is-multiline" style="border-bottom: 2px solid rgba(66, 68, 90, 1)">
+    <div class="column is-12">
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" style="border-radius: 100%; box-shadow: 0px 0px 0px 1px rgba(66, 68, 90, 1);">
           </figure>
         </div>
         <div class="media-content">
           <p class="title is-4"><%= comment&.profile&.name %></p>
           <p class="subtitle is-6"><%= time_ago_in_words(comment.created_at) %></p>
+          <p class="subtitle is-6">W odpowiedzi do <%= link_to comment.profile.name, profile_path(comment.profile), data: { turbo: false }, style: 'color: #007bff' %></p>
         </div>
-        <% if current_user.profile == comment.profile %>
-          <%= link_to post_comment_path('123', comment), data: { turbo_method: :delete } do %>
-            <i class="fa-solid fa-trash fa-lg"></i>
+        <div class="media-right">
+          <% if comment.present? %>
+            <%= link_to post_comment_path('#', comment.id), data: { turbo_method: :delete } do %>
+              <i class="fa-solid fa-trash fa-lg"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="column is-12">
+        <div class="post-content">
+          <%= comment&.message if comment.present? %>
+        </div>
+      </div>
+      <div class="action-buttons" style="display: flex; justify-content: space-evenly; padding: 10px; align-items: center">
+        <%= turbo_frame_tag "likeable_options_#{comment.id}" do %>
+          <% unless comment.liked?(current_user.profile) %>
+            <%= render partial: 'shared/like', locals: { obj: comment, post: false } %>
+          <% else %>
+            <%= render partial: 'shared/unlike', locals: { obj: comment, post: false } %>
           <% end %>
         <% end %>
+        <%= render partial: 'comments/show', locals: { comment: comment } %>
+        <i class="fa-solid fa-share fa-lg"></i>
       </div>
-      <div class="content">
-        <%= comment.message %>
+      <div id="comment_<%= comment.id %>_reply_form" class="column is-12">
       </div>
-    </div>
-    <span class="card-footer"></span>
-    <div class="action-buttons" style="display: flex; justify-content: space-evenly; padding: 10px; align-items: center">
-      <%= turbo_frame_tag "likeable_options_#{comment.id}" do %>
-        <% unless comment.liked?(current_user.profile) %>
-          <%= render partial: 'shared/like', locals: { obj: comment, post: false } %>
-        <% else %>
-          <%= render partial: 'shared/unlike', locals: { obj: comment, post: false } %>
-        <% end %>
-      <% end %>
-      <%= render partial: 'comments/show', locals: { comment: comment} %>
-      <i class="fa-solid fa-share fa-lg"></i>
-    </div>
-    <div class="columns is-12 is-multiline reply-options-section">
-
       <div id="comment_<%= comment.id %>_replies" class="column is-12">
         <% if comment.replies.any? %>
           <% comment.replies.each do |reply| %>
-            <%= render partial: 'comments/reply', locals: { comment: reply } %>
+            <%= render partial: 'comments/reply', locals: { post: post, comment: reply } %>
           <% end %>
         <% end %>
-      </div>
-
-      <div class="column is-8">
-        <div id="comment_<%= comment.id %>_reply_form"></div>
       </div>
     </div>
   </div>

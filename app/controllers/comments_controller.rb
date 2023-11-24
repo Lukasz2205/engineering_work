@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.turbo_stream { render :create, locals: { comment: @comment, post: @post } }
+        format.turbo_stream { render :create, locals: { post: @post, comment: @comment} }
       else
         format.html { redirect_to root_path, alert: 'Something went wrong' }
       end
@@ -27,6 +27,7 @@ class CommentsController < ApplicationController
 
   def reply
     @comment       = Comment.find(params[:comment_id])
+    @post          = @comment.post
     @reply         = @comment.replies.new(set_comment)
     @reply.profile = current_user_profile
     respond_to do |format|
