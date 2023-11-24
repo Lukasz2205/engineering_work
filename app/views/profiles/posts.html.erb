@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "choice_objects" do %>
   <% @posts.each do |p| %>
-    <%= render 'shared/profile_post', p: p %>
+    <%= render 'shared/post', p: p %>
   <% end %>
 
   <% if @pagy.next.present? %>

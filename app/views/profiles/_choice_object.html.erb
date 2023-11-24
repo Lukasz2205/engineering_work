@@ -1,5 +1,5 @@
 <div class="columns is-12 is-multiline">
-  <div class="column is-12" style="position: fixed; width: 45%; z-index: 9999;">
+  <div class="column is-12" style="position: fixed; width: 46%; z-index: 9999;">
     <div class="card box-column">
       <div class="card-content">
         <div class="media">
@@ -37,10 +37,10 @@
       </footer>
     </div>
   </div>
-  <div class="column is-12" style="margin-top: 15rem">
+  <div class="column is-12" style="margin-top: 16rem">
     <%= turbo_frame_tag 'choice_objects', class: "columns is-12 is-multiline" do %>
       <% @posts.each do |p| %>
-        <%= render partial: 'shared/profile_post', locals: { p: p } %>
+        <%= render partial: 'shared/post', locals: { p: p } %>
       <% end %>
     <% end %>
   </div>

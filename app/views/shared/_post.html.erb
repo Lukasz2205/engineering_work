@@ -21,12 +21,16 @@
       </div>
       <span class="card-footer" style="margin-bottom: 25px"></span>
       <div class="post-content post-limit " data-post-target="content">
-        <%= p&.description if p.present? %>
+        <% if p.class == Post %>
+          <%= p.description if p.present? %><br/>
+        <% else %>
+          <%= p.message if p.present? %><br/>
+        <% end %>
       </div>
       <div class="show-more" data-post-target="button"></div>
     </div>
     <div class="card-image">
-      <% if p.present? && p.attachments.attached? %>
+      <% if p.class == Post && p.present? && p.attachments.attached? %>
         <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
           <% p.attachments.each_with_index do |attachment| %>
             <% if attachment.image? %>
