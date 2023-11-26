@@ -1,14 +1,24 @@
 class NotificationsService
-  def initialize(sender, object)
-    @sender   = sender
-    @object   = object
+  def initialize(recipient, notifiable)
+    @sender     = notifiable.profile
+    @recipient  = recipient
+    @notifiable = notifiable
   end
 
   def create_notification
-    puts 'hehehe'
-    puts @sender.inspect
-    puts @object.inspect
-    @notification = @object.profile.notifications.new(assigned_by: @sender, object: @object)
-    # puts @notification
+    @notifiable.notifications.new(profile:    @sender,
+                                       recipient:  @notifiable.profile,
+                                       notifiable: @notifiable,
+                                       text:       notification_text)
+  end
+
+  private
+
+  def notification_text
+    if @notifiable.class == Post
+      'Polubił twój post!'
+    else
+      'Polubił twój Komentarz!'
+    end
   end
 end
