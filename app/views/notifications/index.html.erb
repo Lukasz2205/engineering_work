@@ -1,15 +1,17 @@
 <h1 class="title">Powiadomienia</h1>
 <div class="columns is-12 is-multiline">
   <h2 class="title">Nieodczytane</h2>
-  <% @notifications_unread.each do |notif| %>
-    <div class="column is-12 notification-box">
-      <%= render notif %>
-    </div>
-  <% end %>
+  <div class="column is-12">
+    <% @notifications_unread.each do |notif| %>
+      <div class="column is-12 notification-box">
+        <%= render notif %>
+      </div>
+    <% end %>
+  </div>
   <div class="column is-12">
     <h2 class="title">Odczytane</h2>
     <% @notifications_read.each do |notif| %>
-      <div class="column is-12 notification-box">
+      <div class="column is-12 notification-box is-read">
         <%= render notif %>
       </div>
     <% end %>
