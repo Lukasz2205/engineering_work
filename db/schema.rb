@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_09_150519) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_26_160304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -89,6 +89,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_150519) do
     t.index ["room_id"], name: "index_messages_on_room_id"
   end
 
+  create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "profile_id", null: false
+    t.uuid "assigned_by", null: false
+    t.string "object_type", null: false
+    t.uuid "object_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["object_type", "object_id"], name: "index_notifications_on_object"
+    t.index ["profile_id"], name: "index_notifications_on_profile_id"
+  end
+
   create_table "participants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "profile_id", null: false
     t.uuid "room_id", null: false
@@ -142,6 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_150519) do
   add_foreign_key "likes", "profiles"
   add_foreign_key "messages", "profiles"
   add_foreign_key "messages", "rooms"
+  add_foreign_key "notifications", "profiles"
   add_foreign_key "participants", "profiles"
   add_foreign_key "participants", "rooms"
   add_foreign_key "posts", "profiles"
