@@ -1,15 +1,15 @@
 class NotificationsService
-  def initialize(recipient, notifiable)
-    @sender     = notifiable.profile
-    @recipient  = recipient
+  def initialize(sender, notifiable)
+    @sender     = sender
+    @recipient  = notifiable.profile
     @notifiable = notifiable
   end
 
   def create_notification
     @notifiable.notifications.new(profile:    @sender,
-                                       recipient:  @notifiable.profile,
-                                       notifiable: @notifiable,
-                                       text:       notification_text)
+                                  recipient:  @notifiable.profile,
+                                  notifiable: @notifiable,
+                                  text:       notification_text)
   end
 
   private
