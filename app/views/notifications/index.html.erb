@@ -1,7 +1,10 @@
 <h1 class="title">Powiadomienia</h1>
 <div class="columns is-12 is-multiline">
-  <h2 class="title">Nieodczytane</h2>
   <div class="column is-12">
+    <%= link_to 'Odczytaj wszystkie', read_all_notifications_path %><br/>
+  </div>
+  <div class="column is-12">
+    <h2 class="title">Nieodczytane</h2>
     <% @notifications_unread.each do |notif| %>
       <div class="column is-12 notification-box">
         <%= render notif %>

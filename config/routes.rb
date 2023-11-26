@@ -15,7 +15,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only: %i[index]
+  resources :notifications, only: %i[index] do
+    collection do
+      get 'read_all'
+    end
+  end
 
   resources :profiles, only: %i[show edit update destroy] do
     get 'posts', to: 'profiles#posts', as: 'posts'
