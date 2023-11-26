@@ -18,12 +18,12 @@
         <span class="nav-item">Wiadomości</span>
       </li>
     <% end %>
-    <li>
-      <a href="#">
+    <%= link_to notifications_path do %>
+      <li class="<%= 'is-active' if controller.controller_name == 'notifications' %>">
         <i class='bx bx-bell'></i>
         <span class="nav-item">Powiadomienia</span>
-      </a>
-    </li>
+      </li>
+    <% end %>
     <% if current_user.role == 'admin' %>
       <%= link_to panel_administration_index_path do %>
         <li class="<%= 'is-active' if controller.controller_name == 'administration' %>">
