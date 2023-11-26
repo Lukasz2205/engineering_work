@@ -84,13 +84,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170749) do
 
   create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "profile_id", null: false
-    t.uuid "assigned_by", null: false
-    t.string "object_type", null: false
-    t.uuid "object_id", null: false
+    t.uuid "recipient_id"
+    t.string "notifiable_type"
+    t.uuid "notifiable_id"
+    t.string "text"
+    t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["object_type", "object_id"], name: "index_notifications_on_object"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
     t.index ["profile_id"], name: "index_notifications_on_profile_id"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
   create_table "participants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -147,6 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170749) do
   add_foreign_key "messages", "profiles"
   add_foreign_key "messages", "rooms"
   add_foreign_key "notifications", "profiles"
+  add_foreign_key "notifications", "profiles", column: "recipient_id"
   add_foreign_key "participants", "profiles"
   add_foreign_key "participants", "rooms"
   add_foreign_key "posts", "profiles"
