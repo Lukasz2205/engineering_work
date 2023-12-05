@@ -5,7 +5,7 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like.save
-        @notification = NotificationsService.new(current_user_profile, @likeable).create_notification
+        @notification = NotificationsService.new(current_user_profile, @likeable).create_like_notification
         @notification.save
         format.turbo_stream { render :create, locals: { p: @likeable } }
       else

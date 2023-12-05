@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
     @comment.profile = current_user_profile
 
     respond_to do |format|
+      @notification = NotificationsService.new(current_user_profile, @post).create_comment_notification
+      @notification.save
       if @comment.save
         format.turbo_stream { render :create, locals: { post: @post, comment: @comment} }
       else
@@ -31,6 +33,8 @@ class CommentsController < ApplicationController
     @reply         = @comment.replies.new(set_comment)
     @reply.profile = current_user_profile
     respond_to do |format|
+      @notification = NotificationsService.new(current_user_profile, @comment).create_reply_notification
+      @notification.save
       if @reply.save
         format.turbo_stream { render :reply, locals: { reply: @reply, comment: @comment } }
       end

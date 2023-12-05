@@ -3,12 +3,12 @@ class Notification < ApplicationRecord
   belongs_to :recipient, class_name: 'Profile'
   belongs_to :notifiable, polymorphic: true
 
-  validates :profile_id, uniqueness: { scope: %i[recipient_id notifiable_id] }
+  validates :profile_id, uniqueness: { scope: %i[recipient_id notifiable_id text] }
   validate :different_profile_and_recipient
 
   scope :recipient, ->(recipient) { where(recipient: recipient) }
-  scope :unread, -> { where(read: false ) }
-  scope :read, ->{ where(read: true ) }
+  scope :unread, -> { where(read: false ).order(created_at: :desc) }
+  scope :read, ->{ where(read: true ).order(created_at: :desc) }
 
   private
 
