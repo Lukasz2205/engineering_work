@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notifications, only: %i[index] do
+    collection do
+      get 'read_all'
+    end
+  end
+
   resources :profiles, only: %i[show edit update destroy] do
     get 'posts', to: 'profiles#posts', as: 'posts'
     get 'liked_posts', to: 'profiles#liked_posts', as: 'liked_posts'

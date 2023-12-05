@@ -18,12 +18,15 @@
         <span class="nav-item">Wiadomości</span>
       </li>
     <% end %>
-    <li>
-      <a href="#">
+    <%= link_to notifications_path do %>
+      <li class="<%= 'is-active' if controller.controller_name == 'notifications' %>" style="position: relative">
         <i class='bx bx-bell'></i>
         <span class="nav-item">Powiadomienia</span>
-      </a>
-    </li>
+        <% unless @notifications_unread.count == 0 %>
+          <div class="notification-count"><%= @notifications_unread.count %></div>
+        <% end %>
+      </li>
+    <% end %>
     <% if current_user.role == 'admin' %>
       <%= link_to panel_administration_index_path do %>
         <li class="<%= 'is-active' if controller.controller_name == 'administration' %>">

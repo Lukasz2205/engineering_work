@@ -3,6 +3,7 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
   has_many_attached :attachments, dependent: :destroy
 
   validates :description, length: { minimum: 10, message: 'Wpis musi posiadać conajmniej 10 znaków!' }

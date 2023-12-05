@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :create_user_profile
+  before_action :profile_unread_notifications
+
+  def profile_unread_notifications
+    @notifications_unread = Notification.recipient(current_user_profile).unread
+  end
 
   def create_user_profile
     return unless signed_in?
