@@ -29,7 +29,7 @@
       <div class="divider" style="border-bottom: 2px solid rgba(58, 80, 107, 0.68);"></div>
       <%= turbo_stream_from @single_room %>
       <div class="chat" data-controller="autoscroll">
-        <div id="messages" data-autoscroll-target="chat" style="overflow: auto; height: 75vh; display: flex;flex-direction: column-reverse">
+        <div id="messages" data-autoscroll-target="chat" style="overflow: auto; height: 75vh; display: flex;flex-direction: column">
           <%= render @messages %>
         </div>
         <div class=""></div>
