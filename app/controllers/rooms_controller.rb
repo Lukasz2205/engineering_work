@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   layout 'chatroom'
 
   def create
-    @room = Room.create(name: params["room"]["name"])
+    @room = current_user_profile.rooms.create(name: params["room"]["name"])
   end
 
   def index
