@@ -24,7 +24,7 @@ class RoomsController < ApplicationController
   def private_chat
     @profile = Profile.find(params[:profile_id])
     @rooms = Room.public_rooms
-    @users = Profile.all_except(current_user_profile)
+    @profiles = Profile.all_except(current_user_profile)
     @room = Room.new
     @message = Message.new
     @room_name = get_name(@profile, current_user_profile)
