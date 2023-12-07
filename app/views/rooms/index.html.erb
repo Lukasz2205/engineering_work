@@ -3,7 +3,7 @@
     <div class="columns is-12 is-multiline">
       <div class="column is-12">
         <%= turbo_stream_from "profiles" %>
-        <div id="profiles">
+        <div id="profiles" style="display: flex;flex-wrap: wrap; flex-flow: column">
           <h4 style="color: #FFFFFF">Użytkownicy</h4>
           <% @profiles&.each do |profile| %>
             <%= link_to profile.name, private_chat_path(profile.id) %>
@@ -14,10 +14,10 @@
         <div class="divider" style="border-bottom: 2px solid rgba(58, 80, 107, 0.68);"></div>
       </div>
       <div class="column is-12">
-        <h4 style="color: #FFFFFF"> Pokoje </h4>
+        <h4 style="color: #FFFFFF"> Publiczne pokoje rozmów</h4>
         <%= render partial: "shared/new_room_form" %>
         <%= turbo_stream_from "rooms" %>
-        <div id="rooms">
+        <div id="rooms" style="display: flex; flex-flow: column; flex-wrap: wrap">
           <%= render @rooms %>
         </div>
       </div>

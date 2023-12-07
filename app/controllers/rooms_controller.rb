@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   def create
     @room = current_user_profile.rooms.new(name: params["room"]["name"])
     if @room.save
-      redirect_to rooms_path, notice: 'Pomyślnie utworzono pokój rozmów!'
+      redirect_to room_path(@room), notice: 'Pomyślnie utworzono pokój rozmów!'
     end
   end
 
