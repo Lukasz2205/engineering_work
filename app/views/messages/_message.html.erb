@@ -1,4 +1,4 @@
-<div class="cont-<%= message.profile.id %>">
+<div class="cont-<%= message.profile.id %>" title="Autor: <%= message.profile.name %>, Data: <%= message.created_at %>">
   <div class="message-box msg-<%= message.profile.id %>" >
     <% unless message.room.is_private %>
       <h6 class="name"> <%= message.profile.name %> </h6>
