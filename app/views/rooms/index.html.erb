@@ -22,13 +22,13 @@
     <div class="columns is-12 is-multiline">
       <div class="column is-12">
         <%= turbo_stream_from "profiles" %>
-        <div id="profiles" style="display: flex;flex-wrap: wrap; flex-flow: column">
+        <div id="profiles" style="display: flex;flex-wrap: wrap; flex-flow: column; overflow-y: auto">
           <h4 style="color: #FFFFFF">Użytkownicy</h4>
           <% @profiles&.each do |profile| %>
             <%= link_to private_chat_path(profile.id) do %>
               <div class="column" style="display: flex; flex-flow: row">
                 <div class="media-left">
-                  <figure class="image is-48x48">
+                  <figure class="image is-32x32">
                     <img src="https://fabricshop.pl/userdata/public/gfx/3706/Panel-welurowy---poduszka-48x48---Biszkoptowy-labrador-w-trzcinach---podglad.jpg" alt="Placeholder image" style="border-radius: 100%;">
                   </figure>
                 </div>
