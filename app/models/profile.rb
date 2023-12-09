@@ -11,6 +11,7 @@ class Profile < ApplicationRecord
   has_many :reverse_followings, foreign_key: :followed_id, class_name: 'Following', dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :assigned_by, through: :notifications
+  has_many :rooms
 
   before_validation :set_default_name, if: -> { name.nil? }
 

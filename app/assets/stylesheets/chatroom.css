@@ -1,0 +1,19 @@
+.message-box {
+    background-color: #2a4a73;
+}
+
+#messages {
+    overflow: auto;
+    height: 75vh;
+    display: flex;
+    flex-direction: column
+}
+
+.no-messages {
+    overflow: auto;
+    height: 75vh;
+    display: flex;
+    color: #FFFFFF;
+    font-size: 30px;
+    align-items: center;
+}

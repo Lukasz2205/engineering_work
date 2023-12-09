@@ -10,41 +10,37 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <%= javascript_importmap_tags %>
   <style>
-    <%= ".msg-#{current_user.profile&.id}" %> {
+    <%= ".msg-#{current_user.profile&.id}" %>
+    {
         background-color: #007bff !important;
         padding: 10px;
     }
-    <%= ".cont-#{current_user.profile&.id}" %> {
+    <%= ".cont-#{current_user.profile&.id}" %>
+    {
         display: flex;
-        justify-content: flex-end
+        justify-content: flex-end;
     }
   </style>
 </head>
 
-<body style="overflow: hidden">
+<body style=" position: fixed;
+  width: 100%;
+  height: 100%; ">
 
-<div class="columns is-12 full-page-height is-multiline">
-  <div class="column is-12">
-    <div class="columns is-12 is-multiline normal-margin-top">
-      <div class="column is-12">
-        <%= render 'layouts/messages' %>
-      </div>
-      <% if signed_in? %>
-        <div class="column is-3">
-          <%= render 'layouts/navigation_panel' %>
-        </div>
-      <% end %>
-
-      <div class="column is-6">
-        <%= yield %>
-      </div>
-
-      <% if signed_in? %>
-        <div class="column is-3">
-        </div>
-      <% end %>
+  <div class="columns is-12 is-multiline is-centered" style="padding: 0 13rem 0 13rem; margin-top: 1%">
+    <div class="column is-12 is-fixed box-column" style="left:10.5%; width: 80%; z-index: 9999">
+      <%= render 'layouts/navigation' %>
+    </div>
+    <div class="column is-3 is-fixed is-full-height" style="left: 9%; width: 17rem;">
+      <%= render 'layouts/navigation_panel' %>
+    </div>
+    <div class="column is-7" style="position: relative; top: 6rem">
+      <%= yield %>
+    </div>
+    <div class="column is-2 is-fixed is-full-height" style="right: 9%; top: 7rem; width: 17rem;">
+      <%= turbo_frame_tag 'messages_container' %>
+      <%= render 'layouts/messages' %>
     </div>
   </div>
-</div>
 </body>
 </html>

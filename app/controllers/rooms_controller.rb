@@ -2,7 +2,10 @@ class RoomsController < ApplicationController
   layout 'chatroom'
 
   def create
-    @room = Room.create(name: params["room"]["name"])
+    @room = current_user_profile.rooms.new(name: params["room"]["name"])
+    if @room.save
+      redirect_to room_path(@room), notice: 'Pomyślnie utworzono pokój rozmów!'
+    end
   end
 
   def index
@@ -24,7 +27,7 @@ class RoomsController < ApplicationController
   def private_chat
     @profile = Profile.find(params[:profile_id])
     @rooms = Room.public_rooms
-    @users = Profile.all_except(current_user_profile)
+    @profiles = Profile.all_except(current_user_profile)
     @room = Room.new
     @message = Message.new
     @room_name = get_name(@profile, current_user_profile)
@@ -32,6 +35,13 @@ class RoomsController < ApplicationController
     @messages = @single_room.messages
 
     render "index"
+  end
+
+  def destroy
+    @room = Room.find(params[:id])
+    if !@room.is_private && @room.destroy
+      redirect_to rooms_path, notice: 'Pomyślnie usunięto pokój rozmów!'
+    end
   end
 
   private
