@@ -13,6 +13,8 @@ class Profile < ApplicationRecord
   has_many :assigned_by, through: :notifications
   has_many :rooms
 
+  has_one_attached :avatar, dependent: :destroy
+
   before_validation :set_default_name, if: -> { name.nil? }
 
   validates_uniqueness_of :name

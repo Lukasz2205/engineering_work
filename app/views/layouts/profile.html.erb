@@ -12,9 +12,11 @@
 </head>
 <body>
 <div class="columns is-12 is-multiline is-centered" style="padding: 0 13rem 0 13rem; margin-top: 0rem">
-  <div class="column is-2 is-fixed box-column min-max-height" style="right: 9%; top: 2%; width: 15%; z-index: 9999">
-    <%= render 'layouts/user_card' %>
-  </div>
+  <% unless policy(@profile).own_profile? %>
+    <div class="column is-2 is-fixed box-column min-max-height" style="right: 9%; top: 2%; width: 15%; z-index: 9999">
+      <%= render 'layouts/user_card' %>
+    </div>
+  <% end %>
   <div class="column is-7">
     <%= yield %>
   </div>
@@ -23,6 +25,7 @@
   </div>
   <div class="column is-2 is-fixed is-full-height" style="right: 9%; top: 7rem; width: 17rem;">
     <%= turbo_frame_tag 'messages_container' %>
+    <%= render 'layouts/messages' %>
   </div>
 </div>
 </body>

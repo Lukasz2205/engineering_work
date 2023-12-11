@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many_attached :attachments, dependent: :destroy
 
-  validates :description, length: { minimum: 10, message: 'Wpis musi posiadać conajmniej 10 znaków!' }
+  validates :description, length: { minimum: 10, message: 'wpis musi posiadać conajmniej 10 znaków!' }
 
   def liked?(profile)
     self.likes.find { |like| like.profile_id == profile.id }
