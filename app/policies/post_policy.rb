@@ -1,7 +1,24 @@
-class PostPolicy
-  attr_reader :user, :post
+class PostPolicy < ApplicationPolicy
 
-  def create?
-    user.user?
+  def show?
+    user_or_admin?
   end
+  def create?
+    user_or_admin?
+  end
+
+  def update?
+    user_or_admin?
+  end
+
+  def destroy
+    user_or_admin?
+  end
+
+  private
+
+  def user_or_admin?
+    user.role == 'user' || user.role == 'admin'
+  end
+
 end

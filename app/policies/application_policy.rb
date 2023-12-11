@@ -42,14 +42,6 @@ class ApplicationPolicy
       @scope = scope
     end
 
-    def admin?
-      user.role == 'admin'
-    end
-
-    def user?
-      user.role == 'user'
-    end
-
     def resolve
       raise NotImplementedError, "You must define #resolve in #{self.class}"
     end
