@@ -3,11 +3,7 @@
     <div class="card box-column">
       <div class="card-content">
         <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="https://fabricshop.pl/userdata/public/gfx/3706/Panel-welurowy---poduszka-48x48---Biszkoptowy-labrador-w-trzcinach---podglad.jpg" alt="Placeholder image" style="border-radius: 100%; border: 1px solid #FFFFFF">
-            </figure>
-          </div>
+          <%= render partial: 'shared/user_profile_avatar', locals: { profile: @profile } %>
           <div class="media-content">
             <p class="title is-4">
               <%= @profile.name %>
@@ -37,7 +33,10 @@
       </footer>
     </div>
   </div>
-  <div class="column is-12" style="margin-top: 16rem;">
+  <div class="column is-12" style="margin-top: 16rem">
+    <h1 class="title">Wpisy</h1>
+  </div>
+  <div class="column is-12">
     <%= turbo_frame_tag 'choice_objects', src: profile_posts_path(@profile.id), class: "columns is-12 is-multiline" do %>
       <% 5.times do %>
         <%= render partial: 'shared/post' %>

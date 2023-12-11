@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    @profile.create(params.require(:profile).permit(:id, :name, :description, :user_id))
+    @profile.create(params.require(:profile).permit(:id, :name, :description, :user_id, ))
   end
   def show
     @profiles = Profile.all
@@ -97,6 +97,6 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
-    params.require(:profile).permit(:name, :description)
+    params.require(:profile).permit(:name, :description, :avatar)
   end
 end

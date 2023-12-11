@@ -1,0 +1,9 @@
+<div class="media-left">
+  <figure class="image is-48x48">
+    <% if profile.present? && profile&.avatar.present? %>
+      <%= image_tag profile.avatar, style: "border-radius: 100%; border: 1px solid #FFFFFF" %>
+    <% else %>
+      <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" style="border-radius: 100%; border: 1px solid #FFFFFF">
+    <% end %>
+  </figure>
+</div>
