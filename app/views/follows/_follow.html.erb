@@ -1,0 +1,17 @@
+<div class="media box-column" style="display: flex; justify-content: center; align-items: center; padding: 1rem">
+  <%= render partial: 'shared/user_profile_avatar', locals: { profile: profile } %>
+  <div class="media-content">
+    <p class="title is-5" style="color: #FFFFFF;">
+      <%= link_to profile.name, profile_path(profile) %>
+    </p>
+  </div>
+  <%= turbo_frame_tag 'followable_options' do %>
+    <% if current_user.profile == profile %>
+      <%= link_to 'Edytuj profil', edit_profile_path(profile), data: { turbo: 'false' }, class: 'button' %>
+    <% elsif current_user.profile.followees.include?(profile) %>
+      <%= render partial: 'profiles/unfollow', locals: { profile: profile } %>
+    <% else %>
+      <%= render partial: 'profiles/follow', locals: { profile: profile } %>
+    <% end %>
+  <% end %>
+</div>

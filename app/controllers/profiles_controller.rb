@@ -68,6 +68,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def followers
+    @follows = @profile.followers
+  end
+
+
+  def followed
+    @follows = @profile.followees
+  end
+
   def posts
     @pagy, @posts = pagy(@profile&.posts.order(created_at: :desc), items: 5)
 

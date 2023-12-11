@@ -23,9 +23,13 @@ Rails.application.routes.draw do
   end
 
   resources :profiles do
-    get 'posts', to: 'profiles#posts', as: 'posts'
-    get 'liked_posts', to: 'profiles#liked_posts', as: 'liked_posts'
-    get 'comments', to: 'profiles#comments', as: 'comments'
+    get    'posts',       to: 'profiles#posts',       as: 'posts'
+    get    'liked_posts', to: 'profiles#liked_posts', as: 'liked_posts'
+    get    'comments',    to: 'profiles#comments',    as: 'comments'
+    get    'followers',   to: 'profiles#followers',   as: 'followers'
+    get    'followed',    to: 'profiles#followed',    as: 'followed'
+    post   'follows',     to: 'profiles#follow'
+    delete 'unfollow',    to: 'profiles#unfollow'
   end
 
   resources :posts do
@@ -38,10 +42,7 @@ Rails.application.routes.draw do
 
   get 'private_chat/:profile_id', to: 'rooms#private_chat', as: 'private_chat'
 
-  post 'follow', to: 'profiles#follow'
-  delete 'unfollow', to: 'profiles#unfollow'
-
-  post '/comments/:comment_id/reply', to: 'comments#reply', as: 'reply'
+  post '/comments/:comment_id/reply',        to: 'comments#reply',        as: 'reply'
   post '/comments/:comment_id/show_comment', to: 'comments#show_comment', as: 'show_comment'
   post '/comments/:comment_id/hide_comment', to: 'comments#hide_comment', as: 'hide_comment'
 end

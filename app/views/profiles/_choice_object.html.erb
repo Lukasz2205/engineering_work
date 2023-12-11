@@ -24,6 +24,11 @@
           <%= @profile&.description %>
           <br>
           <time><%= time_ago_in_words(@profile.created_at) %></time>
+          <br>
+          <div class="follow-options">
+            <%= link_to 'Followers', profile_followers_path(@profile) %>
+            <%= link_to 'Following', profile_followed_path(@profile) %>
+          </div>
         </div>
       </div>
       <footer class="card-footer">
@@ -33,7 +38,7 @@
       </footer>
     </div>
   </div>
-  <div class="column is-12" style="margin-top: 16rem">
+  <div class="column is-12" style="margin-top: 18rem">
     <h1 class="title"><%= header %></h1>
   </div>
   <div class="column is-12">
