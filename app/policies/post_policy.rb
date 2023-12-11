@@ -2,11 +2,11 @@ class PostPolicy < ApplicationPolicy
   def show?
     user_or_admin?
   end
+
   def create?
     user_or_admin?
   end
-
-  def destroy
+  def destroy?
     user.profile == record.profile || user.admin?
   end
 
