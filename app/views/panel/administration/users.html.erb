@@ -37,7 +37,7 @@
           <td><%= prof.posts.count %></td>
           <td><%= prof.comments.count %></td>
           <td><%= prof.followers.count %></td>
-          <td><%= prof.block %></td>
+          <td><%= block_information(prof.block) %></td>
           <td><i class='bx bx-block' style="display: flex; justify-content: center"></i></td>
         </tr>
       <% end %>
