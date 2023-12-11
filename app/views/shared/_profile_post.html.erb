@@ -8,7 +8,7 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile), data: { turbo: "false" } if p.present? %></p>
+          <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile), data: { turbo: "false", turbo_confirm: 'Czy jesteś pewny?' } if p.present? %></p>
           <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) if p.present? %></p>
         </div>
         <% if p.present? %>
