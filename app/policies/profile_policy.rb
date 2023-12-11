@@ -9,4 +9,12 @@ class ProfilePolicy < ApplicationPolicy
   def own_profile?
     user == record.user
   end
+
+  def block?
+    user.admin?
+  end
+
+  def unblock?
+    user.admin?
+  end
 end

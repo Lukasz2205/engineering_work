@@ -51,6 +51,7 @@ class ProfilesController < ApplicationController
   end
 
   def block
+    authorize current_user_profile
     respond_to do |format|
       if @profile.update(block: true)
         @notification = NotificationsService.new(current_user_profile, @profile).create_block_notifications
@@ -63,6 +64,7 @@ class ProfilesController < ApplicationController
   end
 
   def unblock
+    authorize current_user_profile
     respond_to do |format|
       if @profile.update(block: false)
         @notification = NotificationsService.new(current_user_profile, @profile).create_block_notifications
