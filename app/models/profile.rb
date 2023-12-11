@@ -21,6 +21,10 @@ class Profile < ApplicationRecord
 
   scope :all_except, ->(profile) { where.not(id: profile) }
 
+  def blocked?
+    block == false
+  end
+
   private
 
   def set_default_name

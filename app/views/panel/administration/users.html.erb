@@ -12,7 +12,7 @@
         <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Liczba postów</abbr></th>
         <th><abbr title="Liczba komentarzy dodanych przez użytkownika">Liczba komentarzy</abbr></th>
         <th><abbr title="Liczba osób obserwujących tego użytkownika">Liczba obserwujących</abbr></th>
-        <th><abbr title="Status użytkownika o posiadanej blokadzie profilu">Blokada</abbr></th>
+        <th><abbr title="Informacja użytkownika o posiadanej blokadzie profilu">Blokada</abbr></th>
         <th><abbr title="Akcja możliwa do wykonania na użutkowniku">Akcja</abbr></th>
       </tr>
       </thead>
@@ -24,21 +24,27 @@
         <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Liczba postów</abbr></th>
         <th><abbr title="Liczba komentarzy dodanych przez użytkownika">Liczba komentarzy</abbr></th>
         <th><abbr title="Liczba osób obserwujących tego użytkownika">Liczba obserwujących</abbr></th>
-        <th><abbr title="Status użytkownika o posiadanej blokadzie profilu">Blokada</abbr></th>
+        <th><abbr title="Informacja użytkownika o posiadanej blokadzie profilu">Blokada</abbr></th>
         <th><abbr title="Akcja możliwa do wykonania na użutkowniku">Akcja</abbr></th>
       </tr>
       </tfoot>
       <tbody>
       <% @profiles.each_with_index do |prof, index| %>
         <tr>
-          <th><%= index %></th>
+          <th><%= index += 1 %></th>
           <td><strong><%= prof.name %></strong></td>
           <td><%= prof.user.email %></td>
           <td><%= prof.posts.count %></td>
           <td><%= prof.comments.count %></td>
           <td><%= prof.followers.count %></td>
           <td><%= block_information(prof.block) %></td>
-          <td><i class='bx bx-block' style="display: flex; justify-content: center"></i></td>
+          <td id="block_option_<%= prof.id %>">
+            <% if prof.blocked?  %>
+              <%= render partial: 'profiles/block_options/block', locals: { profile: prof } %>
+            <% else %>
+              <%= render partial: 'profiles/block_options/unblock', locals: { profile: prof } %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>

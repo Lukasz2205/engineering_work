@@ -1,7 +1,7 @@
 class NotificationsService
   def initialize(sender, notifiable)
     @sender     = sender
-    @recipient  = notifiable.profile
+    @recipient  = notifiable
     @notifiable = notifiable
   end
 
@@ -24,6 +24,12 @@ class NotificationsService
                                   recipient:  @notifiable.profile,
                                   notifiable: @notifiable,
                                   text:       'Odpowiedział na twój komentarz!')
+  end
+
+  def create_block_notifications
+    @notifiable.notifications.new(profile:    @sender,
+                                  recipient:  @notifiable,
+                                  text:       'Zostałeś zablokowany!')
   end
 
   private
