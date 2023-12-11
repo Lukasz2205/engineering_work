@@ -55,9 +55,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_06_211449) do
     t.index ["profile_id"], name: "index_comments_on_profile_id"
   end
 
-  create_table "followings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "follows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "follower_id"
-    t.uuid "followed_id"
+    t.uuid "followee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

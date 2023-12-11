@@ -54,7 +54,7 @@ class ProfilesController < ApplicationController
 
   def follow
     respond_to do |format|
-      if current_user_profile.followed_profiles << @profile
+      if current_user.profile.followees << @profile
         format.html { redirect_to @profile, notice: "Post was successfully created." }
       end
     end
@@ -62,10 +62,19 @@ class ProfilesController < ApplicationController
 
   def unfollow
     respond_to do |format|
-      if current_user_profile.followed_profiles.destroy(@profile)
+      if  current_user.profile.followed_profiles.find_by(followee_id: @profile.id).destroy
         format.html { redirect_to @profile, notice: "Post was successfully created." }
       end
     end
+  end
+
+  def followers
+    @follows = @profile.followers
+  end
+
+
+  def followed
+    @follows = @profile.followees
   end
 
   def posts

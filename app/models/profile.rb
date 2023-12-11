@@ -5,12 +5,11 @@ class Profile < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :messages, dependent: :destroy
-  has_many :followings, foreign_key: :follower_id, dependent: :destroy
-  has_many :followed_profiles, through: :followings, source: :followed
-  has_many :followers, through: :reverse_followings, source: :follower
-  has_many :reverse_followings, foreign_key: :followed_id, class_name: 'Following', dependent: :destroy
+  has_many :followed_profiles, foreign_key: :follower_id, class_name: 'Follow'
+  has_many :followees, through: :followed_profiles
+  has_many :following_profiles, foreign_key: :followee_id, class_name: 'Follow'
+  has_many :followers, through: :following_profiles
   has_many :notifications, dependent: :destroy
-  has_many :assigned_by, through: :notifications
   has_many :rooms
 
   has_one_attached :avatar, dependent: :destroy
