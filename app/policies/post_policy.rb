@@ -1,5 +1,4 @@
 class PostPolicy < ApplicationPolicy
-
   def show?
     user_or_admin?
   end
@@ -7,18 +6,14 @@ class PostPolicy < ApplicationPolicy
     user_or_admin?
   end
 
-  def update?
-    user_or_admin?
-  end
-
   def destroy
-    user_or_admin?
+    user.profile == record.profile || user.admin?
   end
 
   private
 
   def user_or_admin?
-    user.role == 'user' || user.role == 'admin'
+    user.user? || user.admin?
   end
 
 end

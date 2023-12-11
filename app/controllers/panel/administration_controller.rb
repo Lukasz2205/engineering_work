@@ -1,6 +1,6 @@
 module Panel
   class AdministrationController < BaseController
-    before_action :authorization
+    before_action :authorize_role
     def index
       @pagy, @posts = pagy(Post.all.order('created_at DESC'), items: 5)
     end
@@ -19,10 +19,12 @@ module Panel
     end
 
     private
+
+    def authorize_role
+      authorize current_user, :is_admin?
+    end
     def authorization
-      unless AdministrationPolicy.new(current_user).is_admin?
-        redirect_to root_path, alert: "Odmowa dostępu!"
-      end
+      UserPolicy.new(current_user).is_admin?
     end
   end
 end

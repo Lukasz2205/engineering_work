@@ -6,4 +6,12 @@ class User < ApplicationRecord
 
   has_one :profile
   accepts_nested_attributes_for :profile
+
+  def admin?
+    role == 'admin'
+  end
+
+  def user?
+    role == 'user'
+  end
 end
