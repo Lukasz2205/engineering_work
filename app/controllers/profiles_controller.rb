@@ -1,5 +1,8 @@
 class ProfilesController < ApplicationController
   before_action :fetch_profile, except: [:edit, :update]
+  before_action lambda {
+    resize_before_save(params[:profile][:avatar], 48, 48)
+  }, only: [:update]
 
   layout 'layouts/profile'
 
@@ -83,6 +86,23 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def resize_before_save(image_param, width, height)
+    return unless image_param
+
+    begin
+      ImageProcessing::MiniMagick
+              .source(image_param)
+              .resize_to_fit(width, height)
+              .call(destination: image_param.tempfile.path)
+      puts 'Image has been resized successfully'
+    rescue StandardError => e
+      puts "Error resizing image: #{e.message}"
+      # Do nothing. If this is catching, it probably means the
+      # file type is incorrect, which can be caught later by
+      # model validations.
+    end
+  end
 
   def fetch_object
     @object = if params[:post_id]

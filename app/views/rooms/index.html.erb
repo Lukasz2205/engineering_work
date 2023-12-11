@@ -33,11 +33,7 @@
           <% @profiles&.each do |profile| %>
             <%= link_to private_chat_path(profile.id) do %>
               <div class="column" style="display: flex; flex-flow: row;">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="https://fabricshop.pl/userdata/public/gfx/3706/Panel-welurowy---poduszka-48x48---Biszkoptowy-labrador-w-trzcinach---podglad.jpg" alt="Placeholder image" style="border-radius: 100%;">
-                  </figure>
-                </div>
+                <%= render partial: 'shared/user_profile_avatar', locals: { profile: profile } %>
                 <div class="media-content">
                   <p> <%= profile.name %></p>
                 </div>
