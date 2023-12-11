@@ -21,12 +21,14 @@
   <div class="column is-3 box-column">
     <div class="columns is-12 is-multiline">
       <div class="column is-12">
+        <h4 style="color: #FFFFFF">Użytkownicy</h4>
+      </div>
+      <div class="column is-12">
         <%= turbo_stream_from "profiles" %>
-        <div id="profiles" style="display: flex;flex-wrap: wrap; flex-flow: column; overflow-y: auto">
-          <h4 style="color: #FFFFFF">Użytkownicy</h4>
+        <div id="profiles" style="display: flex;flex-wrap: wrap; flex-flow: column; overflow-y: auto;  height: 250px">
           <% @profiles&.each do |profile| %>
             <%= link_to private_chat_path(profile.id) do %>
-              <div class="column" style="display: flex; flex-flow: row">
+              <div class="column" style="display: flex; flex-flow: row;">
                 <div class="media-left">
                   <figure class="image is-32x32">
                     <img src="https://fabricshop.pl/userdata/public/gfx/3706/Panel-welurowy---poduszka-48x48---Biszkoptowy-labrador-w-trzcinach---podglad.jpg" alt="Placeholder image" style="border-radius: 100%;">
@@ -46,6 +48,9 @@
       <div class="column is-12">
         <h4 style="color: #FFFFFF"> Publiczne pokoje rozmów</h4>
         <%= render partial: "shared/new_room_form" %>
+      </div>
+      <div class="column is-12" style="overflow-y: auto; height: 45vh">
+
         <%= turbo_stream_from "rooms" %>
         <div id="rooms" style="display: flex; flex-flow: column; flex-wrap: wrap">
           <%= render @rooms %>
