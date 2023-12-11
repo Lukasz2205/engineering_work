@@ -1,0 +1,4 @@
+<div class="follow-options">
+  <%= link_to "#{profile.followers.count} Obserwujący", profile_followers_path(profile), style: "#{ 'text-decoration: none;color: #FFFF;' if  controller.action_name == 'followers' }" %>
+  <%= link_to "#{profile.followees.count} Obserwowani", profile_followed_path(profile), style: "#{ 'text-decoration: none;color: #FFFF;' if  controller.action_name == 'followed' }" %>
+</div>

@@ -6,9 +6,7 @@ class ProfilesController < ApplicationController
 
   layout 'layouts/profile'
 
-  def new
-
-  end
+  def new;end
 
   def create
     @profile.create(params.require(:profile).permit(:id, :name, :description, :user_id, ))

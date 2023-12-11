@@ -25,10 +25,7 @@
           <br>
           <time><%= time_ago_in_words(@profile.created_at) %></time>
           <br>
-          <div class="follow-options">
-            <%= link_to 'Obserwujący', profile_followers_path(@profile) %>
-            <%= link_to 'Obserwowani', profile_followed_path(@profile) %>
-          </div>
+          <%= render partial: 'shared/follow_options', locals: { profile: @profile } %>
         </div>
       </div>
       <footer class="card-footer">
