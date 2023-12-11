@@ -2,7 +2,8 @@ class RoomsController < ApplicationController
   layout 'chatroom'
 
   def create
-    @room = current_user_profile.rooms.new(name: params["room"]["name"])
+    @room = current_user_profile.rooms.new(name: params["rooms"]["name"])
+    authorize @room
     if @room.save
       redirect_to room_path(@room), notice: 'Pomyślnie utworzono pokój rozmów!'
     end
@@ -39,6 +40,7 @@ class RoomsController < ApplicationController
 
   def destroy
     @room = Room.find(params[:id])
+    authorize @room
     if !@room.is_private && @room.destroy
       redirect_to rooms_path, notice: 'Pomyślnie usunięto pokój rozmów!'
     end
