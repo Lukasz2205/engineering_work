@@ -1,6 +1,6 @@
 <div class="columns is-12 is-multiline">
   <div class="column is-12 normal-margin-top">
-    <%= form_with model: @profile, url: profile_path do |f| %>
+    <%= form_with model: @profile, url: profile_path, data: { turbo_method: 'false' } do |f| %>
       <%= f.text_field :name, placeholder: 'name', class: 'input'%>
       <%= f.text_field :description, placeholder: 'Opis', class: 'input' %>
       <%= f.submit 'Update', class: 'button' %>
