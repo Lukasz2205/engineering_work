@@ -27,7 +27,7 @@
         <% end %>
       </li>
     <% end %>
-    <% if current_user.role == 'admin' %>
+    <% if policy(current_user).is_admin? %>
       <%= link_to panel_administration_index_path do %>
         <li class="<%= 'is-active' if controller.controller_name == 'administration' %>">
           <i class='bx bx-laptop'></i>
@@ -42,6 +42,4 @@
       <% end %>
     </li>
   </ul>
-
-
 </aside>
