@@ -1,17 +1,27 @@
 class ProfilesController < ApplicationController
-  before_action :fetch_profile
+  before_action :fetch_profile, except: [:edit, :update]
 
   layout 'layouts/profile'
 
+  def new
+
+  end
+
+  def create
+    @profile.create(params.require(:profile).permit(:id, :name, :description, :user_id))
+  end
   def show
     @profiles = Profile.all
     @post = @profile&.posts.new
     @posts = @profile&.posts.order('created_at DESC')
   end
 
-  def edit;end
+  def edit
+    @profile = current_user_profile
+  end
 
   def update
+    @profile = Profile.find(params[:id])
     if @profile.update(set_profile)
       redirect_to @profile, notice: 'Successfully updated'
     else

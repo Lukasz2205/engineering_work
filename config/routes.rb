@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions:      'users/sessions',
+    registrations: 'users/registrations'
   }
 
   root 'home#index'
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, only: %i[show edit update destroy] do
+  resources :profiles do
     get 'posts', to: 'profiles#posts', as: 'posts'
     get 'liked_posts', to: 'profiles#liked_posts', as: 'liked_posts'
     get 'comments', to: 'profiles#comments', as: 'comments'
