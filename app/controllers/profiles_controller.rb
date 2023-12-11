@@ -17,11 +17,13 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = current_user_profile
+    @profile = Profile.find(params[:id])
+    authorize @profile
   end
 
   def update
     @profile = Profile.find(params[:id])
+    authorize @profile
     if @profile.update(set_profile)
       redirect_to @profile, notice: 'Successfully updated'
     else

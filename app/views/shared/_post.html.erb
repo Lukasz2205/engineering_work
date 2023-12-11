@@ -13,7 +13,7 @@
         </div>
         <% if p.present? %>
           <% if current_user.profile == p.profile %>
-            <%= link_to post_path(p.id), data: { turbo_method: :delete } do %>
+            <%= link_to post_path(p.id), data: { turbo_method: :delete, turbo_confirm: 'Czy jesteś pewny?' } do %>
               <i class="fa-solid fa-trash fa-lg"></i>
             <% end %>
           <% end %>
