@@ -7,19 +7,25 @@
       <thead>
       <tr>
         <th><abbr title="Position">Numer</abbr></th>
-        <th>Nazwa</th>
-        <th><abbr title="Adres email">Adres email</abbr></th>
-        <th><abbr title="Liczba postów">Liczba postów</abbr></th>
-        <th><abbr title="Liczba komentarzy">Liczba komentarzy</abbr></th>
+        <th><abbr title="Nazwa użytkownika">Nazwa</abbr></th>
+        <th><abbr title="Adres email posiadany przez użytkownika">Adres email</abbr></th>
+        <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Liczba postów</abbr></th>
+        <th><abbr title="Liczba komentarzy dodanych przez użytkownika">Liczba komentarzy</abbr></th>
+        <th><abbr title="Liczba osób obserwujących tego użytkownika">Liczba obserwujących</abbr></th>
+        <th><abbr title="Status użytkownika o posiadanej blokadzie profilu">Blokada</abbr></th>
+        <th><abbr title="Akcja możliwa do wykonania na użutkowniku">Akcja</abbr></th>
       </tr>
       </thead>
       <tfoot>
       <tr>
         <th><abbr title="Position">Numer</abbr></th>
-        <th>Nazwa</th>
-        <th><abbr title="Adres email">Adres email</abbr></th>
-        <th><abbr title="Liczba postów">Liczba postów</abbr></th>
-        <th><abbr title="Liczba komentarzy">Liczba komentarzy</abbr></th>
+        <th><abbr title="Nazwa użytkownika">Nazwa</abbr></th>
+        <th><abbr title="Adres email posiadany przez użytkownika">Adres email</abbr></th>
+        <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Liczba postów</abbr></th>
+        <th><abbr title="Liczba komentarzy dodanych przez użytkownika">Liczba komentarzy</abbr></th>
+        <th><abbr title="Liczba osób obserwujących tego użytkownika">Liczba obserwujących</abbr></th>
+        <th><abbr title="Status użytkownika o posiadanej blokadzie profilu">Blokada</abbr></th>
+        <th><abbr title="Akcja możliwa do wykonania na użutkowniku">Akcja</abbr></th>
       </tr>
       </tfoot>
       <tbody>
@@ -30,6 +36,9 @@
           <td><%= prof.user.email %></td>
           <td><%= prof.posts.count %></td>
           <td><%= prof.comments.count %></td>
+          <td><%= prof.followers.count %></td>
+          <td><%= prof.block %></td>
+          <td><i class='bx bx-block' style="display: flex; justify-content: center"></i></td>
         </tr>
       <% end %>
       </tbody>
