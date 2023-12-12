@@ -2,9 +2,9 @@ class RoomsController < ApplicationController
   layout 'chatroom'
 
   def create
-    @room = current_user_profile.rooms.new(name: params["rooms"]["name"])
+    @room = current_user_profile.rooms.new(name: params["room"]["name"])
     authorize @room
-    if @room.save
+    if @room.save!
       redirect_to room_path(@room), notice: 'Pomyślnie utworzono pokój rozmów!'
     end
   end
