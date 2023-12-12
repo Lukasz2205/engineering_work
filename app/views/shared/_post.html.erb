@@ -27,23 +27,22 @@
       </div>
       <div class="show-more" data-post-target="button"></div>
     </div>
-    <div class="card-image">
+    <div class="card-image" style="background-color: black; margin-top: 0px; margin-bottom: 0px">
       <% if p.class == Post && p.present? && p.attachments.attached? %>
-        <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
-          <% p.attachments.each_with_index do |attachment| %>
-            <% if attachment.image? %>
-              <div class="column is-3 normal-margin-bottom">
-                <figure class="image is-4by3">
-                  <%= image_tag(attachment) %>
-                </figure>
-              </div>
-            <% elsif attachment.video? %>
-              <div class="column is-6">
-                <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
+        <%= link_to post_path(p), data: { turbo: false } do %>
+          <div class="columns is-12 is-multiline">
+            <% attachment = p.attachments.first %>
+              <% if attachment.image? %>
+                <div class="column is-12 normal-margin-bottom" style="display: flex; justify-content: center; height: 400px">
+                  <%= image_tag(attachment, class: 'image' ) %>
+                </div>
+              <% elsif attachment.video? %>
+                <div class="column is-12" style="display: flex; justify-content: center; height: 400px">
+                  <%= video_tag(url_for(attachment), class: 'image', style: 'height: auto; width: 100%;', controls: '') %>
+                </div>
+              <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
