@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "post_#{p.id if p.present?}", class: 'column is-12', data: { controller: 'modal' } do %>
+<%= turbo_frame_tag "post_#{p.id if p.present?}", class: 'column is-12' do %>
   <div class="card post-card box-column" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>; padding-bottom: 0.24rem">
     <div class="card-content" data-controller="post">
       <div class="media">
@@ -9,7 +9,6 @@
           <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile), data: { turbo: "false" } if p.present? %></p>
           <p class="subtitle is-6"><%= date_format(p.created_at) if p.present? %></p>
         </div>
-          <i id="modal-btn" class='bx bx-edit-alt' style="font-size: 24px" data-action="click->modal#openModal"></i>
         <% if p.present? %>
           <% if policy(p).owner_admin? %>
             <%= link_to post_path(p.id), data: { turbo_method: :delete, turbo_confirm: 'Czy jesteś pewny?' } do %>
@@ -70,22 +69,6 @@
       <a href="#">
         <i class="fa-solid fa-share fa-lg"></i>
       </a>
-    </div>
-  </div>
-  <div id="my-modal" data-modal-target="modal" class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-card modal-content">
-      <header class="modal-card-head">
-        <p class="modal-card-title title">Edycja postu</p>
-        <button class="close delete" aria-label="close" data-action="click->modal#closeModal"></button>
-      </header>
-      <section class="modal-card-body">
-        <%= p.description if p.present? %><br/>
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success">Aktualizuj</button>
-        <button class="button" data-action="click->modal#closeModal">Cancel</button>
-      </footer>
     </div>
   </div>
 <% end %>

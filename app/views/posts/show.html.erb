@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "post_#{@post.id if @post.present?}", class: 'column is-12 ' do %>
+<%= turbo_frame_tag "post_#{@post.id if @post.present?}", class: 'column is-12', data: { controller: 'modal' } do %>
   <div class="card post-card box-column" style="margin-top: 25px; <%= 'filter: blur(4px);' unless @post.present? %>">
     <div class="card-content" data-controller="post">
       <div class="media">
@@ -11,6 +11,7 @@
           <p class="title is-4"><%= link_to @post.profile.name, profile_path(@post.profile), data: { turbo: "false" } if @post.present? %></p>
           <p class="subtitle is-6"><%= time_ago_in_words(@post.created_at) if @post.present? %></p>
         </div>
+        <i id="modal-btn" class='bx bx-edit-alt' style="font-size: 24px" data-action="click->modal#openModal"></i>
         <% if @post.present? %>
           <% if current_user.profile == @post.profile %>
             <%= link_to post_path(@post.id), data: { turbo_method: :delete } do %>
@@ -80,6 +81,25 @@
             <% end %>
           <% end %>
         </div>
+      <% end %>
+    </div>
+  </div>
+  <div id="my-modal" data-modal-target="modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card modal-content">
+      <header class="modal-card-head">
+        <p class="modal-card-title title">Edycja postu</p>
+        <button class="close delete" aria-label="close" data-action="click->modal#closeModal"></button>
+      </header>
+      <%= form_with model: @post, url: post_path(@post), data: { turbo: false } do |f| %>
+        <section class="modal-card-body">
+          <%= f.text_area :description, placeholder: 'dodaj posts', class: 'input post-input' %>
+          <%= f.file_field :attachments, multiple: true, accept: ".jpg, .jpeg, .png, .webp, .mp4" %>
+        </section>
+        <footer class="modal-card-foot">
+          <%= f.submit class: 'button' %>
+          <button class="button" data-action="click->modal#closeModal">Cancel</button>
+        </footer>
       <% end %>
     </div>
   </div>

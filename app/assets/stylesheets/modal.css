@@ -2,14 +2,14 @@
     --modal-duration: 1s;
     --modal-color: rgba(58, 80, 107, 0.68);;
 }
-.button {
-    background: #428bca;
-    padding: 1em 2em;
-    color: #fff;
-    border: 0;
-    border-radius: 5px;
-    cursor: pointer;
-}
+/*.button {*/
+/*    background: #428bca;*/
+/*    padding: 1em 2em;*/
+/*    color: #fff;*/
+/*    border: 0;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .button:hover {
     background: #3876ac;
@@ -23,11 +23,10 @@
     top: 0;
     height: 100%;
     width: 100%;
-    overflow: auto;
 }
 
 .modal-content {
-    margin: 20% auto;
+    margin: 10% auto;
     width: 60%;
     animation-name: modalopen;
     animation-duration: var(--modal-duration);
