@@ -12,8 +12,9 @@
         <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Liczba postów</abbr></th>
         <th><abbr title="Liczba komentarzy dodanych przez użytkownika">Liczba komentarzy</abbr></th>
         <th><abbr title="Liczba osób obserwujących tego użytkownika">Liczba obserwujących</abbr></th>
+        <th><abbr title="Rola użytkownika w systemie">Rola</abbr></th>
         <th><abbr title="Informacja o tym czy użytkownik ma zablokowaną możliwośc dodawania nowych wpisów">Blokada</abbr></th>
-        <th><abbr title="Akcja możliwa do wykonania na użutkowniku">Akcja</abbr></th>
+        <th><abbr title="Akcja możliwa do wykonania na użytkowniku">Akcja</abbr></th>
       </tr>
       </thead>
       <tfoot>
@@ -24,8 +25,9 @@
         <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Liczba postów</abbr></th>
         <th><abbr title="Liczba komentarzy dodanych przez użytkownika">Liczba komentarzy</abbr></th>
         <th><abbr title="Liczba osób obserwujących tego użytkownika">Liczba obserwujących</abbr></th>
+        <th><abbr title="Rola użytkownika w systemie">Rola</abbr></th>
         <th><abbr title="Informacja o tym czy użytkownik ma zablokowaną możliwośc dodawania nowych wpisów">Blokada</abbr></th>
-        <th><abbr title="Akcja możliwa do wykonania na użutkowniku">Akcja</abbr></th>
+        <th><abbr title="Akcja możliwa do wykonania na użytkowniku">Akcja</abbr></th>
       </tr>
       </tfoot>
       <tbody>
@@ -37,6 +39,7 @@
           <td><%= prof.posts.count %></td>
           <td><%= prof.comments.count %></td>
           <td><%= prof.followers.count %></td>
+          <td><%= user_role(prof.user.role) %></td>
           <td><%= block_information(prof.block) %></td>
           <td id="block_option_<%= prof.id %>">
             <% if prof.blocked?  %>
