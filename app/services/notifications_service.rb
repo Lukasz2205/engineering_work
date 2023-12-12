@@ -29,7 +29,15 @@ class NotificationsService
   def create_block_notifications
     @notifiable.notifications.new(profile:    @sender,
                                   recipient:  @notifiable,
+                                  notifiable: @notifiable,
                                   text:       'Zostałeś zablokowany!')
+  end
+
+  def create_unblock_notifications
+    @notifiable.notifications.new(profile:    @sender,
+                                  recipient:  @notifiable,
+                                  notifiable: @notifiable,
+                                  text:       'Zostałeś odblokowany!')
   end
 
   private

@@ -10,6 +10,7 @@ class Profile < ApplicationRecord
   has_many :following_profiles, foreign_key: :followee_id, class_name: 'Follow'
   has_many :followers, through: :following_profiles
   has_many :notifications, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :rooms
 
   has_one_attached :avatar, dependent: :destroy

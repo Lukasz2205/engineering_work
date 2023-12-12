@@ -1,7 +1,10 @@
-<%= link_to notification.profile.name, profile_path(notification.profile) %>
+<% unless notification.notifiable_type == 'Profile' %>
+  <%= link_to notification.profile.name, profile_path(notification.profile) %>
+<% end %>
 <%= notification.text %>
 <% if notification.notifiable_type == 'Post' %>
   <%= link_to notification.notifiable.description, post_path(notification.notifiable) %>
-<% else %>
+<% elsif notification.notifiable_type == 'Message' %>
   <%= notification.notifiable.message %>
+  <%= notification.created_at %>
 <% end %>

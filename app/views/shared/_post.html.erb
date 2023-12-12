@@ -7,7 +7,7 @@
         <% end %>
         <div class="media-content">
           <p class="title is-4"><%= link_to p.profile.name, profile_path(p.profile), data: { turbo: "false" } if p.present? %></p>
-          <p class="subtitle is-6"><%= time_ago_in_words(p.created_at) if p.present? %></p>
+          <p class="subtitle is-6"><%= date_format(p.created_at) if p.present? %></p>
         </div>
         <% if p.present? %>
           <% if current_user.profile == p.profile %>
