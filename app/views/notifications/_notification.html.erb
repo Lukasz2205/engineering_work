@@ -6,5 +6,6 @@
   <%= link_to notification.notifiable.description, post_path(notification.notifiable) %>
 <% elsif notification.notifiable_type == 'Message' %>
   <%= notification.notifiable.message %>
-  <%= notification.created_at %>
+<% else %>
+  <%= date_format(notification.created_at) %>
 <% end %>

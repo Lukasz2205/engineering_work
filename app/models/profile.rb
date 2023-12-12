@@ -23,7 +23,7 @@ class Profile < ApplicationRecord
   scope :all_except, ->(profile) { where.not(id: profile) }
 
   def blocked?
-    block == false
+    block == true
   end
 
   private

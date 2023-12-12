@@ -40,10 +40,10 @@
           <td><%= block_information(prof.block) %></td>
           <td id="block_option_<%= prof.id %>">
             <% if prof.blocked?  %>
-              <%= render partial: 'profiles/block_options/block', locals: { profile: prof } %>
-            <% else %>
               <%= render partial: 'profiles/block_options/unblock', locals: { profile: prof } %>
-            <% end %>
+            <% else %>
+              <%= render partial: 'profiles/block_options/block', locals: { profile: prof } %>
+          <% end %>
           </td>
         </tr>
       <% end %>
