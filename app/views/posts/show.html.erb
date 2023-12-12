@@ -71,7 +71,6 @@
     </div>
     <span class="card-footer" style="margin-bottom: 15px"></span>
     <%= render partial: 'comments/form', locals: { p: @post } if @post.present? %>
-
     <div class="comments-section">
       <% if @post.present? %>
         <div id="post_comments_<%= @post.id %>" class="columns is-12 is-multiline" style="padding: 1rem">
@@ -93,12 +92,28 @@
       </header>
       <%= form_with model: @post, url: post_path(@post), data: { turbo: false } do |f| %>
         <section class="modal-card-body">
-          <%= f.text_area :description, placeholder: 'dodaj posts', class: 'input post-input' %>
+          <%= f.text_area :description, placeholder: 'dodaj posts', class: 'input post-input', style: 'height: 250px; max-height: 450px' %>
           <%= f.file_field :attachments, multiple: true, accept: ".jpg, .jpeg, .png, .webp, .mp4" %>
+          <% if @post.present? && @post.attachments.attached? %>
+            <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
+              <% @post.attachments.each_with_index do |attachment| %>
+                <% if attachment.image? %>
+                  <div class="column is-3 normal-margin-bottom">
+                    <figure class="image is-4by3">
+                      <%= image_tag(attachment) %>
+                    </figure>
+                  </div>
+                <% elsif attachment.video? %>
+                  <div class="column is-6">
+                    <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
         </section>
         <footer class="modal-card-foot">
-          <%= f.submit class: 'button' %>
-          <button class="button" data-action="click->modal#closeModal">Cancel</button>
+          <%= f.submit 'Aktualizuj', class: 'button', style: 'width: 100%' %>
         </footer>
       <% end %>
     </div>
