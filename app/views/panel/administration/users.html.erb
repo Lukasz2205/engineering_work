@@ -9,9 +9,9 @@
         <th><abbr title="Position">Numer</abbr></th>
         <th><abbr title="Nazwa użytkownika">Nazwa</abbr></th>
         <th><abbr title="Adres email posiadany przez użytkownika">Adres email</abbr></th>
-        <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Liczba postów</abbr></th>
-        <th><abbr title="Liczba komentarzy dodanych przez użytkownika">Liczba komentarzy</abbr></th>
-        <th><abbr title="Liczba osób obserwujących tego użytkownika">Liczba obserwujących</abbr></th>
+        <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Wpisy</abbr></th>
+        <th><abbr title="Liczba komentarzy dodanych przez użytkownika">komentarzy</abbr></th>
+        <th><abbr title="Liczba osób obserwujących tego użytkownika">Obserwujący</abbr></th>
         <th><abbr title="Rola użytkownika w systemie">Rola</abbr></th>
         <th><abbr title="Informacja o tym czy użytkownik ma zablokowaną możliwośc dodawania nowych wpisów">Blokada</abbr></th>
         <th><abbr title="Akcja możliwa do wykonania na użytkowniku">Akcja</abbr></th>
@@ -22,9 +22,9 @@
         <th><abbr title="Position">Numer</abbr></th>
         <th><abbr title="Nazwa użytkownika">Nazwa</abbr></th>
         <th><abbr title="Adres email posiadany przez użytkownika">Adres email</abbr></th>
-        <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Liczba postów</abbr></th>
-        <th><abbr title="Liczba komentarzy dodanych przez użytkownika">Liczba komentarzy</abbr></th>
-        <th><abbr title="Liczba osób obserwujących tego użytkownika">Liczba obserwujących</abbr></th>
+        <th><abbr title="Liczba postów zamieszczonych przez użytkownika">Wpisy</abbr></th>
+        <th><abbr title="Liczba komentarzy dodanych przez użytkownika">komentarzy</abbr></th>
+        <th><abbr title="Liczba osób obserwujących tego użytkownika">Obserwujący</abbr></th>
         <th><abbr title="Rola użytkownika w systemie">Rola</abbr></th>
         <th><abbr title="Informacja o tym czy użytkownik ma zablokowaną możliwośc dodawania nowych wpisów">Blokada</abbr></th>
         <th><abbr title="Akcja możliwa do wykonania na użytkowniku">Akcja</abbr></th>
@@ -46,7 +46,7 @@
               <%= render partial: 'profiles/block_options/unblock', locals: { profile: prof } %>
             <% else %>
               <%= render partial: 'profiles/block_options/block', locals: { profile: prof } %>
-          <% end %>
+            <% end %>
           </td>
         </tr>
       <% end %>
