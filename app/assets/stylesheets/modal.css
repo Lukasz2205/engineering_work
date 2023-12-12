@@ -27,7 +27,7 @@
 
 .modal-content {
     margin: 5% auto;
-    width: 60%;
+    width: 50%;
     overflow-y: auto;
     animation-name: modalopen;
     animation-duration: var(--modal-duration);

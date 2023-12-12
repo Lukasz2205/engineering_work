@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.update(set_post)
+    if @post.update(params.require(:post).permit(:description))
       redirect_to post_path(@post), notice: 'Pomyślnie zaktualizowano post!'
     else
       redirect_to root_path, alert: 'Coś poszło nie tak'
