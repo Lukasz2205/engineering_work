@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "post_#{p.id if p.present?}", class: 'column is-12 ' do %>
+<%= turbo_frame_tag "post_#{p.id if p.present?}", class: 'column is-12' do %>
   <div class="card post-card box-column" style="margin-top: 25px; <%= 'filter: blur(4px);' unless p.present? %>; padding-bottom: 0.24rem">
     <div class="card-content" data-controller="post">
       <div class="media">
@@ -72,4 +72,3 @@
     </div>
   </div>
 <% end %>
-

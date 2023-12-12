@@ -25,6 +25,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(set_post)
+      redirect_to post_path(@post), notice: 'Pomyślnie zaktualizowano post!'
+    else
+      redirect_to root_path, alert: 'Coś poszło nie tak'
+    end
+  end
+
   def destroy
     @post = Post.find(params[:id])
   rescue StandardError
