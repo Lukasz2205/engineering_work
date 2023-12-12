@@ -40,10 +40,15 @@ public_room  = profile1.rooms.create(name: 'Publiczny pokój')
   private_room.messages.create(profile: profile2, content: Faker::Lorem.sentence(word_count: rand(1..30)))
 end
 
+profiles = Profile.where.not(id: profile1).take(10)
 20.times do
-  profiles = Profile.all.take(10)
   public_room.messages.create(profile: profiles[rand(0..9)], content: Faker::Lorem.sentence(word_count: rand(1..30)))
 end
+
+profiles.each do |profile|
+  profile1.followees << profile
+end
+profile2.followees << profile1
 
 post = profile1.posts.first
 post.likes.create(profile: profile2)
