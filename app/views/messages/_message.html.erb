@@ -1,7 +1,7 @@
 <div class="cont-<%= message.profile.id %>" title="Autor: <%= message.profile.name %>, Data: <%= message.created_at %>">
   <div class="message-box msg-<%= message.profile.id %>" >
     <% unless message.room.is_private %>
-      <h6 class="name"> <%= message.profile.name %> </h6>
+      <h6 class="name"> <%= link_to message.profile.name, profile_path(message.profile) %>: </h6>
     <% end %>
     <%= message.content %>
   </div>

@@ -84,7 +84,7 @@
     </div>
   </div>
   <div id="my-modal" data-modal-target="modal" class="modal">
-    <div class="modal-background"></div>
+    <div class="modal-background" data-action="click->modal#closeModal"></div>
     <div class="modal-card modal-content">
       <header class="modal-card-head">
         <p class="modal-card-title title">Edycja postu</p>
@@ -92,7 +92,7 @@
       </header>
       <%= form_with model: @post, url: post_path(@post), data: { turbo: false } do |f| %>
         <section class="modal-card-body">
-          <%= f.text_area :description, placeholder: 'dodaj posts', class: 'input post-input', style: 'height: 250px; max-height: 450px' %>
+          <%= f.text_area :description, placeholder: 'dodaj posts', class: 'input post-input', style: 'height: 250px; max-height: 300px' %>
           <%= f.file_field :attachments, multiple: true, accept: ".jpg, .jpeg, .png, .webp, .mp4" %>
           <% if @post.present? && @post.attachments.attached? %>
             <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">

@@ -13,10 +13,4 @@ export default class extends Controller {
     this.modalTarget.style.display = 'none';
     document.body.classList.remove('modal-open');
   }
-
-  outsideClick(e) {
-    if (e.target == modal) {
-      this.modalTarget.style.display = 'none';
-    }
-  }
 }
