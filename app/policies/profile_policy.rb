@@ -11,10 +11,16 @@ class ProfilePolicy < ApplicationPolicy
   end
 
   def block?
-    user.admin?
+    self_and_admin
   end
 
   def unblock?
-    user.admin?
+    self_and_admin
+  end
+
+  private
+
+  def self_and_admin
+    record != user.profile && user.admin?
   end
 end

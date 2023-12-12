@@ -51,11 +51,13 @@ class ProfilesController < ApplicationController
   end
 
   def block
-    authorize current_user_profile
+    authorize @profile
     respond_to do |format|
       if @profile.update(block: true)
         @notification = NotificationsService.new(current_user_profile, @profile).create_block_notifications
-        @notification.save
+        puts 'asdasdas'
+        puts @notification.inspect
+        puts @notification.save!
         # format.turbo_stream { render 'profiles/block_options/block', locals: { p: @profile } }
       else
         format.html { redirect_to root_path, alert: 'Something went wrong' }
@@ -64,7 +66,7 @@ class ProfilesController < ApplicationController
   end
 
   def unblock
-    authorize current_user_profile
+    authorize @profile
     respond_to do |format|
       if @profile.update(block: false)
         @notification = NotificationsService.new(current_user_profile, @profile).create_block_notifications
