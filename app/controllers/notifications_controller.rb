@@ -4,9 +4,9 @@ class NotificationsController < ApplicationController
   def index;end
 
   def read_all
-    @notifications_unread.each do |notif|
-      notif.update(read: true)
-    end
+    puts 'ahahaa'
+    puts @notifications_unread.update(read: true)
+    @notifications_unread.each { |notif| notif.update(read: true) }
     redirect_to notifications_path
   end
 

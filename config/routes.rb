@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     get    'comments',    to: 'profiles#comments',    as: 'comments'
     get    'followers',   to: 'profiles#followers',   as: 'followers'
     get    'followed',    to: 'profiles#followed',    as: 'followed'
+    put    'block',       to: 'profiles#block'
+    put    'unblock',     to: 'profiles#unblock'
     post   'follows',     to: 'profiles#follow'
     delete 'unfollow',    to: 'profiles#unfollow'
   end

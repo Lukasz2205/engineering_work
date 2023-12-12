@@ -10,6 +10,7 @@ class Profile < ApplicationRecord
   has_many :following_profiles, foreign_key: :followee_id, class_name: 'Follow'
   has_many :followers, through: :following_profiles
   has_many :notifications, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :rooms
 
   has_one_attached :avatar, dependent: :destroy
@@ -20,6 +21,10 @@ class Profile < ApplicationRecord
   after_create_commit { broadcast_append_to "profiles" }
 
   scope :all_except, ->(profile) { where.not(id: profile) }
+
+  def blocked?
+    block == true
+  end
 
   private
 

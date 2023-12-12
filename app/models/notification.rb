@@ -1,9 +1,9 @@
 class Notification < ApplicationRecord
   belongs_to :profile
   belongs_to :recipient, class_name: 'Profile'
-  belongs_to :notifiable, polymorphic: true
+  belongs_to :notifiable, optional: true, polymorphic: true
 
-  validates :profile_id, uniqueness: { scope: %i[recipient_id notifiable_id text] }
+  validates :profile_id, uniqueness: { scope: %i[recipient_id notifiable_id text] }, unless: -> { notifiable_type == 'Profile' }
   validate :different_profile_and_recipient
 
   scope :recipient, ->(recipient) { where(recipient: recipient) }
@@ -14,7 +14,7 @@ class Notification < ApplicationRecord
 
   def different_profile_and_recipient
     if profile_id && recipient_id && profile_id == recipient_id
-      errors.add(:base, "Profile and recipient must be different")
+      errors.add(:base, "Nie można dodać notyfikacji dla samego siebie")
     end
   end
 end

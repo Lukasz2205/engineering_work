@@ -6,7 +6,7 @@ module Panel
     end
 
     def users
-      @profiles = Profile.all
+      @profiles = Profile.all.order(name: :asc)
     end
 
     def posts

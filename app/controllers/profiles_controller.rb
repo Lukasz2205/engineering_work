@@ -50,6 +50,32 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def block
+    authorize @profile
+    respond_to do |format|
+      if @profile.update(block: true)
+        @notification = NotificationsService.new(current_user_profile, @profile).create_block_notifications
+        @notification.save
+        # format.turbo_stream { render 'profiles/block_options/block', locals: { p: @profile } }
+      else
+        format.html { redirect_to root_path, alert: 'Something went wrong' }
+      end
+    end
+  end
+
+  def unblock
+    authorize @profile
+    respond_to do |format|
+      if @profile.update(block: false)
+        @notification = NotificationsService.new(current_user_profile, @profile).create_unblock_notifications
+        @notification.save
+        # format.turbo_stream { render 'profiles/block_options/unblock', locals: { p: @profile } }
+      else
+        format.html { redirect_to root_path, alert: 'Something went wrong' }
+      end
+    end
+  end
+
   def follow
     respond_to do |format|
       if current_user.profile.followees << @profile
