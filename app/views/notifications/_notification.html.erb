@@ -3,9 +3,9 @@
 <% end %>
 <%= notification.text %>
 <% if notification.notifiable_type == 'Post' %>
-  <%= link_to notification.notifiable.description, post_path(notification.notifiable) %>
+  <%= link_to notification.notifiable.description.truncate(60), post_path(notification.notifiable) %>
 <% elsif notification.notifiable_type == 'Message' %>
-  <%= notification.notifiable.message %>
+  <%= notification.notifiable.message.truncate(40) %>
 <% else %>
   <%= date_format(notification.created_at) %>
 <% end %>

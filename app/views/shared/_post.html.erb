@@ -10,7 +10,7 @@
           <p class="subtitle is-6"><%= date_format(p.created_at) if p.present? %></p>
         </div>
         <% if p.present? %>
-          <% if current_user.profile == p.profile %>
+          <% if policy(p).owner_admin? %>
             <%= link_to post_path(p.id), data: { turbo_method: :delete, turbo_confirm: 'Czy jesteś pewny?' } do %>
               <i class="fa-solid fa-trash fa-lg"></i>
             <% end %>
