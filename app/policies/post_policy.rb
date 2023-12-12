@@ -4,7 +4,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def create?
-    user_or_admin?
+    user_or_admin? && !blocked?
   end
   def destroy?
     user.profile == record.profile || user.admin?
@@ -16,4 +16,7 @@ class PostPolicy < ApplicationPolicy
     user.user? || user.admin?
   end
 
+  def blocked?
+    user.profile.blocked?
+  end
 end
