@@ -33,6 +33,5 @@ export default class extends Controller {
         video.pause()
       })
     }
-
   }
-  }
+}

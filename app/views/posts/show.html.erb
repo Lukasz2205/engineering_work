@@ -84,25 +84,31 @@
     <div class="modal-background" data-action="click->modal#closeModal"></div>
     <div class="modal-card modal-content">
       <header class="modal-card-head">
-        <p class="modal-card-title title">Edycja postu</p>
+        <p class="modal-card-title title">Multimedia</p>
         <button class="close delete" aria-label="close" data-action="click->modal#closeImageModal"></button>
       </header>
-      <section class="modal-card-body">
+      <section class="modal-card-body" data-controller="slider">
         <% if @post.present? && @post.attachments.attached? %>
           <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
-            <% @post.attachments.each_with_index do |attachment| %>
-              <% if attachment.image? %>
-                <div class="column is-12 normal-margin-bottom" style="display: flex; justify-content: center; margin: -200px; padding: 200px">
-                  <figure class="image">
+            <div class="column is-1" style="display: flex; justify-content: center;">
+              <button data-slider-target="switchLeft"> < </button>
+            </div>
+            <div class="column is-10" data-slider-target="slider" style="width: 80%;height: 58vh;display: flex;justify-content: center; align-items: center">
+              <% @post.attachments.each_with_index do |attachment| %>
+                <% if attachment.image? %>
+                  <figure class="image hidden" data-slider-target="image">
                     <%= image_tag(attachment) %>
                   </figure>
-                </div>
-              <% elsif attachment.video? %>
-                <div class="column is-12" style="display: flex; justify-content: center; margin: -260px; padding: 250px">
-                  <%= video_tag(url_for(attachment), class: 'image', style: 'height: auto; width: 100%;', controls: '') %>
-                </div>
+                <% elsif attachment.video? %>
+                  <figure class="image hidden" data-slider-target="image">
+                    <%= video_tag(url_for(attachment), class: 'image', style: 'height: auto; width: 100%;', controls: '') %>
+                  </figure>
+                <% end %>
               <% end %>
-            <% end %>
+            </div>
+            <div class="column is-1" style="display: flex; justify-content: center;">
+              <button data-slider-target="switchRight"> > </button>
+            </div>
           </div>
         <% end %>
       </section>
