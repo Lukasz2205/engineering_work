@@ -1,6 +1,6 @@
-<%= turbo_frame_tag "new_comment_#{comment.id}" do %>
+<%= turbo_frame_tag "new_comment_#{comment.id}", class: "comment-form", style: "display: flex; padding: 15px; width: 100%" do %>
   <%= form_with model: comment.replies.new, url: reply_path(comment) do |f| %>
-    <%= f.text_area :message , class: 'input', style: 'width: 86%; max-width: 86%' %>
+    <%= f.text_area :message , class: 'input', style: 'max-width: 80%' %>
     <%= f.submit 'Dodaj', class: 'button is-primary'  %>
   <% end %>
 <% end %>

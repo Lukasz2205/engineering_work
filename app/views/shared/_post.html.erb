@@ -27,25 +27,34 @@
       </div>
       <div class="show-more" data-post-target="button"></div>
     </div>
-    <div class="card-image">
-      <% if p.class == Post && p.present? && p.attachments.attached? %>
-        <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
-          <% p.attachments.each_with_index do |attachment| %>
-            <% if attachment.image? %>
-              <div class="column is-3 normal-margin-bottom">
-                <figure class="image is-4by3">
-                  <%= image_tag(attachment) %>
-                </figure>
-              </div>
-            <% elsif attachment.video? %>
-              <div class="column is-6">
-                <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;', controls: '') %>
+    <% if p.class == Post && p.present? && p.attachments.attached? %>
+      <%= link_to post_path(p.id), data: { turbo: false } do %>
+        <div class="card-image" style="background-color: #FFFFFF;">
+          <div class="columns is-multiline" style="margin: 15px">
+            <% attachments_count = p.attachments.count %>
+            <% p.attachments.each_with_index do |attachment| %>
+              <div class="column" style="padding: 0; position: relative">
+                <% if attachment.image? %>
+                  <%= image_tag(attachment, class: '') %>
+                <% elsif attachment.video? %>
+                  <% if attachments_count == 1 %>
+                    <div class="center" style="display: flex; justify-content: center; align-items: center">
+                      <%= video_tag(url_for(attachment), style: 'max-height: 20rem') %>
+                      <i class='bx bx-play-circle' style="font-size: <%= attachments_count != 1 ? '100%' : '150px' %>; position: absolute; z-index: 9999; color: #FFFFFF; max-height: 15rem"></i>
+                    </div>
+                  <% else %>
+                    <div class="center" style="display: flex; justify-content: center; align-items: center">
+                      <%= video_tag(url_for(attachment), style: 'max-height: 4.9rem') %>
+                      <i class='bx bx-play-circle' style="font-size: <%= attachments_count != 1 ? '100%' : '150px' %>; position: absolute; z-index: 9999; color: #FFFFFF; max-height: 15rem"></i>
+                    </div>
+                  <% end %>
+                <% end %>
               </div>
             <% end %>
-          <% end %>
+          </div>
         </div>
       <% end %>
-    </div>
+    <% end %>
     <span class="card-footer" style="margin-bottom: 15px"></span>
     <div class="action-buttons" data-controller="likes" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
       <% if p.present? %>
@@ -66,9 +75,6 @@
           <i class="fa-regular fa-comment fa-lg"></i>
         <% end %>
       <% end %>
-      <a href="#">
-        <i class="fa-solid fa-share fa-lg"></i>
-      </a>
     </div>
   </div>
 <% end %>
