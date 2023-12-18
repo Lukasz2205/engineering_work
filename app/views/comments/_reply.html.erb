@@ -8,9 +8,9 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4"><%= comment&.profile&.name %></p>
+          <p class=" is-4"><%= comment&.profile&.name %></p>
           <p class="subtitle is-6"><%= time_ago_in_words(comment.created_at) %></p>
-          <p class="subtitle is-6">W odpowiedzi do <%= link_to comment.profile.name, profile_path(comment.profile), data: { turbo: false }, style: 'color: #007bff' %></p>
+          <p class=" is-6">W odpowiedzi do <%= link_to comment.profile.name, profile_path(comment.profile), data: { turbo: false }, style: 'color: #007bff' %></p>
         </div>
         <div class="media-right">
           <% if comment.present? %>
@@ -34,7 +34,6 @@
           <% end %>
         <% end %>
         <%= render partial: 'comments/show', locals: { comment: comment } %>
-        <i class="fa-solid fa-share fa-lg"></i>
       </div>
       <div id="comment_<%= comment.id %>_reply_form" class="column is-12">
       </div>

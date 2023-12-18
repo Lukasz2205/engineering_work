@@ -1,0 +1,45 @@
+<nav class="" role="navigation" aria-label="main navigation">
+  <ul style="display: flex; flex-flow: row !important;">
+    <%= link_to root_path do %>
+      <li class="<%= 'is-active' if controller.controller_name == 'home' %>">
+        <i class="bx bxs-grid-alt"></i>
+        <span class="nav-item">Strona główna</span>
+      </li>
+    <% end %>
+    <%= link_to profile_path(current_user.profile) do %>
+      <li class="<%= 'is-active' if controller.controller_name == 'profiles' %>">
+        <i class="bx bxs-user"></i>
+        <span class="nav-item">Profil</span>
+      </li>
+    <% end %>
+    <%= link_to rooms_path do %>
+      <li class="<%= 'is-active' if controller.controller_name == 'rooms' %>">
+        <i class='bx bx-message-rounded-dots'></i>
+        <span class="nav-item">Wiadomości</span>
+      </li>
+    <% end %>
+    <%= link_to notifications_path do %>
+      <li class="<%= 'is-active' if controller.controller_name == 'notifications' %>" style="position: relative">
+        <i class='bx bx-bell'></i>
+        <span class="nav-item">Powiadomienia</span>
+        <% unless @notifications_unread.count == 0 %>
+          <div class="notification-count"><%= @notifications_unread.count %></div>
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(current_user).is_admin? %>
+      <%= link_to users_panel_administration_index_path do %>
+        <li class="<%= 'is-active' if controller.controller_name == 'administration' %>">
+          <i class='bx bx-laptop'></i>
+          <span class="nav-item">Panel</span>
+        </li>
+      <% end %>
+    <% end %>
+    <li>
+      <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+        <i class="bx bxs-log-out"></i>
+        <span class="nav-item">Logout</span>
+      <% end %>
+    </li>
+  </ul>
+</nav>

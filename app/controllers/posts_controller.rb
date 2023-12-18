@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  layout 'layouts/post'
+
   def show
     @post = Post.find(params[:id])
     authorize @post

@@ -1,121 +1,89 @@
-<%= turbo_frame_tag "post_#{@post.id if @post.present?}", class: 'column is-12', data: { controller: 'modal' } do %>
-  <div class="card post-card box-column" style="margin-top: 25px; <%= 'filter: blur(4px);' unless @post.present? %>">
-    <div class="card-content" data-controller="post">
-      <div class="media">
-        <div class="media-left">
-          <figure class="image is-48x48">
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" style="border-radius: 100%; box-shadow: 0px 0px 0px 1px rgba(66, 68, 90, 1);">
-          </figure>
-        </div>
-        <div class="media-content">
-          <p class="title is-4"><%= link_to @post.profile.name, profile_path(@post.profile), data: { turbo: "false" } if @post.present? %></p>
-          <p class="subtitle is-6"><%= time_ago_in_words(@post.created_at) if @post.present? %></p>
-        </div>
-        <i id="modal-btn" class='bx bx-edit-alt' style="font-size: 24px" data-action="click->modal#openModal"></i>
-        <% if @post.present? %>
-          <% if current_user.profile == @post.profile %>
-            <%= link_to post_path(@post.id), data: { turbo_method: :delete } do %>
-              <i class="fa-solid fa-trash fa-lg"></i>
+<%= turbo_frame_tag "post_#{@post.id if @post.present?}", class: 'columns is-12 is-multiline box-column', data: { controller: 'modal' } do %>
+    <div class="column is-8" data-controller="slider" style="display: flex;justify-content: center;">
+      <% if @post.present? && @post.attachments.attached? %>
+        <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;align-items: center">
+          <div class="column is-1 left-slider-arrow" style="font-size: 60px;height: 90%; display: flex; align-items: center; position: fixed; left: 3rem; z-index: 9999">
+            <i class='bx bx-caret-left' data-slider-target="switchLeft"></i>
+          </div>
+          <div class="column is-10" data-slider-target="slider" style="align-items: center; display: flex; justify-content: center; height: 55rem; width: 39rem; position: fixed">
+            <% @post.attachments.each_with_index do |attachment| %>
+              <% if attachment.image? %>
+                  <%= image_tag(attachment, class: 'image hidden', data: { 'slider-target' => 'image' }) %>
+              <% elsif attachment.video? %>
+                <%= video_tag(url_for(attachment), class: 'image hidden', style: 'max-height: 85vh; width: 100%;', controls: '', data: { 'slider-target' => 'image' }) %>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
-      </div>
-      <span class="card-footer" style="margin-bottom: 25px"></span>
-      <div class="post-content post-limit " data-post-target="content">
-        <%= @post&.description if @post.present? %>
-      </div>
-      <div class="show-more" data-post-target="button"></div>
-    </div>
-    <div class="card-image">
-      <% if @post.class == Post && @post.present? && @post.attachments.attached? %>
-        <div class="columns is-12 is-multiline" data-action="click->modal#openImageModal">
-          <% attachment = @post.attachments.first %>
-          <% if attachment.image? %>
-            <div class="column is-12 normal-margin-bottom" style="display: flex; justify-content: center; height: 400px">
-              <%= image_tag(attachment, class: 'image' ) %>
-            </div>
-          <% elsif attachment.video? %>
-            <div class="column is-12">
-              <%= video_tag(url_for(attachment), style: 'height: auto; width: 100%;') %>
-            </div>
-          <% end %>
+          </div>
+          <div class="column is-1 right-slider-arrow" style="font-size: 60px; height: 90%; display: flex; align-items: center; position: fixed; right: 30rem; z-index: 9999">
+            <i class='bx bx-caret-right' data-slider-target="switchRight"></i>
+          </div>
         </div>
       <% end %>
     </div>
-    <span class="card-footer" style="margin-bottom: 15px"></span>
-    <div class="action-buttons" data-controller="likes" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
-      <% if @post.present? %>
-        <%= turbo_frame_tag "likeable_options_#{@post.id}" do %>
-          <% if @post.liked?(current_user.profile) %>
-            <%= render partial: 'shared/unlike', locals: { obj: @post, post: true } %>
+    <div class="column is-4" style="height: 90vh;overflow-y: auto; border-left: 1px solid #FFFFFF">
+      <div class="post-card" style="<%= 'filter: blur(4px);' unless @post.present? %>">
+        <div class="card-content" data-controller="post">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" style="border-radius: 100%; box-shadow: 0px 0px 0px 1px rgba(66, 68, 90, 1);">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p><%= link_to @post.profile.name, profile_path(@post.profile), data: { turbo: "false" } if @post.present? %></p>
+              <p><%= time_ago_in_words(@post.created_at) if @post.present? %></p>
+            </div>
+            <i id="modal-btn" class='bx bx-edit-alt' style="font-size: 24px" data-action="click->modal#openModal"></i>
+            <% if @post.present? %>
+              <% if current_user.profile == @post.profile %>
+                <%= link_to post_path(@post.id), data: { turbo_method: :delete } do %>
+                  <i class="fa-solid fa-trash fa-lg"></i>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+          <span class="card-footer" style="margin-bottom: 25px"></span>
+          <div class="post-content post-limit " data-post-target="content">
+            <%= @post&.description if @post.present? %>
+          </div>
+          <div class="show-more" data-post-target="button"></div>
+        </div>
+        <span class="card-footer" style="margin-bottom: 15px"></span>
+        <div class="action-buttons" data-controller="likes" style="display: flex; justify-content: space-evenly; margin-bottom: 15px; align-items: center">
+          <% if @post.present? %>
+            <%= turbo_frame_tag "likeable_options_#{@post.id}" do %>
+              <% if @post.liked?(current_user.profile) %>
+                <%= render partial: 'shared/unlike', locals: { obj: @post, post: true } %>
+              <% else %>
+                <%= render partial: 'shared/like', locals: { obj: @post, post: true } %>
+              <% end %>
+            <% end %>
           <% else %>
-            <%= render partial: 'shared/like', locals: { obj: @post, post: true } %>
+            <a href="#">
+              <i class="fa-regular fa-heart fa-lg"></i>
+            </a>
           <% end %>
-        <% end %>
-      <% else %>
-        <a href="#">
-          <i class="fa-regular fa-heart fa-lg"></i>
-        </a>
-      <% end %>
-      <% if @post.present? %>
-        <%= link_to post_path(@post.id), data: { turbo: false } do %>
-          <i class="fa-regular fa-comment fa-lg"></i>
-        <% end %>
-      <% end %>
-      <a href="#">
-        <i class="fa-solid fa-share fa-lg"></i>
-      </a>
-    </div>
-    <span class="card-footer" style="margin-bottom: 15px"></span>
-    <%= render partial: 'comments/form', locals: { p: @post } if @post.present? %>
-    <div class="comments-section">
-      <% if @post.present? %>
-        <div id="post_comments_<%= @post.id %>" class="columns is-12 is-multiline" style="padding: 1rem">
-          <% if @post.comments.any? %>
-            <% @post.comments.each do |com| %>
-              <%= render partial: 'comments/reply', locals: { post: @post, comment: com } %>
+          <% if @post.present? %>
+            <%= link_to post_path(@post.id), data: { turbo: false } do %>
+              <i class="fa-regular fa-comment fa-lg"></i>
             <% end %>
           <% end %>
         </div>
-      <% end %>
-    </div>
-  </div>
-  <div id="my-modal" data-modal-target="imageModal" class="modal">
-    <div class="modal-background" data-action="click->modal#closeModal"></div>
-    <div class="modal-card modal-content">
-      <header class="modal-card-head">
-        <p class="modal-card-title title">Multimedia</p>
-        <button class="close delete" aria-label="close" data-action="click->modal#closeImageModal"></button>
-      </header>
-      <section class="modal-card-body" data-controller="slider">
-        <% if @post.present? && @post.attachments.attached? %>
-          <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;">
-            <div class="column is-1" style="display: flex; justify-content: center;">
-              <button data-slider-target="switchLeft"> < </button>
-            </div>
-            <div class="column is-10" data-slider-target="slider" style="width: 80%;height: 58vh;display: flex;justify-content: center; align-items: center">
-              <% @post.attachments.each_with_index do |attachment| %>
-                <% if attachment.image? %>
-                  <figure class="image hidden" data-slider-target="image">
-                    <%= image_tag(attachment) %>
-                  </figure>
-                <% elsif attachment.video? %>
-                  <figure class="image hidden" data-slider-target="image">
-                    <%= video_tag(url_for(attachment), class: 'image', style: 'height: auto; width: 100%;', controls: '') %>
-                  </figure>
+        <span class="card-footer" style="margin-bottom: 15px"></span>
+        <%= render partial: 'comments/form', locals: { p: @post } if @post.present? %>
+        <div class="comments-section">
+          <% if @post.present? %>
+            <div id="post_comments_<%= @post.id %>" class="columns is-12 is-multiline" style="padding: 1rem">
+              <% if @post.comments.any? %>
+                <% @post.comments.each do |com| %>
+                  <%= render partial: 'comments/reply', locals: { post: @post, comment: com } %>
                 <% end %>
               <% end %>
             </div>
-            <div class="column is-1" style="display: flex; justify-content: center;">
-              <button data-slider-target="switchRight"> > </button>
-            </div>
-          </div>
-        <% end %>
-      </section>
-      <footer class="modal-card-foot">
-      </footer>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
   <div id="my-modal" data-modal-target="modal" class="modal">
     <div class="modal-background" data-action="click->modal#closeModal"></div>
     <div class="modal-card modal-content">
@@ -125,10 +93,10 @@
       </header>
       <%= form_with model: @post, url: post_path(@post), data: { turbo: false } do |f| %>
         <section class="modal-card-body">
-          <%= f.text_area :description, placeholder: 'dodaj posts', class: 'input post-input', style: 'height: 250px; max-height: 300px' %>
+          <%= f.text_area :description, placeholder: 'Treść', class: 'input post-input', style: 'height: 250px; max-height: 300px' %>
         </section>
         <footer class="modal-card-foot">
-          <%= f.submit 'Aktualizuj', class: 'button', style: 'width: 100%' %>
+           <%= f.submit 'Aktualizuj', class: 'button', style: 'width: 100%' %>
         </footer>
       <% end %>
     </div>

@@ -6,6 +6,10 @@ export default class extends Controller {
   connect() {
     let numberOfImages = this.imageTargets.length - 1
     let currentPlace = 0
+    if (numberOfImages === 0) {
+      document.querySelector('.left-slider-arrow').classList.add('hidden')
+      document.querySelector('.right-slider-arrow').classList.add('hidden')
+    }
 
     this.sliderTarget.children[0].classList.remove('hidden')
     this.switchLeftTarget.addEventListener('click', () => {
