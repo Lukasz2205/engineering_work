@@ -6,6 +6,9 @@
   <%= link_to notification.notifiable.description.truncate(60), post_path(notification.notifiable) %>
 <% elsif notification.notifiable_type == 'Message' %>
   <%= notification.notifiable.message.truncate(40) %>
+<% elsif notification.notifiable_type == 'Comment' %>
+  <% post = notification.notifiable.root_comment.post %>
+  <%= link_to notification.notifiable.message, post_path(post) %>
 <% else %>
   <%= date_format(notification.created_at) %>
 <% end %>
