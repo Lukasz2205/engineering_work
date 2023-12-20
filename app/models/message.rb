@@ -4,6 +4,8 @@ class Message < ApplicationRecord
 
   before_create :confirm_participant
 
+  validates :content, length: { minimum: 1 }
+
   def confirm_participant
     if self.room.is_private
       is_participant = Participant.where(profile_id: self.profile.id, room_id: self.room.id).first
