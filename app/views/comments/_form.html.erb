@@ -1,6 +1,6 @@
-<div id="comment_form_<%= p.id %>" class="comment-form" style="padding: 15px; width: 100%">
-  <%= form_with model: Comment.new, url: post_comments_path(p) do |f| %>
-    <%= f.text_area :message, class: 'input', style: 'max-width: 80%' %>
+<div id="comment_form_<%= p.id %>" class="comment-form" style="display: flex; padding: 15px; width: 100%">
+  <%= form_with model: Comment.new, url: post_comments_path(p), class: 'comment-form-red' do |f| %>
+    <%= f.text_area :message, class: 'input' %>
     <%= f.submit 'Dodaj', class: 'button is-primary' %>
   <% end %>
 </div>
