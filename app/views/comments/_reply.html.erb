@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "comment_#{comment.id}", class: "column is-12 comment-reply-box" do %>
   <div class="columns is-12 is-multiline" style="border-bottom: 2px solid rgba(66, 68, 90, 1)">
-    <div class="column is-12">
+    <div class="column is-12" data-controller="post">
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
@@ -23,9 +23,10 @@
         </div>
       </div>
       <div class="column is-12">
-        <div class="post-content">
+        <div class="post-content comment-limit" data-post-target="content" style="word-break: break-all">
           <%= comment&.message if comment.present? %>
         </div>
+        <div class="show-more" data-post-target="button"></div>
       </div>
       <div class="action-buttons" style="display: flex; justify-content: space-evenly; padding: 10px; align-items: center">
         <%= turbo_frame_tag "likeable_options_#{comment.id}" do %>

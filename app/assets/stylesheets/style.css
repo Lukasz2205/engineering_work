@@ -51,6 +51,13 @@ html {
     overflow: hidden;
 }
 
+.comment-limit {
+    text-wrap: inherit;
+    min-height: 90px;
+    height: 90px;
+    overflow: hidden;
+}
+
 .post-content {
     overflow-wrap: break-word;
 }
