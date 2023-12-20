@@ -16,7 +16,7 @@
         </div>
         <div class="media-right">
           <% if comment.present? %>
-            <%= link_to post_comment_path('#', comment.id), data: { turbo_method: :delete } do %>
+            <%= link_to post_comment_path('#', comment.id), data: { turbo_method: :delete, turbo_confirm: 'Czy na pewno chcesz usunąć komentarz?' } do %>
               <i class="fa-solid fa-trash fa-lg"></i>
             <% end %>
           <% end %>

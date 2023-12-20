@@ -75,7 +75,7 @@
           <% if @post.present? %>
             <div id="post_comments_<%= @post.id %>" class="columns is-12 is-multiline" style="padding: 1rem">
               <% if @post.comments.any? %>
-                <% @post.comments.each do |com| %>
+                <% @post.comments.order(created_at: :desc).each do |com| %>
                   <div id="comment_direct_<%= com.id %>" style="margin-top: 1rem; width: 100%">
                     <%= render partial: 'comments/reply', locals: { post: @post, comment: com } %>
                       <% com.all_descendants.each do |desc| %>
