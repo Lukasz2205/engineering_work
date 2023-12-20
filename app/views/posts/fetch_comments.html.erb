@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "comment_direct_#{@comment.id}", style: "margin-top: 1rem; width: 100%" do %>
+  <%= render partial: 'comments/reply', locals: { post: @post, comment: @comment } %>
+  <% @comment.all_descendants.each do |desc| %>
+    <%= render partial: 'comments/reply', locals: { post: @post, comment: desc } %>
+  <% end %>
+<% end %>

@@ -73,18 +73,15 @@
         <%= render partial: 'comments/form', locals: { p: @post } if @post.present? %>
         <div class="comments-section">
           <% if @post.present? %>
-            <div id="post_comments_<%= @post.id %>" class="columns is-12 is-multiline" style="padding: 1rem">
+            <%= turbo_frame_tag "post_comments_#{@post.id}", class: "columns is-12 is-multiline", style: "padding: 1rem" do%>
               <% if @post.comments.any? %>
                 <% @post.comments.order(created_at: :desc).each do |com| %>
-                  <div id="comment_direct_<%= com.id %>" style="margin-top: 1rem; width: 100%">
-                    <%= render partial: 'comments/reply', locals: { post: @post, comment: com } %>
-                      <% com.all_descendants.each do |desc| %>
-                          <%= render partial: 'comments/reply', locals: { post: @post, comment: desc } %>
-                      <% end %>
-                  </div>
+                  <%= turbo_frame_tag "comment_direct_#{com.id}", style: "margin-top: 1rem; width: 100%", src: post_fetch_comments_path(@post, comment_id: com.id), loading: :lazy do %>
+                   <%= render 'shared/empty_reply' %>
+                  <% end %>
                 <% end %>
               <% end %>
-            </div>
+            <% end %>
           <% end %>
         </div>
       </div>
