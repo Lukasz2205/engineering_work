@@ -55,6 +55,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def fetch_comments
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:comment_id])
+  end
+
   private
 
   def set_post

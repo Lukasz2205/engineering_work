@@ -2,10 +2,10 @@
     <div class="column is-8" data-controller="slider" style="display: flex;justify-content: center;">
       <% if @post.present? && @post.attachments.attached? %>
         <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;align-items: center">
-          <div class="column is-1 left-slider-arrow" style="font-size: 60px;height: 90%; display: flex; align-items: center; position: fixed; left: 3rem; z-index: 9999">
+          <div class="column is-1 left-slider-arrow" style="font-size: 60px;height: 90%; display: flex; align-items: center; position: fixed; left: 2rem; z-index: 9999">
             <i class='bx bx-caret-left' data-slider-target="switchLeft"></i>
           </div>
-          <div class="column is-10" data-slider-target="slider" style="align-items: center; display: flex; justify-content: center; height: 55rem; width: 39rem; position: fixed">
+          <div class="column is-10" data-slider-target="slider" style="align-items: center; display: flex; justify-content: center; height: 55rem; width: 50rem; position: fixed">
             <% @post.attachments.each_with_index do |attachment| %>
               <% if attachment.image? %>
                   <%= image_tag(attachment, class: 'image hidden', data: { 'slider-target' => 'image' }) %>
@@ -73,13 +73,15 @@
         <%= render partial: 'comments/form', locals: { p: @post } if @post.present? %>
         <div class="comments-section">
           <% if @post.present? %>
-            <div id="post_comments_<%= @post.id %>" class="columns is-12 is-multiline" style="padding: 1rem">
+            <%= turbo_frame_tag "post_comments_#{@post.id}", class: "columns is-12 is-multiline", style: "padding: 1rem" do%>
               <% if @post.comments.any? %>
-                <% @post.comments.each do |com| %>
-                  <%= render partial: 'comments/reply', locals: { post: @post, comment: com } %>
+                <% @post.comments.order(created_at: :desc).each do |com| %>
+                  <%= turbo_frame_tag "comment_direct_#{com.id}", style: "margin-top: 1rem; width: 100%", src: post_fetch_comments_path(@post, comment_id: com.id), loading: :lazy do %>
+                   <%= render 'shared/empty_reply' %>
+                  <% end %>
                 <% end %>
               <% end %>
-            </div>
+            <% end %>
           <% end %>
         </div>
       </div>

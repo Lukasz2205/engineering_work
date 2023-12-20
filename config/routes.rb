@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only: %i[create destroy]
+    get 'fetch_comments', to: 'posts#fetch_comments'
   end
   resources :likes, only: %i[create destroy]
   resources :rooms do

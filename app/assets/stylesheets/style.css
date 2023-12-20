@@ -72,3 +72,9 @@ label {
 .hidden {
     display: none !important;
 }
+
+.comment-form-red {
+    display: flex;
+    width: 100%;
+    min-width: 100%;
+}

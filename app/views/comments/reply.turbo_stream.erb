@@ -1,4 +1,4 @@
-<%= turbo_stream.append "comment_#{comment.id}_replies" do %>
+<%= turbo_stream.append "comment_direct_#{comment.root_comment.id}" do %>
   <%= render partial: 'comments/reply', locals: { comment: reply } %>
 <% end %>
 

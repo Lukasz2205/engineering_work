@@ -10,11 +10,13 @@
         <div class="media-content">
           <p class=" is-4"><%= comment&.profile&.name %></p>
           <p class="subtitle is-6"><%= time_ago_in_words(comment.created_at) %></p>
-          <p class=" is-6">W odpowiedzi do <%= link_to comment.profile.name, profile_path(comment.profile), data: { turbo: false }, style: 'color: #007bff' %></p>
+          <% unless comment.post.present? %>
+            <p class=" is-6">W odpowiedzi do <%= link_to comment.profile.name, profile_path(comment.profile), data: { turbo: false }, style: 'color: #007bff' %></p>
+          <% end %>
         </div>
         <div class="media-right">
           <% if comment.present? %>
-            <%= link_to post_comment_path('#', comment.id), data: { turbo_method: :delete } do %>
+            <%= link_to post_comment_path('#', comment.id), data: { turbo_method: :delete, turbo_confirm: 'Czy na pewno chcesz usunąć komentarz?' } do %>
               <i class="fa-solid fa-trash fa-lg"></i>
             <% end %>
           <% end %>
@@ -36,13 +38,6 @@
         <%= render partial: 'comments/show', locals: { comment: comment } %>
       </div>
       <div id="comment_<%= comment.id %>_reply_form" class="column is-12">
-      </div>
-      <div id="comment_<%= comment.id %>_replies" class="column is-12">
-        <% if comment.replies.any? %>
-          <% comment.replies.each do |reply| %>
-            <%= render partial: 'comments/reply', locals: { post: post, comment: reply } %>
-          <% end %>
-        <% end %>
       </div>
     </div>
   </div>
