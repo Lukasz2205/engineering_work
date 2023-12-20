@@ -3,7 +3,7 @@ class Notification < ApplicationRecord
   belongs_to :recipient, class_name: 'Profile'
   belongs_to :notifiable, optional: true, polymorphic: true
 
-  validates :profile_id, uniqueness: { scope: %i[recipient_id notifiable_id text] }, unless: -> { notifiable_type == 'Profile' }
+  validates :profile_id, uniqueness: { scope: %i[recipient_id notifiable_id text] }, unless: -> { (notifiable_type == 'Profile' || notifiable_type == 'Post' || notifiable_type == 'Comment' ) }
   validate :different_profile_and_recipient
 
   scope :recipient, ->(recipient) { where(recipient: recipient) }
