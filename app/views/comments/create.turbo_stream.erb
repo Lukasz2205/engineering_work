@@ -1,7 +1,9 @@
-<%= turbo_stream.prepend "post_comments_#{@post.id}" do %>
-  <%= render partial: 'comments/reply', locals: { post: @post, comment: @comment } %>
+<%= turbo_stream.prepend "post_comments_#{post.id}" do %>
+  <div id="comment_direct_<%= comment.id %>" style="margin-top: 1rem; width: 100%">
+    <%= render partial: 'comments/reply', locals: { post: post, comment: comment } %>
+  </div>
 <% end %>
 
-<%= turbo_stream.replace "comment_form_#{@post.id}" do %>
-  <%= render partial: 'comments/form', locals: { p: @post }%>
+<%= turbo_stream.replace "comment_form_#{post.id}" do %>
+  <%= render partial: 'comments/form', locals: { p: post }%>
 <% end %>

@@ -2,10 +2,10 @@
     <div class="column is-8" data-controller="slider" style="display: flex;justify-content: center;">
       <% if @post.present? && @post.attachments.attached? %>
         <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;align-items: center">
-          <div class="column is-1 left-slider-arrow" style="font-size: 60px;height: 90%; display: flex; align-items: center; position: fixed; left: 3rem; z-index: 9999">
+          <div class="column is-1 left-slider-arrow" style="font-size: 60px;height: 90%; display: flex; align-items: center; position: fixed; left: 2rem; z-index: 9999">
             <i class='bx bx-caret-left' data-slider-target="switchLeft"></i>
           </div>
-          <div class="column is-10" data-slider-target="slider" style="align-items: center; display: flex; justify-content: center; height: 55rem; width: 39rem; position: fixed">
+          <div class="column is-10" data-slider-target="slider" style="align-items: center; display: flex; justify-content: center; height: 55rem; width: 50rem; position: fixed">
             <% @post.attachments.each_with_index do |attachment| %>
               <% if attachment.image? %>
                   <%= image_tag(attachment, class: 'image hidden', data: { 'slider-target' => 'image' }) %>
@@ -76,7 +76,12 @@
             <div id="post_comments_<%= @post.id %>" class="columns is-12 is-multiline" style="padding: 1rem">
               <% if @post.comments.any? %>
                 <% @post.comments.each do |com| %>
-                  <%= render partial: 'comments/reply', locals: { post: @post, comment: com } %>
+                  <div id="comment_direct_<%= com.id %>" style="margin-top: 1rem; width: 100%">
+                    <%= render partial: 'comments/reply', locals: { post: @post, comment: com } %>
+                      <% com.all_descendants.each do |desc| %>
+                          <%= render partial: 'comments/reply', locals: { post: @post, comment: desc } %>
+                      <% end %>
+                  </div>
                 <% end %>
               <% end %>
             </div>
