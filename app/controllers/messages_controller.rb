@@ -1,6 +1,8 @@
 class MessagesController < ApplicationController
   def create
-    @message = current_user_profile.messages.create(content: msg_params[:content], room_id: params[:room_id])
+    @message = current_user_profile.messages.new(content: msg_params[:content], room_id: params[:room_id])
+    authorize @message
+    @message.save
   end
 
   private
