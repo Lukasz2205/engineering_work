@@ -2,7 +2,7 @@
   <% if @post.present? && @post.attachments.attached? %>
     <div class="column is-8" data-controller="slider" style="display: flex;justify-content: center;">
         <div class="columns is-12 is-multiline" style="display: flex; justify-content: center;align-items: center">
-        <div class="column is-1 left-slider-arrow" style="font-size: 60px;height: 90%; display: flex; align-items: center; position: fixed; left: 2rem; z-index: 9999">
+        <div class="column is-1 left-slider-arrow" style="font-size: 60px;height: 90%; display: flex; align-items: center; position: fixed; left: -1%; z-index: 9999">
           <i class='bx bx-caret-left' data-slider-target="switchLeft"></i>
         </div>
         <div class="column is-10" data-slider-target="slider" style="align-items: center; display: flex; justify-content: center; height: 55rem; width: 50rem; position: fixed">
@@ -14,7 +14,7 @@
             <% end %>
           <% end %>
         </div>
-        <div class="column is-1 right-slider-arrow" style="font-size: 60px; height: 90%; display: flex; align-items: center; position: fixed; right: 30rem; z-index: 9999">
+        <div class="column is-1 right-slider-arrow" style="font-size: 60px; height: 90%; display: flex; align-items: center; position: fixed; right: 25rem; z-index: 9999">
           <i class='bx bx-caret-right' data-slider-target="switchRight"></i>
         </div>
       </div>
@@ -33,9 +33,9 @@
             <p><%= link_to @post.profile.name, profile_path(@post.profile), data: { turbo: "false" } if @post.present? %></p>
             <p><%= time_ago_in_words(@post.created_at) if @post.present? %></p>
           </div>
-          <i id="modal-btn" class='bx bx-edit-alt' style="font-size: 24px" data-action="click->modal#openModal"></i>
           <% if @post.present? %>
-            <% if current_user.profile == @post.profile %>
+            <% if policy(@post).owner_admin? %>
+              <i id="modal-btn" class='bx bx-edit-alt' style="font-size: 24px" data-action="click->modal#openModal"></i>
               <%= link_to post_path(@post.id), data: { turbo_method: :delete } do %>
                 <i class="fa-solid fa-trash fa-lg"></i>
               <% end %>

@@ -85,3 +85,11 @@ label {
     width: 100%;
     min-width: 100%;
 }
+
+#error_explanation {
+    color: #FFFFFF;
+}
+
+#flash_alert {
+    color: #FFFFFF !important;
+}
