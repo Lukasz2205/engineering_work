@@ -13,3 +13,9 @@
 .fa-solid.fa-heart {
     color: #B00100;
 }
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

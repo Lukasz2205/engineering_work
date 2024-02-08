@@ -18,6 +18,10 @@
   <div class="column is-12" style="position: relative; top: 6rem">
     <%= yield %>
   </div>
+  <div class="column is-12 is-fixed is-full-height" style="top: 12rem; width: 17rem; max-height: 10rem">
+    <%= turbo_frame_tag 'messages_container' %>
+    <%= render 'layouts/messages' %>
+  </div>
 </div>
 </body>
 </html>

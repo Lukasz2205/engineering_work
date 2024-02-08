@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
   def update
     @profile = Profile.find(params[:id])
     authorize @profile
-    if @profile.update(set_profile)
+    if @profile.update!(set_profile)
       redirect_to @profile, notice: 'Successfully updated'
     else
       render 'edit'

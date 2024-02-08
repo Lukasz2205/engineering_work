@@ -1,4 +1,5 @@
-<div class="column is-12 normal-margin-top" style="display: flex; justify-content: center; align-items: center">
+<%= render 'layouts/messages' %>
+<div class="column is-12 normal-margin-top" style="display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh;">
   <div class="card box-column" style="padding: 3em;">
     <h1 class="title" style="display: flex; justify-content: center">
       Zarejestruj się!
@@ -8,12 +9,7 @@
 
       <div class="field">
         <%= f.label :email %><br/>
-        <p class="control has-icons-left has-icons-right">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
-          <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-        </p>
+          <%= f.email_field :email, placeholder: 'Email', autofocus: true, autocomplete: "email", class: 'input' %>
       </div>
 
       <%= f.fields_for :profile, resource.build_profile do |profile_fields| %>
@@ -22,24 +18,13 @@
       <% end %>
 
       <div class="field">
-        <%= f.label :password %>
-
-        <p class="control has-icons-left">
-          <%= f.password_field :password, autocomplete: "new-password", class: 'input' %>
-          <span class="icon is-small is-left">
-          <i class="fas fa-lock"></i>
-       </span>
-        </p>
+        <%= f.label 'Hasło' %>
+        <%= f.password_field :password, placeholder: 'Hasło', autocomplete: "new-password", class: 'input' %>
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation %><br/>
-        <p class="control has-icons-left">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'input' %>
-          <span class="icon is-small is-left">
-          <i class="fas fa-lock"></i>
-        </span>
-        </p>
+        <%= f.label 'Potwierdź hasło' %><br/>
+          <%= f.password_field :password_confirmation, placeholder: 'Hasło', autocomplete: "new-password", class: 'input' %>
 
       </div>
 

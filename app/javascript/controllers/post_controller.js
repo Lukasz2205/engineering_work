@@ -19,6 +19,7 @@ export default class extends Controller {
     showMore(event) {
         event.preventDefault()
         this.contentTarget.classList.remove('post-limit')
+        this.contentTarget.classList.remove('comment-limit')
         this.buttonTarget.classList.add('hidden')
     }
 }

@@ -33,7 +33,7 @@
           <div class="columns is-multiline" style="margin: 15px">
             <% attachments_count = p.attachments.count %>
             <% p.attachments.each_with_index do |attachment| %>
-              <div class="column" style="padding: 0; position: relative">
+              <div class="column" style="padding: 0; position: relative; display: flex; justify-content: center; align-items: center">
                 <% if attachment.image? %>
                   <%= image_tag(attachment, class: '') %>
                 <% elsif attachment.video? %>
@@ -44,7 +44,7 @@
                     </div>
                   <% else %>
                     <div class="center" style="display: flex; justify-content: center; align-items: center">
-                      <%= video_tag(url_for(attachment), style: 'max-height: 4.9rem') %>
+                      <%= video_tag(url_for(attachment)) %>
                       <i class='bx bx-play-circle' style="font-size: <%= attachments_count != 1 ? '100%' : '150px' %>; position: absolute; z-index: 9999; color: #FFFFFF; max-height: 15rem"></i>
                     </div>
                   <% end %>

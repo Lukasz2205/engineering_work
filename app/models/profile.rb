@@ -18,6 +18,7 @@ class Profile < ApplicationRecord
   before_validation :set_default_name, if: -> { name.nil? }
 
   validates_uniqueness_of :name
+  validates :description, length: { maximum: 150 }
   after_create_commit { broadcast_append_to "profiles" }
 
   scope :all_except, ->(profile) { where.not(id: profile) }

@@ -16,9 +16,13 @@
           <%= render @messages %>
         </div>
         <div class=""></div>
-        <div class="msg-form" style="margin-top: 15px; width: 100%">
-          <%= render partial: 'shared/new_message_form' %>
-        </div>
+        <% unless policy(current_user).blocked? %>
+          <div class="msg-form" style="margin-top: 15px; width: 100%">
+            <%= render partial: 'shared/new_message_form' %>
+          </div>
+        <% else %>
+          <h1 class="title">Dostęp do czatu jest zablokowany!</h1>
+        <% end %>
       </div>
     <% end %>
   </div>
