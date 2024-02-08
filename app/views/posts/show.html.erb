@@ -24,11 +24,9 @@
     <div class="post-card" style="<%= 'filter: blur(4px);' unless @post.present? %>">
       <div class="card-content" data-controller="post">
         <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" style="border-radius: 100%; box-shadow: 0px 0px 0px 1px rgba(66, 68, 90, 1);">
-            </figure>
-          </div>
+          <% if @post&.profile.present? %>
+            <%= render partial: 'shared/user_profile_avatar', locals: { profile: @post&.profile } %>
+          <% end %>
           <div class="media-content">
             <p><%= link_to @post.profile.name, profile_path(@post.profile), data: { turbo: "false" } if @post.present? %></p>
             <p><%= time_ago_in_words(@post.created_at) if @post.present? %></p>
