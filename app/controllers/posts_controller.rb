@@ -37,6 +37,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    puts 'zxczxczxczx'
+    puts request.headers['Content-Type']
     @post = Post.find(params[:id])
   rescue StandardError
     respond_to do |format|
@@ -47,11 +49,12 @@ class PostsController < ApplicationController
   else
     authorize @post
     respond_to do |format|
-      if @post.destroy
+      # if @post.destroy
         format.turbo_stream do
           render :destroy, locals: { post: @post, notice: 'Pomyślnie usunięto obiekt!' }
         end
-      end
+        format.html { redirect_to root_path, notice: 'Pomyślnie usunięto obiekt!' }
+      # end
     end
   end
 
