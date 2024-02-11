@@ -10,25 +10,22 @@ user1 = User.create(email:    'example@example.com',
                     password: '123456',
                     role:     'admin',
                     profile:  Profile.create(name:         Faker::Name.name,
-                                              description: Faker::Lorem.sentence(word_count: rand(1..149))))
+                                             description: Faker::Quote.jack_handey))
 user2 = User.create(email:    'example2@example.com',
                     password: '123456',
                     role:     'admin',
                     profile:  Profile.create(name:        Faker::Name.name,
-                                             description: Faker::Lorem.sentence(word_count: rand(1..149))))
-20.times do
+                                             description: Faker::Quote.jack_handey))
+10.times do
   User.create(email:    "#{Faker::Name.first_name}@example.com",
               password: '123456',
               role:     'user',
               profile:  Profile.create(name:        Faker::Name.name,
-                                       description: Faker::Lorem.sentence(word_count: rand(1..150))))
+                                       description: Faker::Quote.jack_handey))
 end
 
 profile1 = user1.profile
 profile2 = user2.profile
-
-profile1.persisted?
-profile2.persisted?
 
 10.times do
   profile1.posts.create(description: Faker::Lorem.sentence(word_count: rand(1..500)))
